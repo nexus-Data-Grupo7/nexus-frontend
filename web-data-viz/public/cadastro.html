@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/cadastro.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>NexusData - Cadastro</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <section class="containerHomePage">
+
+            <nav class="navBar" id="navBar">
+
+                <div class="logoNav">
+                    <a href="index.html"><img class="logo" src="./imagens/logo.png" alt="Logo"></a>
+                    <a href="index.html"><img class="logoNexus" src="./imagens/logoNexus.png" alt="Nexus Logo"></a>
+                </div>
+
+
+                <ul class="navLinks">
+                    <li class="navLink">
+                        <a href="index.html#sobre">Quem somos</a>
+                    </li>
+                    <li class="navLink">
+                        <a href="index.html#servicos">Serviços</a>
+                    </li>
+                    <li class="navLink">
+                        <a href="index.html#valores">Valores</a>
+                    </li>
+                    <li class="navLink">
+                        <a href="index.html#time">Time</a>
+                    </li>
+                </ul>
+
+
+                <div class="botoes">
+                    <a href="login.html"><button class="estiloBotoes">Entrar</button></a>
+                    <a href="cadastro.html"><button class="estiloBotoes">Cadastro</button></a>
+                </div>
+            </nav>
+
+            <div class="homePageContainer">
+                <h2>Realize seu cadastro!</h2>
+
+                <div class="card card-cadastro">
+
+                    <div class="tipo-usuario" style="margin-bottom: 20px;">
+                        <label style="margin-right: 20px;">
+                            <input type="radio" name="tipoUsuario" value="jogador" checked
+                                onchange="alterarTipoCadastro()"> Jogador
+                        </label>
+                        <label>
+                            <input type="radio" name="tipoUsuario" value="organizacao" onchange="alterarTipoCadastro()">
+                            Organização
+                        </label>
+                    </div>
+
+                    <span>Nome</span>
+                    <div class="input">
+                        <input type="text" id="input_nome" placeholder="Seu nome">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+
+                    <span>E-mail</span>
+                    <div class="input">
+                        <input type="text" id="input_email" placeholder="xpto@gmail.com">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+
+                    <span id="span_identificador">CPF</span>
+                    <div class="input">
+                        <input type="text" placeholder="000.000.000-00" id="input_identificador" required>
+                        <i class="fa-solid fa-file"></i>
+                    </div>
+
+                    <span>Senha</span>
+                    <div class="input">
+                        <input type="password" id="input_senha" placeholder="*******">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+
+                    <span>Confirmar senha</span>
+                    <div class="input">
+                        <input type="password" id="input_confirmaSenha" placeholder="*******">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+
+                    <button class="botao" onclick="cadastrar()">Cadastrar</button> <br><br>
+
+                    <div class="login">
+                        <span>Já possui cadastro?</span>
+                        <a href="login.html">Login</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</body>
+
+</html>
+
+<script>
+
+    function alterarTipoCadastro() {
+        const tipoSelecionado = document.querySelector('input[name="tipoUsuario"]:checked').value;
+        const inputIdentificador = document.getElementById('input_identificador');
+        const spanIdentificador = document.getElementById('span_identificador');
+
+        if (tipoSelecionado === 'jogador') {
+            inputIdentificador.placeholder = '000.000.000-00';
+            spanIdentificador.innerText = 'CPF';
+            inputIdentificador.maxLength = 14;
+        } else {
+            inputIdentificador.placeholder = '00.000.000/0000-00';
+            spanIdentificador.innerText = 'CNPJ';
+            inputIdentificador.maxLength = 18;
+        }
+
+        inputIdentificador.value = '';
+    }
+
+    function aplicarMascara(input) {
+        const tipoSelecionado = document.querySelector('input[name="tipoUsuario"]:checked').value;
+        let valor = input.value.replace(/\D/g, '');
+
+        if (tipoSelecionado === 'jogador') {
+            // Formatação para CPF: 000.000.000-00
+            if (valor.length > 3) {
+                valor = valor.replace(/^(\d{3})/, '$1.');
+            }
+            if (valor.length > 6) {
+                valor = valor.replace(/^(\d{3})\.(\d{3})/, '$1.$2.');
+            }
+            if (valor.length > 9) {
+                valor = valor.replace(/^(\d{3})\.(\d{3})\.(\d{3})/, '$1.$2.$3-');
+            }
+        } else {
+            // Formatação para CNPJ: 00.000.000/0000-00
+            if (valor.length > 2) {
+                valor = valor.replace(/^(\d{2})/, '$1.');
+            }
+            if (valor.length > 5) {
+                valor = valor.replace(/^(\d{2})\.(\d{3})/, '$1.$2.');
+            }
+            if (valor.length > 8) {
+                valor = valor.replace(/^(\d{2})\.(\d{3})\.(\d{3})/, '$1.$2.$3/');
+            }
+            if (valor.length > 12) {
+                valor = valor.replace(/^(\d{2})\.(\d{3})\.(\d{3})\/(\d{4})/, '$1.$2.$3/$4-');
+            }
+        }
+
+        input.value = valor;
+    }
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        document.getElementById('input_identificador').addEventListener('input', function () {
+            aplicarMascara(this);
+        });
+
+        alterarTipoCadastro();
+    });
+
+    function cadastrar() {
+        const nome = document.getElementById('input_nome').value;
+        const email = document.getElementById('input_email').value;
+        const identificadorInput = document.getElementById('input_identificador'); // Obtém o input
+        const identificadorLimpo = identificadorInput.value.replace(/\D/g, ''); // Limpa o valor para o envio
+        const senha = document.getElementById('input_senha').value;
+        const confirmaSenha = document.getElementById('input_confirmaSenha').value;
+        const tipoSelecionado = document.querySelector('input[name="tipoUsuario"]:checked').value;
+
+        if (!nome || !email || !identificadorLimpo || !senha || !confirmaSenha) {
+            alert('Por favor, preencha todos os campos.');
+            return;
+        }
+
+        if (senha !== confirmaSenha) {
+            alert('As senhas não coincidem.');
+            return;
+        }
+
+        let dados = {};
+
+        if (tipoSelecionado === 'jogador') {
+            dados = {
+                nome: nome,
+                email: email,
+                cpf: identificadorLimpo, // Usa o valor limpo
+                senha: senha
+            };
+            console.log(dados);
+
+        } else {
+            dados = {
+                nome: nome,
+                email: email,
+                cnpj: identificadorLimpo, // Usa o valor limpo
+                senha: senha
+            };
+            console.log(dados);
+        }
+
+        fetch("usuario/cadastrar/" + tipoSelecionado, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dados)
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('Cadastro realizado com sucesso!');
+                    window.location.href = 'login.html';
+                } else {
+                    return response.json().then(data => {
+                        throw new Error(data.message || 'Erro ao cadastrar. Tente novamente.');
+                    });
+                }
+            })
+            .catch(error => {
+                alert(error.message);
+            });
+    }
+</script>
