@@ -24,7 +24,24 @@ function cadastrarOrganizacao(nome, email, cnpj, senha) {
     return database.executar(instrucaoSql);
 }
 
+function entrarJogador(email, senha) {
+    var instrucaoSql = `
+    SELECT * FROM jogador WHERE emailJogador = '${email}' AND senhaJogador = '${senha}';`
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql)
+    return database.executar(instrucaoSql);
+}
+function entrarOrganizacao(email, senha) {
+    var instrucaoSql = `
+    SELECT * FROM organizacao WHERE emailOrganizacao = '${email}' AND senhaOrganizacao = '${senha}';`
+    
+    console.log("Executando a instrução SQL: \n" + instrucaoSql)
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     cadastrarJogador,
-    cadastrarOrganizacao
+    cadastrarOrganizacao,
+    entrarJogador,
+    entrarOrganizacao
 }

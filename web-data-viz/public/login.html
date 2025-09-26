@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,8 +10,9 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>NexusData - Login</title>
 </head>
+
 <body>
-    
+
     <div class="container">
         <section class="containerHomePage">
 
@@ -51,23 +53,19 @@
 
                     <div class="tipo-usuario" style="margin-bottom: 20px;">
                         <label style="margin-right: 20px;">
-                            <input type="radio" name="tipoUsuario" value="jogador" checked onchange="alterarTipoLogin()"> Jogador
+                            <input type="radio" name="tipoUsuario" value="jogador" checked
+                                onchange="alterarTipoLogin()"> Jogador
                         </label>
                         <label>
-                            <input type="radio" name="tipoUsuario" value="organizacao" onchange="alterarTipoLogin()"> Organização
+                            <input type="radio" name="tipoUsuario" value="organizacao" onchange="alterarTipoLogin()">
+                            Organização
                         </label>
-                    </div>                    
-        
+                    </div>
+
                     <span>E-mail</span>
                     <div class="input">
                         <input type="text" id="input_email" placeholder="xpto@gmail.com">
                         <i class="fa-solid fa-envelope"></i>
-                    </div>
-
-                    <span id="span_identificador">CPF</span>
-                    <div class="input">
-                        <input type="text" placeholder="CPF" id="input_identificador" required>
-                        <i class="fa-solid fa-file"></i>
                     </div>
 
                     <span>Senha</span>
@@ -86,33 +84,62 @@
                 </div>
 
             </div>
-            
+
         </section>
-        
+
     </div>
 
 
-    
+
 </body>
+
 </html>
 
 <script>
     function alterarTipoLogin() {
         const tipoSelecionado = document.querySelector('input[name="tipoUsuario"]:checked').value;
-        const inputIdentificador = document.getElementById('input_identificador');
-        const spanIdentificador = document.getElementById('span_identificador');
-        
-        if (tipoSelecionado === 'jogador') {
-            inputIdentificador.placeholder = 'CPF';
-            inputIdentificador.type = 'text';
-            spanIdentificador.innerText = 'CPF';
-        } else {
-            inputIdentificador.placeholder = 'CNPJ';
-            inputIdentificador.type = 'text';
-            spanIdentificador.innerText = 'CNPJ';
-        }
-        
-        inputIdentificador.value = '';
     }
+
+    function entrar() {
+        const email = document.getElementById("input_email").value;
+        const senha = document.getElementById("input_senha").value;
+        const tipoSelecionado = document.querySelector('input[name="tipoUsuario"]:checked').value;
+
+        if (email === "" || senha === "") {
+            alert("Por favor, preencha todos os campos.");
+            return;
+        }
+
+        const url = "usuario/login/" + tipoSelecionado;
+        console.log(url);
+        
+        const dados = {
+            email: email,
+            senha: senha
+        };
+
+        fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(dados)
+        })
+            .then(resposta => resposta.json())
+            .then(resposta => {
+                if (resposta.erro) {
+                    alert(resposta.mensagem);
+                } else {
+                    alert(resposta.mensagem);
+                    // Redirecionar para a página inicial ou dashboard
+                    window.location.href = "index.html";
+                }
+            })
+            .catch(erro => {
+                console.error("Erro ao tentar realizar o login:", erro);
+                alert("Ocorreu um erro ao tentar realizar o login. Por favor, tente novamente mais tarde.");
+            });
+    }
+
 
 </script>
