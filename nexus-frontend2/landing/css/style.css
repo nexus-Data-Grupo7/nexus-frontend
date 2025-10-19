@@ -1,0 +1,4019 @@
+@import url("./variaveis/variaveis-nexus.css");
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Chewy&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Keania+One&family=Lalezar&family=League+Gothic&family=Orbitron:wght@400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    margin: 0; 
+    padding: 0;
+    text-decoration: none; 
+    box-sizing: border-box;
+    list-style: none; 
+    scroll-behavior: smooth;
+    font-size: var(--font-size-small); 
+    font-family: var(--font-family-texts);
+    transition: all .6s ease-in-out;
+}
+
+body{
+    background: var(--home-background-gradient);
+    margin: auto;
+}
+
+header #topo{
+    display: flex;
+    justify-content: space-between;
+    gap: 80px;
+}
+
+header #topo #logo{
+    margin-left: var(--margin-left-logo-navbar-1900px);
+    margin-top: var(--margin-top-logo-navbar-1900px);
+    width: 4vw; 
+    height: 8vh;
+}
+
+header #topo #logoNexus{
+    position: relative;
+    font-family: Poppins;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 1.3rem;
+    leading-trim: NONE;
+    line-height: 100%;
+    letter-spacing: 0.5px;
+    color: var(--white);
+    right: 78px;
+    top: 37px;
+}
+
+header #topo #logoNexus2{
+    position: absolute;
+    font-family: Poppins;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 1.3rem;
+    leading-trim: NONE;
+    line-height: 100%;
+    letter-spacing: 0.5px;
+    color: var(--white);
+}
+
+header #topo .centralLinks{
+    display: flex;
+    position: relative; 
+    align-items: center;
+    justify-content: center;
+    background-color: var(--black);
+    width: 37vw; 
+    height: 9vh;
+    border-radius: var(--borderRadius-1900px); 
+    opacity: 0.72;
+    transition: all 0.3s ease-in-out;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25px;
+    right: 7px;
+}
+
+
+header #topo .centralLinks ul{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 37vw;
+    margin-left: var(--margin-LEFT-RIGHT-ul-navbar-left-1900px); 
+    margin-right: var(--margin-LEFT-RIGHT-ul-navbar-left-1900px);
+}
+
+header #topo .centralLinks ul li{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+header #topo .centralLinks ul li a{
+    font-family: Inter;
+    color: var(--white);
+}
+
+
+header #topo .buttonsNav{
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    position: relative;
+    gap: 22px;
+    width: 18vw; 
+    height: 13vh;
+    bottom: 9px;
+    right: 30px;
+    border-radius: var(--borderRadius-1900px);
+}
+
+header #topo .buttonsNav .login{
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    width: 9vw;
+    height: 6.5vh;
+    top: 22px;
+    right: 25px;
+    font-family: MuseoModerno;
+    background: var(--button-background-gradient);
+    color: var(--white);
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border: none;
+    transition: var(--mili-seg-5ms);
+    cursor: pointer;
+}
+
+header #topo .buttonsNav .login img{
+    width: 1.5vw;
+    height: 3vh;
+}
+
+header #topo .buttonsNav .cad{
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    width: 9vw;
+    height: 6.5vh;
+    background: none;
+    font-family: MuseoModerno;
+    color: var(--white);
+    top: 23px;
+    right: 25px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-color: var(--white);
+    transition: var(--mili-seg-5ms);
+    cursor: pointer;
+}
+
+section{
+    width: 100%; 
+    height: 100vh;
+    max-width: 1900px; 
+    max-height: 1480px;
+    overflow: hidden;
+}
+
+main .home-section{
+    width: 100%;
+    height: 80%;
+}
+
+main .home-section .slogan{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    color: var(--white);
+}
+
+main .home-section .slogan h2{
+    position: absolute;
+    font-family: Poppins;
+    font-size: 4rem;
+    font-weight: 600;
+    font-style: SemiBold;   
+    top: 165px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+main .home-section .slogan h2 span{
+    font-family: MuseoModerno;
+    font-size: 3.5rem;
+    font-weight: 600;
+    font-style: SemiBold;   
+}
+
+main .home-section .slogan .linhaAzulHome{
+    position: absolute;
+    width: 150vw;
+    top: 77px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 1px;
+    z-index: 0;
+}
+
+main .home-section .slogan .linhaGrayGradientHome{
+    position: absolute;
+    width: 150vw;
+    top: 127px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 1px;
+    z-index: 0;
+}
+
+main .home-section .slogan .linhaBrancaHome{
+    position: absolute;
+    width: 150vw;
+    top: 167px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 1px;
+    z-index: 0;
+}
+
+main .home-section .slogan .subTitulo{
+    position: absolute;
+    top: 280px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+main .home-section .slogan .subTitulo h2{
+    position: relative;
+    font-family: Inter;
+    width: 39.5vw;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 1.3rem;
+    text-align: center;
+    vertical-align: middle;
+    top: 0;
+    left: 0;
+    transform: none;
+    z-index: 1;
+}
+
+main .home-section .slogan .boxAcess{ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 13vw; 
+    height: 7vh; 
+    top: 450px;
+    left: 42%;
+    transform: translateX(-50%);
+    border: 2px solid var(--blue6-borderBottomAcess-nexusData);
+    border-radius: 50px;
+    z-index: 2;
+}
+
+main .home-section .slogan .boxAcess #acessar{
+    width: 95%;
+    height: 85%;
+    background: none;
+    border: 2px solid var(--blue6-borderBottomAcess-nexusData);
+    color: var(--white);
+    cursor: pointer;
+    border-radius: 50px;
+    font-family: MuseoModerno;
+    font-size: 1rem;
+}
+
+main .home-section .slogan .saibaMais{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 15vw; 
+    height: 7vh; 
+    top: 450px;
+    left: 60%;
+    transform: translateX(-50%);
+    border-radius: 50px;
+    z-index: 2;
+}
+
+main .home-section .saibaMais a{
+    position: relative;
+    color: var(--white);
+    cursor: pointer;
+    border-radius: 50px;
+    font-family: MuseoModerno;
+    font-size: 1rem;
+}
+
+main .home-section .saibaMais img #setaSaibaMais{
+    position: relative;
+    right: 50px;
+}
+
+main .home-section .slogan .controles{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    z-index: 1;
+}
+
+main .home-section .slogan .controles .controleLeft{
+    display: flex;
+    position: relative;
+    width: 40%;
+    height: 15%;
+    top: 130px;
+    right: 20px;
+    object-fit: contain;
+    z-index: 1;
+}
+
+main .home-section .slogan .controles .controleLeft img{
+    width: 60vw;
+    height: 35vh;
+    z-index: 1;
+}
+
+main .home-section .slogan .controles .controleRight{
+    display: flex;
+    position: relative;
+    width: 40%;
+    height: 15%;
+    top: 130px;
+    right: 77px;
+    object-fit: contain;
+    z-index: 1;
+}
+
+main .home-section .slogan .controles .controleRight img{
+    width: 60vw;
+    height: 35vh;
+    z-index: 1;
+}
+
+main .whoWeAreSection .quemSomos{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px 10px 0px 10px;
+    width: auto;
+    height: 110vh;
+    color: var(--white);
+}
+
+main .whoWeAreSection .quemSomos img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 68%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+
+main .whoWeAreSection .quemSomos .titleQuemSomos{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    width: 50%;
+    height: 20%;
+    top: 10px;
+    right: 200px;
+    z-index: 1;
+}
+
+main .whoWeAreSection .quemSomos .titleQuemSomos span{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative; 
+    gap: 6px;
+    font-family: Poppins;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 3rem;
+}
+
+main .whoWeAreSection .quemSomos .titleQuemSomos span img{
+    position: relative;
+    width: 4vw;
+    height: 8vh;
+    margin-bottom: 15px;
+    right: 10px;
+}
+
+main .whoWeAreSection .quemSomos .titleQuemSomos span #somos{
+    color: var(--gray-tittleWhoWeAre-nexusData);
+}
+
+main .whoWeAreSection .quemSomos .descricaoQuemSomos{
+    display: flex;
+    width: 35%;
+    height: 40%;
+}
+
+main .whoWeAreSection .quemSomos .descricaoQuemSomos span{
+    position: relative;
+    font-family: Poppins;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 1.3rem;
+    top: 50px;
+    right: 270px;
+    vertical-align: middle;
+}
+
+main .whoWeAreSection .quemSomos .logoQuemSomos{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    object-fit: cover;
+    bottom: 140px;
+    left: 380px;
+}
+
+main .whoWeAreSection .quemSomos .logoQuemSomos img{
+    position: relative;
+    width: 20vw;
+    height: 42vh;
+}
+
+main .whoWeAreSection .quemSomos .imgEsquerda{
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 25vw;
+    height: 32vh;
+    object-fit: cover;
+    bottom: 155px;
+    right: 450px;
+}
+
+main .whoWeAreSection .quemSomos .imgEsquerda img{
+    width: 19vw;
+    height: 47vh;
+    border-radius: 15px;
+}
+
+main .whoWeAreSection .quemSomos .imgCentro{
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 25vw;
+    height: 32vh;
+    object-fit: cover;
+    bottom: 230px;
+    right: 260px;
+    z-index: 1;
+}
+
+main .whoWeAreSection .quemSomos .imgCentro img{
+    width: 19vw;
+    height: 49vh;
+    border-radius: 15px;
+}
+
+main .whoWeAreSection .quemSomos .imgDireita{
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 25vw;
+    height: 32vh;
+    object-fit: cover;
+    bottom: 185px;
+    right: 90px;
+    z-index: 0;
+}
+
+main .whoWeAreSection .quemSomos .imgDireita img{
+    width: 19vw;
+    height: 47vh;
+    border-radius: 15px;
+}
+
+main .whoWeAreSection .quemSomos .textQuemSomos{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 32vw;
+    border-radius: 20px;
+    background-color: var(--black);
+    opacity: 0.56;    
+    bottom: 130px;
+    left: 26%;
+}
+
+main .whoWeAreSection .quemSomos .textQuemSomos span{
+    position: relative;
+    width: 25vw;
+    height: 27vh;
+    font-family: Poppins;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 1.05rem;
+    vertical-align: middle;
+    top: 35px;
+}
+
+main .whoWeAreSection .quemSomos .textQuemSomos .bolinhaFixar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    bottom: 70px;
+    background-color: black;
+    left: 340px;
+    object-fit: cover;
+}
+
+main .whoWeAreSection .quemSomos .textQuemSomos .bolinhaFixar img{
+    width: 2vw;
+    height: 4vh;
+}
+
+main .services{
+    width: 100%;
+    height: 100%;
+}
+
+main .services .servicos{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px 10px 0px 10px;
+    width: auto;
+    height: 100vh;
+    color: var(--white);
+}
+
+main .services .servicos .titleService{
+    position: relative;
+    width: 20%;
+    height: 20%;
+    object-fit: cover;
+    top: 80px;
+    right: 400px;
+}
+
+main .services .servicos .titleService span{
+    font-family: Poppins;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 2.2rem;
+    line-height: 99%;
+    letter-spacing: 0%;
+}
+
+main .services .servicos .titleService img{
+    position: relative;
+    top: 39px;
+    right: 112px;
+    width: 2vw;
+    height: 4vh;
+}
+
+main .services .servicos .blueLineService{
+    position: absolute;
+    width: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 1px;
+    z-index: 0;
+}
+
+main .services .servicos .grayLineService{
+    position: absolute;
+    width: 100%;
+    top: 1420px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 1px;
+    z-index: 0;
+}
+main .services .servicos .grayLineService2{
+    position: absolute;
+    width: 100%;
+    top: 1520px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 1px;
+    z-index: 0;
+}
+
+main .services .servicos .blueLineService2{
+    position: absolute;
+    width: 100%;
+    top: 1750px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 1px;
+    z-index: 0;
+}
+
+main .services .servicos .textService1{
+    display: flex;
+    align-items: center;
+    position: relative;
+    background-color: var(--black);
+    opacity: 0.56;
+    color: var(--white);
+    border-radius: 20px;
+    width: 26.2vw;
+    top: 16%;
+    right: 29.7%;
+    z-index: 1;
+}
+
+main .services .servicos .textService1 span{
+    position: relative;
+    font-weight: bold;
+    color: #ffff;
+    border-radius: 20px;
+    font-size: 1.2rem;
+    left: 20px;
+    padding: 17px;
+}
+
+main .services .servicos .textService1 .bolinhaFixo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: var(--black);
+    color: var(--white);
+    border-radius: 100%;
+    width: 6vw;
+    height: 3vh;
+    right: 10px;
+    bottom: 27px;    
+}
+
+main .services .servicos .textService1 .bolinhaFixo img{
+    width: 2vw;
+    height: 4vh;
+}
+
+main .services .servicos .textService2{
+    display: flex;
+    align-items: center;
+    position: relative;
+    background-color: var(--black);
+    opacity: 0.56;
+    color: var(--white);
+    border-radius: 20px;
+    width: 27vw;
+    top: 18%;
+    right: 29.2%;
+    z-index: 1;
+}
+
+main .services .servicos .textService2 span{
+    position: relative;
+    font-weight: bold;
+    color: #ffff;
+    border-radius: 20px;
+    font-size: 1.2rem;
+    left: 20px;
+    padding: 17px;
+}
+
+main .services .servicos .textService2 .bolinhaFixo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: var(--black);
+    color: var(--white);
+    border-radius: 100%;
+    width: 6vw;
+    height: 3vh;
+    right: 15px;
+    bottom: 27px;    
+}
+
+main .services .servicos .textService2 .bolinhaFixo img{
+    width: 2vw;
+    height: 4vh;
+}
+
+main .services .servicos .textService3{
+    display: flex;
+    align-items: center;
+    position: relative;
+    background-color: var(--black);
+    opacity: 0.56;
+    color: var(--white);
+    border-radius: 20px;
+    width: 26.2vw;
+    top: 20%;
+    right: 29.7%;
+    z-index: 1;
+}
+
+main .services .servicos .textService3 span{
+    position: relative;
+    font-weight: bold;
+    color: #ffff;
+    border-radius: 20px;
+    font-size: 1.2rem;
+    left: 20px;
+    padding: 17px;
+}
+
+main .services .servicos .textService3 .bolinhaFixo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: var(--black);
+    color: var(--white);
+    border-radius: 100%;
+    width: 6vw;
+    height: 3vh;
+    right: 10px;
+    bottom: 27px;    
+}
+
+main .services .servicos .textService3 .bolinhaFixo img{
+    width: 2vw;
+    height: 4vh;
+}
+
+main .services .servicos .textService4{
+    display: flex;
+    align-items: center;
+    position: relative;
+    background-color: var(--black);
+    opacity: 0.56;
+    color: var(--white);
+    border-radius: 20px;
+    width: 29.8vw;
+    top: 22%;
+    right: 27.9%;
+    z-index: 1;
+}
+
+main .services .servicos .textService4 span{
+    position: relative;
+    font-weight: bold;
+    color: #ffff;
+    border-radius: 20px;
+    font-size: 1.2rem;
+    left: 20px;
+    padding: 17px;
+    z-index: 1;
+}
+
+main .services .servicos .textService4 .bolinhaFixo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: var(--black);
+    color: var(--white);
+    border-radius: 100%;
+    width: 6vw;
+    height: 3vh;
+    right: 10px;
+    bottom: 27px;
+    z-index: 1;    
+}
+
+main .services .servicos .textService4 .bolinhaFixo img{
+    width: 2vw;
+    height: 4vh;
+    z-index: 1;
+}
+
+main .services .servicos .celular{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 37vw;
+    bottom: 300px;
+    object-fit: cover;
+    left: 34%;
+}
+
+main .services .servicos .celular img{
+    width: 25vw;
+    height: 50vh;
+}
+
+main .services .servicos .mouse{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 32vw;
+    bottom: 880px;
+    object-fit: cover;
+    transform: rotate(15deg);
+    right: 50px;
+    z-index: 0;
+}
+
+main .services .servicos .mouse img{
+    width: 145vw;
+    height: 125vh;
+}
+
+main .sectionValores .valores{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px 10px 0px 10px;
+    width: auto;
+    height: 100vh;
+    color: var(--white);
+    object-fit: cover;
+    top: 940px;
+}
+
+main .sectionValores .valores img{
+    position: relative;
+    width: 100vw;
+    height: 105vh;
+    border-radius: 20px;
+    -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 90%);
+    mask-image: radial-gradient(circle, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 90%);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    z-index: 0;
+}
+
+main .sectionValores .valores .titleValores{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    width: 50%;
+    height: 20%;
+    bottom: 650px;
+    right: 250px;
+    z-index: 1;
+}
+
+main .sectionValores .valores .titleValores span{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative; 
+    gap: 6px;
+    font-family: Poppins;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 2.5rem;
+}
+
+main .sectionValores .valores .titleValores span img{
+    position: relative;
+    width: 5vw;
+    height: 8vh;;
+    right: 10px;
+    bottom: 5px;
+}
+
+main .sectionValores .valores .linhaValores{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    bottom: 620px;
+    right: 45%;
+}
+
+main .sectionValores .valores .linhaValores img{
+    width: 1vw;
+    height: 60vh;
+    z-index: 1;
+}
+
+main .sectionValores .valores .textosValores{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;    
+    gap: 100px;
+    color: var(--white);
+    bottom: 1155px;
+    right: 26%;
+    width: 20vw;
+}
+
+main .sectionValores .valores .textosValores .valor1{
+    position: relative;
+    font-family: Poppins;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 1.1rem;
+    vertical-align: middle;
+    top: 172px;
+    right: 78px;
+}
+
+main .sectionValores .valores .textosValores .valor2{
+    position: relative;
+    font-family: Poppins;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 1.1rem;
+    vertical-align: middle;
+    top: 112px;
+    right: 78px;
+}
+
+main .sectionValores .valores .textosValores .valor3{
+    position: relative;
+    font-family: Poppins;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 1.1rem;
+    vertical-align: middle;
+    top: 55px;
+    right: 78px;
+}
+
+main .sectionValores .valores .textosValores .valor4{
+    position: relative;
+    font-family: Poppins;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 18px;
+    vertical-align: middle;
+    right: 78px;
+}
+
+main .sectionValores .valores .ligacao{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    bottom: 1550px;
+    left: 220px;
+}
+
+main .sectionValores .valores .ligacao img{
+    width: 40vw;
+    height: 60vh;
+    border-width: 1px;
+    z-index: 0;
+}
+
+main .sectionValores .valores .comunidade{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: var(--gray-home-nexusData);
+    width: 18vw;
+    height: 20vh;
+    padding: 25px;
+    bottom: 1980px;
+    color: var(--white);
+    border-radius: 10px;
+    left: 30%;
+    z-index: 1;
+}
+
+main .sectionValores .valores .comunidade span{
+    position: relative;
+    font-family: Poppins;
+    font-weight: 300;
+    font-style: Light;
+    font-size: 1.2rem;
+    text-align: center;
+    vertical-align: middle;
+    left: 15%;
+}
+
+
+main .sectionValores .valores .comunidade .risco{
+    position: relative;
+    width: 1.5vw;
+    height: 0.9vh;
+    border: 4px;
+    background-color: var(--white);
+    top: 20px;
+    right: 42%;
+}
+
+main .sectionValores .valores .comunidade .bolinhaFixo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    color: var(--white);
+    border-radius: 100%;
+    width: 4vw;
+    height: 4vh;
+    left: 45px;
+    bottom: 27px;
+    z-index: 1; 
+}
+
+main .sectionValores .valores .comunidade .bolinhaFixo img{
+    width: 1.5vw;
+    height: 3vh;
+    z-index: 1;
+    background-color: black;
+}
+
+main .sectionValores .valores .oportunidade{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: var(--white);
+    width: 18vw;
+    height: 20vh;
+    padding: 25px;
+    bottom: 1910px;
+    color: var(--black);
+    border-radius: 10px;
+    left: 2%;
+    z-index: 1;
+}
+
+main .sectionValores .valores .oportunidade span{
+    position: relative;
+    font-family: Poppins;
+    font-weight: 300;
+    font-style: Light;
+    font-size: 1.3rem;
+    text-align: center;
+    vertical-align: middle;
+    left: 15%;
+}
+
+
+main .sectionValores .valores .oportunidade .risco{
+    position: relative;
+    width: 1.5vw;
+    height: 0.9vh;
+    border: 4px;
+    background-color: var(--black);
+    top: 20px;
+    right: 42%;
+}
+
+main .sectionValores .valores .oportunidade .bolinhaFixo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    color: var(--white);
+    border-radius: 100%;
+    width: 4vw;
+    height: 4vh;
+    left: 40px;
+    bottom: 25px;
+    z-index: 1; 
+}
+
+main .sectionValores .valores .oportunidade .bolinhaFixo img{
+    width: 1.5vw;
+    height: 3vh;
+    z-index: 1;
+    background-color: black;
+}
+
+main .sectionValores .valores .confiabilidade{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: var(--gray-home-nexusData);
+    width: 18vw;
+    height: 20vh;
+    padding: 25px;
+    bottom: 1940px;
+    color: var(--white);
+    border-radius: 10px;
+    left: 32%;
+    z-index: 1;
+}
+
+main .sectionValores .valores .confiabilidade span{
+    position: relative;
+    font-family: Poppins;
+    font-weight: 300;
+    font-style: Light;
+    font-size: 1.3rem;
+    text-align: center;
+    vertical-align: middle;
+    left: 15%;
+}
+
+
+main .sectionValores .valores .confiabilidade .risco{
+    position: relative;
+    width: 1.5vw;
+    height: 0.9vh;
+    border: 4px;
+    background-color: var(--white);
+    top: 20px;
+    right: 42%;
+}
+
+main .sectionValores .valores .confiabilidade .bolinhaFixo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    color: var(--white);
+    border-radius: 100%;
+    width: 4vw;
+    height: 4vh;
+    left: 37px;
+    bottom: 22px;
+    z-index: 1; 
+}
+
+main .sectionValores .valores .confiabilidade .bolinhaFixo img{
+    width: 1.5vw;
+    height: 3vh;
+    z-index: 1;
+    background-color: black;
+}
+
+main .sectionValores .valores .transparencia{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: var(--white);
+    width: 18vw;
+    height: 20vh;
+    padding: 25px;
+    bottom: 1850px;
+    color: var(--black);
+    border-radius: 10px;
+    left: 1.5%;
+    z-index: 1;
+}
+
+main .sectionValores .valores .transparencia span{
+    position: relative;
+    font-family: Poppins;
+    font-weight: 300;
+    font-style: Light;
+    font-size: 1.3rem;
+    text-align: center;
+    vertical-align: middle;
+    left: 15%;
+}
+
+
+main .sectionValores .valores .transparencia .risco{
+    position: relative;
+    width: 1.5vw;
+    height: 0.9vh;
+    border: 4px;
+    background-color: var(--black);
+    top: 20px;
+    right: 42%;
+}
+
+main .sectionValores .valores .transparencia .bolinhaFixo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    color: var(--white);
+    border-radius: 100%;
+    width: 4vw;
+    height: 4vh;
+    left: 37px;
+    bottom: 25px;
+    z-index: 1; 
+}
+
+main .sectionValores .valores .transparencia .bolinhaFixo img{
+    width: 1.5vw;
+    height: 3vh;
+    z-index: 1;
+    background-color: black;
+}
+
+main .sectionValores .valores .logoNexus{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    object-fit: cover;
+    bottom: 1940px;
+    left: 460px;
+}
+
+main .sectionValores .valores .logoNexus img{
+    width: 16vw;
+    height: 28vh;
+}
+
+main .teamSection{
+    width: 100%;
+    height: 100vh;
+    max-width: 1900px;
+    max-height: 1280px;
+    overflow: hidden;
+}
+
+
+main .teamSection{
+    width: 100%;
+    height: 120vh;
+    max-width: 1900px;
+    max-height: 1280px;
+    overflow: hidden;
+}
+
+main .teamSection .nossaEquipe {
+    display: flex;
+    justify-content: flex-start;
+    position: relative;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0;
+    padding: 0 150px;
+    height: 120vh;
+    color: var(--white);
+}
+
+main .teamSection .nossaEquipe .grayLineService{
+    position: absolute;
+    width: 100%;
+    left: 50%;
+    top: 60px;
+    transform: translateX(-50%);
+    border-width: 1px;
+    z-index: 0;
+}
+main .teamSection .nossaEquipe .grayLineService2{
+    position: absolute;
+    width: 100%;
+    left: 50%;
+    top: 25px;
+    transform: translateX(-50%);
+    border-width: 1px;
+    z-index: 0;
+}
+
+main .teamSection .nossaEquipe .titleEquipe {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    width: 100%;
+    top: 50px;
+    right: 6%;
+    z-index: 1;
+}
+
+main .teamSection .nossaEquipe .titleEquipe span {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative; 
+    gap: 6px;
+    font-family: Poppins;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 2.5rem;
+}
+
+main .teamSection .nossaEquipe .titleEquipe span img {
+    position: relative;
+    width: 4vw;
+    height: 8vh;
+    right: 10px;
+    bottom: 7px;
+}
+
+main .teamSection .nossaEquipe .descricaoEquipe {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 22vw;
+    border-radius: 20px;
+    background-color: var(--black);
+    opacity: 0.56;
+    top: 80px;
+    right: 10%;
+}
+
+main .teamSection .nossaEquipe .descricaoEquipe span {
+    position: relative;
+    width: 20vw;
+    height: 38vh;
+    font-family: Poppins;
+    font-weight: 600;
+    font-style: SemiBold;
+    color: white;
+    font-size: 18px;
+    leading-trim: NONE;
+    line-height: 110%;
+    vertical-align: middle;
+    top: 52px;
+    left: 20px;
+}
+
+main .teamSection .nossaEquipe .descricaoEquipe .bolinhaFixar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    bottom: 100px;
+    left: 3%;
+    background-color: black;
+    object-fit: cover;
+}
+
+main .teamSection .nossaEquipe .descricaoEquipe .bolinhaFixar img {
+    width: 1.5vw;
+    height: 3vh;
+}
+
+main .teamSection .nossaEquipe .descricaoEquipe .nexusLogo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: 93px;
+    right: 7%;
+    object-fit: cover;
+}
+
+main .teamSection .nossaEquipe .descricaoEquipe .nexusLogo img{
+    width: 1.5vw;
+    height: 3vh;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    position: relative;
+    top: 150px;
+    left: 55%;
+    transform: translateX(-50%);
+    width: 100%;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .carrossel-btn {
+    position: relative;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    width: 60px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    bottom: 180px;
+    left: 19%;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .carrossel-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .carrossel-btn img {
+    position: relative;
+    width: 2vw;
+    height: 4vh;
+    filter: brightness(0) invert(1);
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer {
+    display: flex;
+    align-items: flex-end;
+    gap: 30px;
+    position: relative;
+    bottom: 300px;
+    left: 200px;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro {
+    transition: all 0.5s ease;
+    opacity: 0.4;
+    transform: scale(0.8);
+    position: relative;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro .fotoMembro {
+    position: relative;
+    width: 20vw;
+    height: 50vh;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro:not(.active) .fotoMembro {
+    width: 17vw;
+    height: 48vh;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro .fotoMembro img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro .fotoMembro .redesSociais {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro .fotoMembro .redesSociais .iconRede {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 4vw;
+    height: 8vh;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    object-fit: cover;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro .fotoMembro .redesSociais .iconRede:hover {
+    background: rgba(59, 130, 246, 0.8);
+    border-color: rgba(59, 130, 246, 1);
+    transform: translateY(-3px) scale(1.1);
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro .fotoMembro .redesSociais .iconRede img {
+    position: relative;
+    width: 3.5vw;
+    height: 7.5vh;
+    right: 0.55px;
+    bottom: 0.51px;
+    filter: brightness(0) invert(1);
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro:not(.active) .fotoMembro .redesSociais {
+    opacity: 0;
+    pointer-events: none;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro .nomeMembro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 12px 24px;
+    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    white-space: nowrap;
+    bottom: -52px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro .nomeMembro span {
+    position: relative;
+    color: var(--white);
+    font-family: Poppins;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+main .teamSection .nossaEquipe .indicadores {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    position: relative;
+    bottom : 90px;
+    left: 64.5%;
+    transform: translateX(-50%);
+    width: 100%;
+}
+
+main .teamSection .nossaEquipe .indicadores .indicador {
+    width: 1vw;
+    height: 2vh;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+main .teamSection .nossaEquipe .indicadores .indicador:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+main .teamSection .nossaEquipe .indicadores .indicador.active {
+    background: #3b82f6;
+    width: 3vw;
+    border-radius: 5px;
+}
+
+main .teamSection .nossaEquipe .fraseEquipe {
+    position: relative;
+    bottom: 55px;
+    left: 27.4%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 100%;
+}
+
+main .teamSection .nossaEquipe .fraseEquipe span {
+    position: relative;
+    font-family: Poppins;
+    font-size: 1.2rem;
+    font-style: SemiBold;
+    color: var(--white);
+    font-weight: 600;
+}
+
+main .teamSection .nossaEquipe .valoresEquipe {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    position: relative;
+    bottom: 40px;
+    left: 60%;
+    transform: translateX(-50%);
+    width: 100%;
+}
+
+main .teamSection .nossaEquipe .valoresEquipe .valorItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    max-width: 35vw;
+    border-radius: 7px;
+    position: relative;
+    background-color: var(--black);
+    padding: 20px;
+}
+
+main .teamSection .nossaEquipe .valoresEquipe .valorItem span {
+    position: relative;
+    font-family: Poppins;
+    font-size: 0.9rem;
+    color: var(--white);
+    line-height: 1.6;
+    font-weight: 600;
+}
+
+
+.footerSection {
+    width: 100%;
+    background-color: #000;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    margin-top: 100px;
+}
+
+.footerContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    max-width: 300vw;
+    margin: 0 auto;
+    padding: 60px 40px 30px;
+}
+
+.logoFooter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.logoFooter img {
+    width: 7.5vw;
+    height: 15vh;
+    object-fit: contain;
+}
+
+.textoFooter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    max-width: 30vw;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.textoFooter p {
+    position: relative;
+    font-family: Poppins;
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-style: Bold;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+}
+
+
+.btnFooter {
+    position: relative;
+    padding: 15px 40px;
+    background: var(--black);
+    border-radius: 10px;
+    border: solid 2px var(--gray-home-nexusData);
+    color: var(--gray-tittleWhoWeAre-nexusData);
+    font-family: Poppins;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 250;
+    bottom: 20px;
+}
+
+.btnFooter:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px var(--gray-home-nexusData);
+}
+
+
+.copyrightFooter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.copyrightFooter span{
+   position: relative;
+   color: var(--white);
+   top: 20px;
+   right: 32%;
+   font-family: DM Sans; 
+   font-weight: 400;
+   font-size: 0.9rem;
+   leading-trim: NONE;
+   line-height: 100%;
+   letter-spacing: -0.2px;
+}
+
+.copyrightFooter button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 4vw;
+    height: 8vh;
+    background: none;
+    border: solid 1px var(--gray-home-nexusData);
+    border-radius: 100%;
+    object-fit: cover;
+    top: 20px;
+    left: 30%;
+}
+
+.copyrightFooter button a img{
+   width: 2.8vw;
+   height: 6.8vh;
+   filter: brightness(0) invert(1);
+}
+
+.copyrightFooter .homeText{
+    position: relative;
+    font-family: Poppins;
+    font-weight: 300;
+    font-style: Light;
+    font-size: 0.9rem;
+    leading-trim: NONE;
+    line-height: 100%;
+    text-align: center;
+    color: var(--gray-tittleWhoWeAre-nexusData);
+    bottom: 10px;
+    left: 22%;
+}
+
+
+@media (max-width: 1240px){
+header #topo #logo{
+    margin-left: 40px;
+    margin-top: var(--margin-top-logo-navbar-1900px);
+    width: var(--widht-logo-navbar-1900px); 
+    height: var(--height-logo-navbar-1900px);
+}
+
+header #topo .centralLinks{
+    display: flex;
+    position: relative; 
+    align-items: center;
+    justify-content: center;
+    background-color: var(--black);
+    width: 40vw; 
+    height: 8vh;
+    border-radius: var(--borderRadius-1900px); 
+    opacity: 0.72;
+    transition: all 0.3s ease-in-out;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 23px;
+    left: 23px;
+}
+
+header #topo .buttonsNav .login{
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    width: 9vw;
+    height: 6.5vh;
+    top: 22px;
+    right: 18px;
+    font-family: MuseoModerno;
+    background: var(--button-background-gradient);
+    color: var(--white);
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border: none;
+    transition: var(--mili-seg-5ms);
+    cursor: pointer;
+}
+
+header #topo .buttonsNav .cad{
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    width: 9vw;
+    height: 6.5vh;
+    background: none;
+    font-family: MuseoModerno;
+    color: var(--white);
+    top: 23.5px;
+    right: 18px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-color: var(--white);
+    transition: var(--mili-seg-5ms);
+    cursor: pointer;
+}
+
+main .whoWeAreSection .quemSomos .titleQuemSomos{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    width: 55%;
+    height: 20%;
+    top: 10px;
+    right: 200px;
+    z-index: 1;
+}
+
+main .whoWeAreSection .quemSomos .titleQuemSomos span{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative; 
+    gap: 4px;
+    font-family: Poppins;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 2.5rem;
+    top: 10px;
+}
+
+main .whoWeAreSection .quemSomos .titleQuemSomos span #somos{
+    color: var(--gray-tittleWhoWeAre-nexusData);
+    margin-bottom: 15.5px;
+}
+
+
+
+main .whoWeAreSection .quemSomos .imgEsquerda{
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 25vw;
+    height: 32vh;
+    object-fit: cover;
+    bottom: 175px;
+    right: 450px;
+}
+
+main .whoWeAreSection .quemSomos .logoQuemSomos{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    object-fit: cover;
+    bottom: 180px;
+    left: 340px;
+}
+
+main .whoWeAreSection .quemSomos .logoQuemSomos img{
+    position: relative;
+    width: 20.5vw;
+    height: 38.4vh;
+}
+
+main .whoWeAreSection .quemSomos .textQuemSomos .bolinhaFixar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    bottom: 70px;
+    background-color: black;
+    left: 310px;
+    object-fit: cover;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .carrossel-btn {
+    position: relative;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    bottom: 150px;
+    left: 20%;
+}
+
+main .teamSection .nossaEquipe .indicadores {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    position: relative;
+    bottom : 90px;
+    left: 66.5%;
+    transform: translateX(-50%);
+    width: 100%;
+}
+
+
+}
+
+@media (max-width: 1024px){
+header #topo #logo{
+    position: relative;
+    margin-left: var(--margin-left-logo-navbar-1900px);
+    margin-top: var(--margin-top-logo-navbar-1900px);
+    width: 3.5vw; 
+    height: 6vh;
+    top: 8px;
+    left: 10px;
+}
+
+header #topo #logoNexus{
+    font-size: 1rem;
+    color: var(--white);
+    right: 69px;
+    top: 43px;
+}
+
+header #topo #logoNexus2{
+    font-size: 1rem;
+}
+
+header #topo .centralLinks{
+    width: 32vw; 
+    height: 10vh;
+    top: 3px;
+    right: 55px;
+}
+
+
+header #topo .centralLinks ul li a{
+    font-size: 0.9rem;
+}
+
+
+header #topo .buttonsNav{
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    gap: 22px;
+    width: var(--width-navbar-right-1900px); 
+    height: var(--height-navbar-left-right-1900px);
+    border-radius: var(--borderRadius-1900px);
+}
+
+header #topo .buttonsNav .login{
+    width: 9vw;
+    height: 6.5vh;
+    top: 38px;
+    right: 25px;
+}
+
+header #topo .buttonsNav .login img{
+    width: 1.5vw;
+    height: 3vh;
+}
+
+header #topo .buttonsNav .cad{
+    width: 9vw;
+    height: 6.5vh;
+    top: 39px;
+    right: 25px;
+}
+
+main .home-section .slogan{
+    margin: 0px 5px 0px 5px;
+    width: 100%;
+    height: 100vh;
+    color: var(--white);
+}
+
+main .home-section .slogan h2{
+    font-size: 3.5rem;
+    top: 125px;
+    left: 50%;
+}
+
+main .home-section .slogan h2 span{
+    font-size: 2.5rem; 
+}
+
+main .home-section .slogan .subTitulo{
+    top: 230px;
+    left: 50%;
+}
+
+main .home-section .slogan .boxAcess{ 
+    top: 390px;
+    left: 41%;
+}
+
+
+main .home-section .slogan .saibaMais{ 
+    top: 390px;
+    left: 59%;
+}
+
+
+main .home-section .saibaMais img #setaSaibaMais{
+    position: relative;
+    right: 50px;
+}
+
+main .home-section .slogan .controles .controleLeft{
+    width: 40%;
+    height: 15%;
+    top: 160px;
+    right: 20px;
+}
+
+main .home-section .slogan .controles .controleLeft img{
+    width: 50vw;
+    height: 25vh;
+}
+
+main .home-section .slogan .controles .controleRight{
+    width: 40%;
+    height: 15%;
+    top: 160px;
+    right: 3px;
+}
+
+main .home-section .slogan .controles .controleRight img{
+    width: 50vw;
+    height: 25vh;
+    z-index: 1;
+}
+
+main .whoWeAreSection .quemSomos .titleQuemSomos{
+    width: 40%;
+    height: 20%;
+    top: 13px;
+    right: 230px;
+}
+
+main .whoWeAreSection .quemSomos .titleQuemSomos span{
+    font-size: 2rem;
+}
+
+main .whoWeAreSection .quemSomos .titleQuemSomos span img{
+    width: 3.6vw;
+    height: 7vh;
+    margin-bottom: 10px;
+}
+
+main .whoWeAreSection .quemSomos .descricaoQuemSomos{
+    width: 30%;
+    height: 35%;
+}
+
+main .whoWeAreSection .quemSomos .descricaoQuemSomos span{
+    font-size: 1.1rem;
+    top: 35px;
+    right: 270px;
+}
+
+main .whoWeAreSection .quemSomos .imgEsquerda{
+    width: 22vw;
+    height: 39vh;
+    bottom: 140px;
+    right: 380px;
+}
+
+main .whoWeAreSection .quemSomos .imgEsquerda img{
+    height: 40vh;
+}
+
+main .whoWeAreSection .quemSomos .imgCentro{
+    width: 22vw;
+    height: 29vh;
+    bottom: 185px;
+    right: 237px;
+}
+
+main .whoWeAreSection .quemSomos .imgCentro img{
+    height: 39vh;
+}
+
+main .whoWeAreSection .quemSomos .imgDireita{
+    width: 22vw;
+    height: 29vh;
+    bottom: 140px;
+    right: 90px;
+}
+
+main .whoWeAreSection .quemSomos .imgDireita img{
+    width: 19vw;
+    height: 40vh;
+    border-radius: 15px;
+}
+
+main .whoWeAreSection .quemSomos .textQuemSomos span{
+    height: 28vh;
+    font-size: 0.9rem;
+    top: 18px;
+}
+
+main .whoWeAreSection .quemSomos .textQuemSomos .bolinhaFixar{
+    bottom: 65px;
+    left: 255px;
+}
+
+main .whoWeAreSection .quemSomos .logoQuemSomos{
+    bottom: 180px;
+    left: 270px;
+}
+
+main .whoWeAreSection .quemSomos .logoQuemSomos img{
+    width: 21.5vw;
+    height: 39.3vh;
+}
+
+main .services .servicos .titleService{
+    top: 40px;
+    right: 350px;
+}
+
+main .services .servicos .titleService span{
+    font-size: 1.9rem;
+}
+
+main .services .servicos .titleService img{
+    top: 32px;
+    right: 92px;
+}
+
+main .services .servicos .blueLineService2{
+    top: 1600px;
+}
+
+main .services .servicos .textService1{
+    width: 22.2vw;
+    height: 17vh;
+    top: 14%;
+    right: 31.4%;
+    z-index: 1;
+}
+
+main .services .servicos .textService1 span{
+    font-size: 0.9rem;
+    left: 15px;
+}
+
+main .services .servicos .textService1 .bolinhaFixo{
+    width: 5vw;
+    height: 2.5vh;
+    right: 11px;
+    bottom: 23px;    
+}
+
+main .services .servicos .textService1 .bolinhaFixo img{
+    width: 1.75vw;
+    height: 3.5vh;
+}
+
+main .services .servicos .textService2{
+    width: 25vw;
+    height: 17vh;
+    top: 16%;
+    right: 30%;
+    z-index: 1;
+}
+
+main .services .servicos .textService2 span{
+    font-size: 0.9rem;
+    left: 14px;
+}
+
+main .services .servicos .textService2 .bolinhaFixo{
+    width: 5vw;
+    height: 2.5vh;
+    right: 10px;
+    bottom: 24px;    
+}
+
+main .services .servicos .textService2 .bolinhaFixo img{
+    width: 1.75vw;
+    height: 3.5vh;
+}
+
+main .services .servicos .textService3{
+    width: 22.2vw;
+    height: 17vh;
+    top: 18%;
+    right: 31.4%;
+    z-index: 1;
+}
+
+main .services .servicos .textService3 span{
+    font-size: 0.9rem;
+    left: 14px;
+}
+
+main .services .servicos .textService3 .bolinhaFixo{
+    width: 5vw;
+    height: 2.5vh;
+    right: 10px;
+    bottom: 22px;    
+}
+
+main .services .servicos .textService3 .bolinhaFixo img{
+    width: 1.75vw;
+    height: 3.5vh;
+}
+
+main .services .servicos .textService4{
+    width: 25vw;
+    height: 18vh;
+    top: 20%;
+    right: 29.9%;
+    z-index: 1;
+}
+
+main .services .servicos .textService4 span{
+    font-size: 0.9rem;
+    left: 15px;
+}
+
+main .services .servicos .textService4 .bolinhaFixo{
+    width: 5vw;
+    height: 2.5vh;
+    right: 12px;
+    bottom: 23px;
+    z-index: 1;    
+}
+
+main .services .servicos .textService4 .bolinhaFixo img{
+    width: 1.75vw;
+    height: 3.5vh;
+    z-index: 1;
+}
+
+main .services .servicos .celular{
+    width: 35vw;
+    bottom: 225px;
+}
+
+main .services .servicos .celular img{
+    width: 23vw;
+    height: 46vh;
+}
+
+main .services .servicos .mouse{
+    width: 32vw;
+    bottom: 680px;
+    right: 55px;
+}
+
+main .services .servicos .mouse img{
+    width: 135vw;
+    height: 115vh;
+}
+
+main .sectionValores .valores{
+    height: 95vh;
+    top: 790px;
+}
+
+main .sectionValores .valores img{
+    width: 90vw;
+    height: 85vh;
+}
+
+main .sectionValores .valores .titleValores{
+    bottom: 460px;
+    right: 190px;
+}
+
+main .sectionValores .valores .titleValores span{
+    font-size: 2rem;
+}
+
+main .sectionValores .valores .titleValores span img{
+    width: 3.8vw;
+    height: 7.5vh;;
+}
+
+main .sectionValores .valores .linhaValores{
+    bottom: 455px;
+}
+
+main .sectionValores .valores .linhaValores img{
+    width: 1.2vw;
+    height: 62vh;
+}
+
+main .sectionValores .valores .textosValores{
+    bottom: 950px;
+    width: 18vw;
+}
+
+main .sectionValores .valores .textosValores .valor1{
+    font-size: 0.9rem;
+}
+
+main .sectionValores .valores .textosValores .valor2{
+    font-size: 0.9rem;
+    top: 118px;
+}
+
+main .sectionValores .valores .textosValores .valor3{
+    font-size: 0.9rem;
+    top: 62px;
+}
+
+main .sectionValores .valores .textosValores .valor4{
+    font-size: 0.9rem;
+    bottom: 8px;
+}
+
+main .sectionValores .valores .ligacao{
+    bottom: 1295px;
+    left: 180px;
+}
+
+main .sectionValores .valores .ligacao img{
+    width: 35vw;
+    height: 60vh;
+}
+
+main .sectionValores .valores .comunidade{
+    width: 15vw;
+    height: 17vh;
+    bottom: 1650px;
+    left: 29%;
+}
+
+main .sectionValores .valores .comunidade span{
+    font-size: 1rem;
+    left: 7.5%;
+}
+
+
+main .sectionValores .valores .comunidade .bolinhaFixo{
+    width: 3vw;
+    height: 3vh;
+    left: 8px;
+    bottom: 22px;
+}
+
+main .sectionValores .valores .comunidade .bolinhaFixo img{
+    width: 1.25vw;
+    height: 2.5vh;
+}
+
+main .sectionValores .valores .oportunidade{
+    width: 15vw;
+    height: 17vh;
+    bottom: 1605px;
+}
+
+main .sectionValores .valores .oportunidade span{
+    font-size: 1rem;
+    left: 10%;
+}
+
+main .sectionValores .valores .oportunidade .bolinhaFixo{
+    width: 3vw;
+    height: 3vh;
+    left: 8px;
+    bottom: 22px;
+}
+
+main .sectionValores .valores .oportunidade .bolinhaFixo img{
+    width: 1.25vw;
+    height: 2.5vh;
+}
+
+main .sectionValores .valores .confiabilidade{
+    width: 15vw;
+    height: 17vh;
+    padding: 25px;
+    bottom: 1640px;
+    left: 30%;
+}
+
+main .sectionValores .valores .confiabilidade span{
+    font-size: 1rem;
+    left: 9%;
+}
+
+
+main .sectionValores .valores .confiabilidade .bolinhaFixo{
+    width: 3vw;
+    height: 3vh;
+    left: 3px;
+    bottom: 22px; 
+}
+
+main .sectionValores .valores .confiabilidade .bolinhaFixo img{
+    width: 1.25vw;
+    height: 2.5vh;
+}
+
+main .sectionValores .valores .transparencia{
+    width: 15vw;
+    height: 17vh;
+    bottom: 1600px;;
+    left: 3%;
+    z-index: 1;
+}
+
+main .sectionValores .valores .transparencia span{
+    font-size: 1rem;
+    left: 8.5%;
+}
+
+main .sectionValores .valores .transparencia .bolinhaFixo{
+    width: 3vw;
+    height: 3vh;
+    left: 3px;
+    bottom: 22px; 
+}
+
+main .sectionValores .valores .transparencia .bolinhaFixo img{
+    width: 1.25vw;
+    height: 2.5vh;
+}
+
+main .sectionValores .valores .logoNexus{
+    bottom: 1680px;
+    left: 340px;
+}
+
+main .sectionValores .valores .logoNexus img{
+    width: 11vw;
+    height: 20.2vh;
+}
+
+main .teamSection .nossaEquipe .grayLineService{
+    top: 10px;
+}
+main .teamSection .nossaEquipe .grayLineService2{
+    top: 2px;
+}
+
+main .teamSection .nossaEquipe .titleEquipe {
+    width: 100%;
+    top: 15px;
+    right: 10%;
+    z-index: 1;
+}
+
+main .teamSection .nossaEquipe .titleEquipe span {
+    font-size: 2rem;
+}
+
+main .teamSection .nossaEquipe .titleEquipe span img {
+    width: 3.75vw;
+    height: 7.5vh;
+}
+
+main .teamSection .nossaEquipe .descricaoEquipe {
+    width: 20vw;
+    height: 60vh;
+    border-radius: 20px;
+    top: 75px;
+    right: 10%;
+}
+
+main .teamSection .nossaEquipe .descricaoEquipe span {
+    width: 20vw;
+    height: 20vh;
+    font-size: 1rem;
+    top: -24px;
+    left: 20px;
+}
+
+main .teamSection .nossaEquipe .descricaoEquipe .bolinhaFixar {
+    bottom: 90px;
+    left: -1%;
+}
+
+main .teamSection .nossaEquipe .descricaoEquipe .bolinhaFixar img {
+    width: 1.75vw;
+    height: 3.5vh;
+}
+
+main .teamSection .nossaEquipe .descricaoEquipe .nexusLogo {
+    top: 90px;
+    right: 11%;
+}
+
+main .teamSection .nossaEquipe .descricaoEquipe .nexusLogo img{
+    width: 1.75vw;
+    height: 3.5vh;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe {
+    top: 135px;
+    left: 55%;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .carrossel-btn {
+    width: 25px;
+    height: 25px;
+    bottom:190px;
+    left: 28%;
+}
+
+
+main .teamSection .nossaEquipe .carrosselEquipe .carrossel-btn img {
+    width: 1.75vw;
+    height: 3.5vh;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer {
+    bottom: 300px;
+    left: 200px;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro .fotoMembro {
+    width: 17.5vw;
+    height: 45vh;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro:not(.active) .fotoMembro {
+    width: 15vw;
+    height: 45vh;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro .fotoMembro img {
+    width: 100%;
+    height: 100%;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro .fotoMembro .redesSociais {
+    bottom: 10px;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro .fotoMembro .redesSociais .iconRede {
+    width: 3.75vw;
+    height: 7.5vh;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro .fotoMembro .redesSociais .iconRede img {
+    width: 3.4vw;
+    height: 7.25vh;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro .nomeMembro {
+    padding: 10px 15px;
+    bottom: -57px;
+    left: 50%;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro .nomeMembro span {
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+main .teamSection .nossaEquipe .indicadores {
+    bottom : 95px;
+    left: 69.5%;
+}
+
+main .teamSection .nossaEquipe .indicadores .indicador {
+    width: 0.75vw;
+    height: 1.5vh;
+}
+
+main .teamSection .nossaEquipe .indicadores .indicador.active {
+    width: 2.25vw;
+}
+
+.copyrightFooter span{
+   top: 17px;
+   right: 30%;
+   font-size: 0.8rem;
+}
+
+.copyrightFooter button{
+    width: 3.75vw;
+    height: 7.5vh;
+    top: 18px;
+    left: 30.8%;
+}
+
+}
+
+@media (max-width: 768px){
+    header #topo #logo{
+    position: relative;
+    margin-left: var(--margin-left-logo-navbar-1900px);
+    margin-top: var(--margin-top-logo-navbar-1900px);
+    width: 3vw; 
+    height: 6vh;
+    top: 8px;
+    left: 90px;
+}
+
+header #topo #logoNexus{
+    font-size: 1rem;
+    color: var(--white);
+    right: 68px;
+    top: 43px;
+}
+
+header #topo #logoNexus2{
+    font-size: 1rem;
+}
+
+header #topo .centralLinks{
+    display: none;
+}
+
+header #topo .buttonsNav{
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    gap: 22px;
+    width: var(--width-navbar-right-1900px); 
+    height: var(--height-navbar-left-right-1900px);
+    border-radius: var(--borderRadius-1900px);
+}
+
+header #topo .buttonsNav .login{
+    width: 8vw;
+    height: 5.5vh;
+    top: 34px;
+    right: 25px;
+    font-size: 0.8rem;
+}
+
+header #topo .buttonsNav .login img{
+    width: 1.25vw;
+    height: 2.25vh;
+}
+
+header #topo .buttonsNav .cad{
+    width: 8vw;
+    height: 5.5vh;
+    top: 35px;
+    right: 30px;
+    font-size: 0.8rem;
+}
+
+main .home-section .slogan{
+    margin: 0px 5px 0px 5px;
+    width: 100%;
+    height: 100vh;
+    color: var(--white);
+}
+
+main .home-section .slogan h2{
+    font-size: 2.5rem;
+    top: 75px;
+    left: 50%;
+}
+
+main .home-section .slogan h2 span{
+    font-size: 2.5rem; 
+}
+
+main .home-section .slogan .subTitulo{
+    top: 170px;
+    left: 50%;
+    font-size: 0.6rem;
+}
+
+main .home-section .slogan .subTitulo h2{
+    width: 37.5vw;
+    font-size: 1rem;
+}
+
+main .home-section .slogan .boxAcess{ 
+    top: 320px;
+    left: 41%;
+}
+
+
+main .home-section .slogan .saibaMais{ 
+    top: 320px;
+    left: 60%;
+}
+
+main .home-section .slogan .controles .controleLeft{
+    width: 40%;
+    height: 15%;
+    top: 165px;
+    right: 10px;
+}
+
+main .home-section .slogan .controles .controleLeft img{
+    width: 45vw;
+    height: 22.5vh;
+}
+
+main .home-section .slogan .controles .controleRight{
+    width: 40%;
+    height: 15%;
+    top: 165px;
+    right: 28px;
+}
+
+main .home-section .slogan .controles .controleRight img{
+    width: 45vw;
+    height: 22.5vh;
+    z-index: 1;
+}
+
+main .whoWeAreSection .quemSomos .titleQuemSomos{
+    top: 23px;
+    right: 200px;
+}
+
+main .whoWeAreSection .quemSomos .titleQuemSomos span{
+    font-size: 1.6rem;
+}
+
+main .whoWeAreSection .quemSomos .titleQuemSomos span img{
+    width: 4vw;
+    height: 6vh;
+    margin-bottom: 10px;
+}
+
+main .whoWeAreSection .quemSomos .descricaoQuemSomos{
+    width: 32%;
+    height: 35%;
+}
+
+main .whoWeAreSection .quemSomos .descricaoQuemSomos span{
+    font-size: 0.9rem;
+    top: 32px;
+    right: 220px;
+}
+
+main .whoWeAreSection .quemSomos .imgEsquerda{
+    width: 20vw;
+    height: 36vh;
+    bottom: 140px;
+    right: 280px;
+}
+
+main .whoWeAreSection .quemSomos .imgEsquerda img{
+    height: 36vh;
+}
+
+main .whoWeAreSection .quemSomos .imgCentro{
+    width: 22vw;
+    height: 30vh;
+    bottom: 195px;
+    right: 181px;
+}
+
+main .whoWeAreSection .quemSomos .imgCentro img{
+    height: 35vh;
+}
+
+main .whoWeAreSection .quemSomos .imgDireita{
+    width: 20vw;
+    height: 36vh;
+    bottom: 175px;
+    right: 90px;
+}
+
+main .whoWeAreSection .quemSomos .imgDireita img{
+    width: 20vw;
+    height: 36vh;
+    border-radius: 15px;
+}
+
+main .whoWeAreSection .quemSomos .textQuemSomos{
+    bottom: 170px;
+    left: 26%;
+}
+
+main .whoWeAreSection .quemSomos .textQuemSomos span{
+    height: 28vh;
+    font-size: 0.8rem;
+    top: 25px;
+}
+
+main .whoWeAreSection .quemSomos .textQuemSomos .bolinhaFixar{
+    bottom: 68px;
+    left: 190px;
+}
+
+main .whoWeAreSection .quemSomos .logoQuemSomos{
+    bottom: 150px;
+    left: 190px;
+}
+
+main .whoWeAreSection .quemSomos .logoQuemSomos img{
+    width: 26.4vw;
+    height: 36vh;
+}
+
+main .services .servicos .titleService{
+    top: 10px;
+    right: 260px;
+}
+
+main .services .servicos .titleService span{
+    font-size: 1.8rem;
+}
+
+main .services .servicos .titleService img{
+    top: 31px;
+    right: 75px;
+}
+
+main .services .servicos .blueLineService2{
+    top: 1580px;
+}
+
+main .services .servicos .textService1{
+    width: 24vw;
+    height: 18vh;
+    top: 8%;
+    right: 31.4%;
+    z-index: 1;
+}
+
+main .services .servicos .textService1 span{
+    font-size: 0.8rem;
+    left: 11px;
+}
+
+main .services .servicos .textService1 .bolinhaFixo{
+    width: 5vw;
+    height: 2.5vh;
+    right: 11px;
+    bottom: 25px;    
+}
+
+main .services .servicos .textService1 .bolinhaFixo img{
+    width: 1.75vw;
+    height: 3.5vh;
+}
+
+main .services .servicos .textService2{
+    width: 27vw;
+    height: 18vh;
+    top: 12%;
+    right: 30%;
+    z-index: 1;
+}
+
+main .services .servicos .textService2 span{
+    font-size: 0.8rem;
+    left: 11px;
+}
+
+main .services .servicos .textService2 .bolinhaFixo{
+    width: 5vw;
+    height: 2.5vh;
+    right: 9px;
+    bottom: 24px;    
+}
+
+main .services .servicos .textService2 .bolinhaFixo img{
+    width: 1.75vw;
+    height: 3.5vh;
+}
+
+main .services .servicos .textService3{
+    width: 24vw;
+    height: 18vh;
+    top: 16%;
+    right: 31.4%;
+    z-index: 1;
+}
+
+main .services .servicos .textService3 span{
+    font-size: 0.8rem;
+    left: 11px;
+}
+
+main .services .servicos .textService3 .bolinhaFixo{
+    width: 5vw;
+    height: 2.5vh;
+    right: 10px;
+    bottom: 25px;    
+}
+
+main .services .servicos .textService3 .bolinhaFixo img{
+    width: 1.75vw;
+    height: 3.5vh;
+}
+
+main .services .servicos .textService4{
+    width: 29vw;
+    height: 18vh;
+    top: 20%;
+    right: 28.9%;
+    z-index: 1;
+}
+
+main .services .servicos .textService4 span{
+    font-size: 0.9rem;
+    left: 11px;
+}
+
+main .services .servicos .textService4 .bolinhaFixo{
+    width: 5vw;
+    height: 2.5vh;
+    right: 11px;
+    bottom: 25px;
+    z-index: 1;    
+}
+
+main .services .servicos .textService4 .bolinhaFixo img{
+    width: 1.75vw;
+    height: 3.5vh;
+    z-index: 1;
+}
+
+main .services .servicos .celular{
+    width: 38vw;
+    bottom: 265px;
+}
+
+main .services .servicos .celular img{
+    width: 27vw;
+    height: 48vh;
+}
+
+main .services .servicos .mouse{
+    width: 32vw;
+    bottom: 720px;
+    right: 20px;
+}
+
+main .services .servicos .mouse img{
+    width: 130vw;
+    height: 110vh;
+}
+
+main .sectionValores .valores{
+    height: 95vh;
+    top: 790px;
+}
+
+main .sectionValores .valores img{
+    top: 30px;
+    width: 90vw;
+    height: 85vh;
+}
+
+main .sectionValores .valores .titleValores{
+    bottom: 330px;
+    right: 140px;
+}
+
+main .sectionValores .valores .titleValores span{
+    font-size: 1.8rem;
+}
+
+main .sectionValores .valores .titleValores span img{
+    width: 3.8vw;
+    height: 7.5vh;
+    display: none;
+}
+
+main .sectionValores .valores .linhaValores{
+    bottom: 350px;
+    left: -40%;
+}
+
+main .sectionValores .valores .linhaValores img{
+    width: 1.3vw;
+    height: 62vh;
+}
+
+main .sectionValores .valores .textosValores{
+    bottom: 845px;
+    width: 15vw;
+    left: -150px;
+}
+
+main .sectionValores .valores .textosValores .valor1{
+    font-size: 0.7rem;
+    top: 197px;
+}
+
+main .sectionValores .valores .textosValores .valor2{
+    font-size: 0.7rem;
+    top: 132px;
+}
+
+main .sectionValores .valores .textosValores .valor3{
+    font-size: 0.7rem;
+    top: 66px;
+}
+
+main .sectionValores .valores .textosValores .valor4{
+    font-size: 0.7rem;
+    bottom: 8px;
+}
+
+main .sectionValores .valores .ligacao{
+    bottom: 1215px;
+    left: 120px;
+}
+
+main .sectionValores .valores .ligacao img{
+    width: 36vw;
+    height: 62vh;
+}
+
+main .sectionValores .valores .comunidade{
+    width: 15vw;
+    height: 17vh;
+    bottom: 1550px;
+    left: 29%;
+}
+
+main .sectionValores .valores .comunidade span{
+    font-size: 0.8rem;
+    left: 8%;
+}
+
+
+main .sectionValores .valores .comunidade .bolinhaFixo{
+    width: 3vw;
+    height: 3vh;
+    left: 3px;
+    bottom: 50px;
+}
+
+main .sectionValores .valores .comunidade .bolinhaFixo img{
+    width: 1.75vw;
+    height: 2.5vh;
+}
+
+main .sectionValores .valores .oportunidade{
+    width: 15vw;
+    height: 17vh;
+    bottom: 1485px;
+}
+
+main .sectionValores .valores .oportunidade span{
+    font-size: 0.8rem;
+    left: 10%;
+}
+
+main .sectionValores .valores .oportunidade .bolinhaFixo{
+    width: 3vw;
+    height: 3vh;
+    left: 3px;
+    bottom: 50px;
+}
+
+main .sectionValores .valores .oportunidade .bolinhaFixo img{
+    width: 1.75vw;
+    height: 2.5vh;
+}
+
+main .sectionValores .valores .confiabilidade{
+    width: 15vw;
+    height: 17vh;
+    padding: 25px;
+    bottom: 1540px;
+    left: 30%;
+}
+
+main .sectionValores .valores .confiabilidade span{
+    font-size: 0.8rem;
+    left: 9%;
+}
+
+
+main .sectionValores .valores .confiabilidade .bolinhaFixo{
+    width: 3vw;
+    height: 3vh;
+    left: -1px;
+    bottom: 50px; 
+}
+
+main .sectionValores .valores .confiabilidade .bolinhaFixo img{
+    width: 1.75vw;
+    height: 2.5vh;
+}
+
+main .sectionValores .valores .transparencia{
+    width: 16vw;
+    height: 18vh;
+    bottom: 1475px;;
+    left: 3%;
+    z-index: 1;
+}
+
+main .sectionValores .valores .transparencia span{
+    font-size: 0.8rem;
+    left: 8.5%;
+}
+
+main .sectionValores .valores .transparencia .bolinhaFixo{
+    width: 3vw;
+    height: 3vh;
+    left: 1px;
+    bottom: 50px; 
+}
+
+main .sectionValores .valores .transparencia .bolinhaFixo img{
+    width: 1.75vw;
+    height: 2.5vh;
+}
+
+main .sectionValores .valores .logoNexus{
+    bottom: 1580px;
+    left: 255px;
+}
+
+main .sectionValores .valores .logoNexus img{
+    width: 9vw;
+    height: 15vh;
+}
+
+main .teamSection .nossaEquipe {
+    top: 100px;
+    height: 110vh;
+}
+
+main .teamSection .nossaEquipe .grayLineService{
+    top: 10px;
+}
+main .teamSection .nossaEquipe .grayLineService2{
+    top: 2px;
+}
+
+main .teamSection .nossaEquipe .titleEquipe {
+    width: 100%;
+    top: 10px;
+    right: 20%;
+    z-index: 1;
+}
+
+main .teamSection .nossaEquipe .titleEquipe span {
+    font-size: 1.8rem;
+}
+
+main .teamSection .nossaEquipe .titleEquipe span img {
+    width: 3.75vw;
+    height: 7.5vh;
+}
+
+main .teamSection .nossaEquipe .descricaoEquipe {
+    width: 20vw;
+    height: 35vh;
+    border-radius: 20px;
+    top: 45px;
+    right: 17%;
+}
+
+main .teamSection .nossaEquipe .descricaoEquipe span {
+    width: 20vw;
+    height: 20vh;
+    font-size: 0.8rem;
+    top: -15px;
+    left: 20px;
+}
+
+main .teamSection .nossaEquipe .descricaoEquipe .bolinhaFixar {
+    bottom: 77px;
+}
+
+main .teamSection .nossaEquipe .descricaoEquipe .bolinhaFixar img {
+    width: 1.75vw;
+    height: 3.5vh;
+}
+
+main .teamSection .nossaEquipe .descricaoEquipe .nexusLogo {
+    top: 80px;
+    right: 11.5%;
+}
+
+main .teamSection .nossaEquipe .descricaoEquipe .nexusLogo img{
+    width: 1.75vw;
+    height: 3.5vh;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe {
+    top: 140px;
+    left: 35%;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .carrossel-btn {
+    width: 25px;
+    height: 25px;
+    bottom:190px;
+    left: 41%;
+    display: none;
+}
+
+
+main .teamSection .nossaEquipe .carrosselEquipe .carrossel-btn img {
+    width: 1.75vw;
+    height: 3.5vh;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer {
+    bottom: 300px;
+    left: 200px;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro .fotoMembro {
+    width: 17.5vw;
+    height: 34vh;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro:not(.active) .fotoMembro {
+    width: 15vw;
+    height: 32vh;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro .fotoMembro img {
+    width: 100%;
+    height: 100%;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro .fotoMembro .redesSociais {
+    bottom: 10px;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro .fotoMembro .redesSociais .iconRede {
+    width: 2.75vw;
+    height: 5vh;
+    display: none;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro .fotoMembro .redesSociais .iconRede img {
+    width: 2.1vw;
+    height: 4vh;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro .nomeMembro {
+    padding: 5px 10px;
+    bottom: -32px;
+    left: 50%;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro .nomeMembro span {
+    font-size: 0.5rem;
+    font-weight: 500;
+}
+
+main .teamSection .nossaEquipe .indicadores {
+    bottom : 115px;
+    left: 78%;
+}
+
+main .teamSection .nossaEquipe .indicadores .indicador {
+    width: 1.25vw;
+    height: 1.75vh;
+}
+
+main .teamSection .nossaEquipe .indicadores .indicador.active {
+    width: 2vw;
+}
+
+main .teamSection .nossaEquipe .fraseEquipe {
+    bottom: 55px;
+    left: 27%;
+}
+
+main .teamSection .nossaEquipe .fraseEquipe span {
+    font-size: 1.1rem;
+}
+
+main .teamSection .nossaEquipe .valoresEquipe {
+    bottom: 40px;
+    left: 50%;
+}
+
+main .teamSection .nossaEquipe .valoresEquipe .valorItem {
+    gap: 15px;
+    max-width: 30vw;
+    height: 22vh;
+    left: 2%;
+}
+
+main .teamSection .nossaEquipe .valoresEquipe .valorItem span {
+    width: 15vw;
+    font-size: 0.7rem;
+}
+
+.footerSection {
+    width: 100%;
+    height: 67vh;
+    background-color: #000;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    margin-top: 20px;
+}
+
+.textoFooter p {
+    bottom: 25px;
+    font-size: 0.9rem;
+    
+}
+
+
+.btnFooter {
+    padding: 15px 30px;
+    font-size: 0.7rem;
+    bottom: 40px;
+}
+
+.copyrightFooter span{
+   top: 17px;
+   right: 25%;
+   font-size: 0.8rem;
+}
+
+.copyrightFooter button{
+    width: 3.75vw;
+    height: 7.5vh;
+    top: 18px;
+    left: 28%;
+}
+
+.copyrightFooter button a img{
+   width: 2.25vw;
+   height: 5vh;
+}
+
+.copyrightFooter .homeText{
+    bottom: 10px;
+    left: 17%;
+}
+
+}
+
+@media (max-width: 430px){
+
+header #topo #logo{
+    width: 12vw; 
+    height: 6vh;
+    top: 25px;
+    left: 70px;
+}
+
+header #topo #logoNexus{
+    font-size: 1.3rem;
+    color: var(--white);
+    right: 10px;
+    top: 57px;
+}
+
+header #topo #logoNexus2{
+    font-size: 1.3rem;
+}
+
+header #topo .centralLinks{
+    display: none;
+}
+
+header #topo .buttonsNav{
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    gap: 22px;
+}
+
+header #topo .buttonsNav .login{
+    width: 16vw;
+    height: 4vh;
+    top: 120px;
+    right: 185px;
+    font-size: 0.9rem;
+}
+
+header #topo .buttonsNav .login img{
+    display: none;
+}
+
+header #topo .buttonsNav .cad{
+    width: 16vw;
+    height: 4vh;
+    top: 121px;
+    right: 145px;
+    font-size: 0.9rem;
+}
+
+section{
+    width: 100%; 
+    height: 60vh;
+}
+
+main .home-section{
+    height: 40%;
+}
+
+main .home-section .slogan .linhaAzulHome{
+    top: 67px;
+}
+
+main .home-section .slogan .linhaGrayGradientHome{
+    top: 107px;
+}
+
+main .home-section .slogan .linhaBrancaHome{
+    top: 117px;
+}
+
+main .home-section .slogan{
+    margin: 0px 5px 0px 5px;
+    width: 100%;
+    height: 75vh;
+    color: var(--white);
+}
+
+main .home-section .slogan h2{
+    font-size: 1.5rem;
+    top: 105px;
+    left: 50%;
+}
+
+main .home-section .slogan h2 span{
+    font-size: 1.25rem; 
+}
+
+main .home-section .slogan .subTitulo{
+    top: 150px;
+    left: 50%;
+    font-size: 0.8rem;
+}
+
+main .home-section .slogan .subTitulo h2{
+    width: 60vw;
+    font-size: 1rem;
+}
+
+main .home-section .slogan .boxAcess{ 
+    width: 20vw; 
+    height: 5vh; 
+    top: 260px;
+    left: 35%;
+    text-align: center;
+}
+
+main .home-section .slogan .boxAcess #acessar{
+    font-size: 0.7rem;
+}
+
+main .home-section .slogan .saibaMais{
+    width: 25vw; 
+    height: 5vh; 
+    top: 261px;
+    left: 70%;
+}
+
+main .home-section .saibaMais a{
+    font-size: 0.7rem;
+}
+
+main .home-section .saibaMais img #setaSaibaMais{
+    position: relative;
+    right: 50px;
+}
+
+main .home-section .slogan .controles .controleLeft{
+    width: 45%;
+    height: 20%;
+    top: 95px;
+    right: 10px;
+}
+
+main .home-section .slogan .controles .controleLeft img{
+    width: 65vw;
+    height: 25vh;
+}
+
+main .home-section .slogan .controles .controleRight{
+    width: 45%;
+    height: 20%;
+    top: 95px;
+    right: 90px;
+}
+
+main .home-section .slogan .controles .controleRight img{
+    width: 65vw;
+    height: 25vh;
+    z-index: 1;
+}
+
+main .whoWeAreSection .quemSomos img{
+    width: 100%;
+    height: 100%;
+}
+
+main .whoWeAreSection .quemSomos .titleQuemSomos{
+    top: 3px;
+    right: 100px;
+}
+
+main .whoWeAreSection .quemSomos .titleQuemSomos span{
+    font-size: 1.3rem;
+}
+
+main .whoWeAreSection .quemSomos .titleQuemSomos span img{
+    width: 8vw;
+    height: 6vh;
+    margin-bottom: 10px;
+}
+
+main .whoWeAreSection .quemSomos .descricaoQuemSomos{
+    width: 40%;
+    height: 30%;
+}
+
+main .whoWeAreSection .quemSomos .descricaoQuemSomos span{
+    font-size: 0.6rem;
+    top: 15px;
+    right: 75px;
+}
+
+main .whoWeAreSection .quemSomos .imgEsquerda{
+    width: 20vw;
+    bottom: 60px;
+}
+
+main .whoWeAreSection .quemSomos .imgEsquerda img{
+    height: 22vh;
+    left: 140px;
+}
+
+main .whoWeAreSection .quemSomos .imgCentro{
+    width: 20vw;
+    bottom: 175px;
+    right: 90px;
+}
+
+main .whoWeAreSection .quemSomos .imgCentro img{
+    height: 24vh;
+}
+
+main .whoWeAreSection .quemSomos .imgDireita{
+    width: 22vw;
+    height: 36vh;
+    bottom: 202px;
+    right: 40px;
+}
+
+main .whoWeAreSection .quemSomos .imgDireita img{
+    width: 20vw;
+    height: 22vh;
+    border-radius: 15px;
+}
+
+main .whoWeAreSection .quemSomos .textQuemSomos{
+    bottom: 305px;
+    left: 26%;
+    width: 35vw;
+    height: 25vh;
+}
+
+main .whoWeAreSection .quemSomos .textQuemSomos span{
+    width: 30vw;
+    height: 28vh;
+    font-size: 0.6rem;
+    top: 29px;
+}
+
+main .whoWeAreSection .quemSomos .textQuemSomos .bolinhaFixar{
+   display: none;
+}
+
+main .whoWeAreSection .quemSomos .logoQuemSomos{
+    bottom: 100px;
+    left: 110px;
+}
+
+main .whoWeAreSection .quemSomos .logoQuemSomos img{
+    width: 26vw;
+    height: 20vh;
+}
+
+main .services .servicos .titleService{
+    top: 25px;
+    right: 140px;
+}
+
+main .services .servicos .titleService span{
+    font-size: 1.4rem;
+}
+
+main .services .servicos .titleService img{
+    display: none;
+}
+
+main .services .servicos .grayLineService{
+    top: 1020px;
+}
+main .services .servicos .grayLineService2{
+    top: 920px;
+}
+
+main .services .servicos .blueLineService2{
+    top: 1080px;
+}
+
+main .services .servicos .textService1{
+    width: 30vw;
+    height: 18vh;
+    top: 8%;
+    right: 31.4%;
+    z-index: 1;
+}
+
+main .services .servicos .textService1 span{
+    font-size: 0.8rem;
+    left: 5px;
+}
+
+main .services .servicos .textService1 .bolinhaFixo{
+    display: none;    
+}
+
+main .services .servicos .textService2{
+    width: 30vw;
+    height: 18vh;
+    top: 11%;
+    right: 31%;
+    z-index: 1;
+}
+
+main .services .servicos .textService2 span{
+    font-size: 0.7rem;
+    left: 11px;
+}
+
+main .services .servicos .textService2 .bolinhaFixo{
+    display: none;   
+}
+
+
+main .services .servicos .textService3{
+    width: 30vw;
+    height: 18vh;
+    top: 14%;
+    right: 31.4%;
+    z-index: 1;
+}
+
+main .services .servicos .textService3 span{
+    font-size: 0.7rem;
+    left: 11px;
+}
+
+main .services .servicos .textService3 .bolinhaFixo{
+    display: none;   
+}
+
+main .services .servicos .textService4{
+    width: 30vw;
+    height: 18vh;
+    top: 17%;
+    right: 31.4%;
+    z-index: 1;
+}
+
+main .services .servicos .textService4 span{
+    font-size: 0.7rem;
+    left: 11px;
+}
+
+main .services .servicos .textService4 .bolinhaFixo{
+    display: none; 
+}
+
+main .services .servicos .celular{
+    width: 38vw;
+    bottom: 305px;
+}
+
+main .services .servicos .celular img{
+    width: 27vw;
+    height: 45vh;
+}
+
+main .services .servicos .mouse{
+    width: 30vw;
+    bottom: 680px;
+    right: 20px;
+}
+
+main .services .servicos .mouse img{
+    width: 110vw;
+    height: 100vh;
+}
+
+main .sectionValores .valores{
+    height: 100vh;
+    top: 500px;
+}
+
+main .sectionValores .valores img{
+    top: 30px;
+    width: 90vw;
+    height: 85vh;
+}
+
+main .sectionValores .valores .titleValores{
+    bottom: 200px;
+    right: 85px;
+}
+
+main .sectionValores .valores .titleValores span{
+    font-size: 1.4rem;
+}
+
+main .sectionValores .valores .titleValores span img{
+    display: none;
+}
+
+main .sectionValores .valores .linhaValores{
+    bottom: 225px;
+    left: -45%;
+}
+
+main .sectionValores .valores .linhaValores img{
+    width: 2vw;
+    height: 48vh;
+}
+
+main .sectionValores .valores .textosValores{
+    bottom: 625px;
+    width: 15vw;
+    left: -60px;
+}
+
+main .sectionValores .valores .textosValores .valor1{
+    font-size: 0.4rem;
+    top: 180px;
+}
+
+main .sectionValores .valores .textosValores .valor2{
+    font-size: 0.4rem;
+    top: 117px;
+}
+
+main .sectionValores .valores .textosValores .valor3{
+    font-size: 0.4rem;
+    top: 53.5px;
+}
+
+main .sectionValores .valores .textosValores .valor4{
+    font-size: 0.4rem;
+    bottom: 15px;
+}
+
+main .sectionValores .valores .ligacao{
+    bottom: 955px;
+    left: 55px;
+}
+
+main .sectionValores .valores .ligacao img{
+    width: 32vw;
+    height: 52vh;
+}
+
+main .sectionValores .valores .comunidade{
+    width: 22vw;
+    height: 17vh;
+    bottom: 1220px;
+    left: 29%;
+}
+
+main .sectionValores .valores .comunidade span{
+    font-size: 0.7rem;
+    left: 2%;
+}
+
+
+main .sectionValores .valores .comunidade .bolinhaFixo{
+    display: none;
+}
+
+main .sectionValores .valores .oportunidade{
+    width: 22vw;
+    height: 17vh;
+    bottom: 1185px;
+}
+
+main .sectionValores .valores .oportunidade span{
+    font-size: 0.7rem;
+    left: 2%;
+}
+
+main .sectionValores .valores .oportunidade .bolinhaFixo{
+    display: none;
+}
+
+main .sectionValores .valores .confiabilidade{
+    width: 22vw;
+    height: 17vh;
+    padding: 25px;
+    bottom: 1240px;
+    left: 30%;
+}
+
+main .sectionValores .valores .confiabilidade span{
+    font-size: 0.7rem;
+    left: 2%;
+}
+
+
+main .sectionValores .valores .confiabilidade .bolinhaFixo{
+    display: none; 
+}
+
+main .sectionValores .valores .transparencia{
+    width: 22vw;
+    height: 17vh;
+    bottom: 1175px;;
+    left: 3%;
+    z-index: 1;
+}
+
+main .sectionValores .valores .transparencia span{
+    font-size: 0.7rem;
+    left: 2%;
+}
+
+main .sectionValores .valores .transparencia .bolinhaFixo{
+    display: none;
+}
+
+main .teamSection .nossaEquipe {
+    top: 100px;
+    height: 110vh;
+}
+
+main .teamSection .nossaEquipe .grayLineService{
+    top: 10px;
+}
+main .teamSection .nossaEquipe .grayLineService2{
+    top: 2px;
+}
+
+main .teamSection .nossaEquipe .titleEquipe {
+    width: 100%;
+    top: -20px;
+    right: 75%;
+    z-index: 1;
+}
+
+main .teamSection .nossaEquipe .titleEquipe span {
+    font-size: 1.5rem;
+}
+
+main .teamSection .nossaEquipe .titleEquipe span img {
+   display: none;
+}
+
+main .teamSection .nossaEquipe .descricaoEquipe {
+    width: 28vw;
+    height: 35vh;
+    border-radius: 20px;
+    top: 15px;
+    right: 100%;
+}
+
+main .teamSection .nossaEquipe .descricaoEquipe span {
+    width: 20vw;
+    height: 20vh;
+    font-size: 0.6rem;
+    top: -2px;
+    left: 20px;
+}
+
+main .teamSection .nossaEquipe .descricaoEquipe .bolinhaFixar {
+    display: none;
+}
+
+main .teamSection .nossaEquipe .descricaoEquipe .nexusLogo {
+    display: none;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe {
+    top: 140px;
+    left: 35%;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer {
+    bottom: 300px;
+    left: 90px;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro .fotoMembro {
+    width: 18vw;
+    height: 20vh;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro:not(.active) .fotoMembro {
+    width: 18vw;
+    height: 18vh;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro .fotoMembro img {
+    width: 100%;
+    height: 100%;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro .fotoMembro .redesSociais {
+    bottom: 10px;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro .fotoMembro .redesSociais .iconRede {
+    width: 2.75vw;
+    height: 5vh;
+    display: none;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro .fotoMembro .redesSociais .iconRede img {
+    width: 2.1vw;
+    height: 4vh;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro .nomeMembro {
+    padding: 5px 10px;
+    bottom: -32px;
+    left: 50%;
+}
+
+main .teamSection .nossaEquipe .carrosselEquipe .membrosContainer .membro .nomeMembro span {
+    font-size: 0.5rem;
+    font-weight: 500;
+}
+
+main .teamSection .nossaEquipe .indicadores {
+    bottom : 115px;
+    left: 107%;
+}
+
+main .teamSection .nossaEquipe .indicadores .indicador {
+    width: 2vw;
+    height: 1.75vh;
+}
+
+main .teamSection .nossaEquipe .indicadores .indicador.active {
+    width: 4vw;
+}
+
+main .teamSection .nossaEquipe .fraseEquipe {
+    bottom: 60px;
+    left: -13%;
+}
+
+main .teamSection .nossaEquipe .fraseEquipe span {
+    font-size: 0.8rem;
+}
+
+main .teamSection .nossaEquipe .valoresEquipe {
+    bottom: 45px;
+    left: 50%;
+}
+
+main .teamSection .nossaEquipe .valoresEquipe .valorItem {
+    gap: 5px;
+    max-width: 22vw;
+    height: 22vh;
+    left: 1%;
+}
+
+main .teamSection .nossaEquipe .valoresEquipe .valorItem span {
+    width: 20vw;
+    font-size: 0.5rem;
+}
+
+.footerSection {
+    width: 100%;
+    height: 75vh;
+    background-color: #000;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    margin-top: 20px;
+}
+
+.textoFooter p {
+    bottom: 35px;
+    font-size: 0.7rem;
+    
+}
+
+
+.btnFooter {
+    padding: 15px 30px;
+    font-size: 0.7rem;
+    bottom: 40px;
+}
+
+.logoFooter {
+    margin-bottom: 30px;
+}
+
+.logoFooter img {
+    width: 15vw;
+    height: 15vh;
+    object-fit: contain;
+}
+
+.copyrightFooter span{
+   top: 17px;
+   right: 15%;
+   font-size: 0.6rem;
+}
+
+.copyrightFooter button{
+    width: 6vw;
+    height: 6vh;
+    top: 18px;
+    left: 28%;
+}
+
+.copyrightFooter button a img{
+   width: 5vw;
+   height: 5vh;
+}
+
+.copyrightFooter .homeText{
+    bottom: 10px;
+    left: 8%;
+} 
+}
