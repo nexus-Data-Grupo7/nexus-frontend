@@ -3,51 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/login.css">
+    <link rel="stylesheet" href="./css/cadastro.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>NexusData - Login</title>
+    <title>NexusData - Cadastro</title>
 </head>
 <body>
     
     <div class="container">
         <section class="containerHomePage">
 
-            <nav class="navBar" id="navBar">
+            <header>
+                <nav id="topo">
+                    <img src="./images/logoQuemSomos.png" alt="" id="logo">
+                    <span id="logoNexus">nexus<span id="logoNexus2">Data</span></span>
+                    <div class="centralLinks">
+                        <a href="#">
+                            <ul>
+                                <li><a href="index.html#home">Home</a></li>
+                                <li><a href="index.html#about">Sobre</a></li>
+                                <li><a href="index.html#services">Serviços</a></li>
+                                <li><a href="index.html#values">Valores</a></li>
+                                <li><a href="index.html#team">Equipe</a></li>
+                            </ul>
+                        </a>
+                    </div>
 
-                <div class="logoNav">
-                    <a href="index.html"><img class="logo" src="./imagens/logo.png" alt="Logo"></a>
-                    <a href="index.html"><img class="logoNexus" src="./imagens/logoNexus.png" alt="Nexus Logo"></a>
+                    <div class="buttonsNav">
+                        <a href="login.html"><button class="login">Login <img src="./images/controle.png" alt=""></button></a>
+                        <a href="cadastro.html"><button class="cad">Cadastro</button></a>
+                    </div>
+                </nav>
+
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
-
-
-                <ul class="navLinks">
-                    <li class="navLink">
-                        <a href="index.html#sobre">Quem somos</a>
-                    </li>
-                    <li class="navLink">
-                        <a href="index.html#servicos">Serviços</a>
-                    </li>
-                    <li class="navLink">
-                        <a href="index.html#valores">Valores</a>
-                    </li>
-                    <li class="navLink">
-                        <a href="index.html#time">Time</a>
-                    </li>
-                </ul>
-
-
-                <div class="botoes">
-                    <a href="login.html"><button class="estiloBotoes">Entrar</button></a>
-                    <a href="cadastro.html"><button class="estiloBotoes">Cadastro</button></a>
-                </div>
-            </nav>
+            </header>
 
             <div class="homePageContainer">
-                <h2>Bem vindo de volta!</h2>
+                
 
                 <div class="card card-cadastro">
+                    <h2>Cadastro!</h2>
 
                     <div class="tipo-usuario" style="margin-bottom: 20px;">
                         <label style="margin-right: 20px;">
@@ -56,17 +56,23 @@
                         <label>
                             <input type="radio" name="tipoUsuario" value="organizacao" onchange="alterarTipoLogin()"> Organização
                         </label>
-                    </div>                    
-        
+                    </div>
+
+                    <span>Nome</span>
+                    <div class="input">
+                        <input type="text" id="input_nome" placeholder="Nome">
+                        <i class="fa-solid fa-circle-user"></i>
+                    </div>
+
                     <span>E-mail</span>
                     <div class="input">
                         <input type="text" id="input_email" placeholder="xpto@gmail.com">
                         <i class="fa-solid fa-envelope"></i>
                     </div>
 
-                    <span id="span_identificador">CPF</span>
+                    <span id="span_identificador">ID de jogador</span>
                     <div class="input">
-                        <input type="text" placeholder="CPF" id="input_identificador" required>
+                        <input type="text" placeholder="ID" id="input_identificador" required>
                         <i class="fa-solid fa-file"></i>
                     </div>
 
@@ -76,11 +82,17 @@
                         <i class="fa-solid fa-lock"></i>
                     </div>
 
-                    <button class="botao" onclick="entrar()">Entrar</button> <br><br>
+                    <span>Confirmar senha</span>
+                    <div class="input">
+                        <input type="password" id="input_confirmaSenha" placeholder="*******">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
 
-                    <div class="cadastro">
-                        <span>Não possui cadastro?</span>
-                        <a href="cadastro.html">Cadastro</a>
+                    <button class="botao" onclick="cadastrar()">Cadastrar</button> <br><br>
+
+                    <div class="login">
+                        <span>Já possui cadastro?</span>
+                        <a href="login.html">Login</a>
                     </div>
 
                 </div>
@@ -90,22 +102,21 @@
         </section>
         
     </div>
-
-
     
 </body>
 </html>
 
 <script>
+
     function alterarTipoLogin() {
         const tipoSelecionado = document.querySelector('input[name="tipoUsuario"]:checked').value;
         const inputIdentificador = document.getElementById('input_identificador');
         const spanIdentificador = document.getElementById('span_identificador');
         
         if (tipoSelecionado === 'jogador') {
-            inputIdentificador.placeholder = 'CPF';
+            inputIdentificador.placeholder = 'ID';
             inputIdentificador.type = 'text';
-            spanIdentificador.innerText = 'CPF';
+            spanIdentificador.innerText = 'ID de jogador';
         } else {
             inputIdentificador.placeholder = 'CNPJ';
             inputIdentificador.type = 'text';
