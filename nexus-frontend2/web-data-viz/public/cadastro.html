@@ -10,7 +10,6 @@
     <title>NexusData - Cadastro</title>
 </head>
 <body>
-    
     <div class="container">
         <section class="containerHomePage">
             <header>
@@ -26,7 +25,6 @@
                             <li><a href="index.html#team">Equipe</a></li>
                         </ul>
                     </div>
-
                     <div class="buttonsNav">
                         <a href="login.html"><button class="login">Login <img src="./images/controle.png" alt=""></button></a>
                         <a href="cadastro.html"><button class="cad">Cadastro</button></a>
@@ -65,7 +63,6 @@
                         <i class="fa-solid fa-lock"></i>
                     </div>
 
-                   
                     <div id="campos_jogador" style="display: block;">
                         <span>Nome</span>
                         <div class="input">
@@ -120,72 +117,69 @@
             </div>
         </section>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/js-sha256@0.9.0/build/sha256.min.js"></script>
+
+    <script>
+    function alterarTipoLogin() {
+        const tipoSelecionado = document.querySelector('input[name="tipoUsuario"]:checked').value;
+        document.getElementById("campos_jogador").style.display = tipoSelecionado === "jogador" ? "block" : "none";
+        document.getElementById("campos_organizacao").style.display = tipoSelecionado === "organizacao" ? "block" : "none";
+    }
+
+    async function cadastrar() {
+        const email = document.getElementById("input_email").value.trim();
+        const senha = document.getElementById("input_senha").value.trim();
+        const confirma = document.getElementById("input_confirmaSenha").value.trim();
+        const tipoConta = document.querySelector('input[name="tipoUsuario"]:checked').value.toUpperCase();
+
+        if (!email || !senha || !confirma) {
+            alert("Preencha todos os campos obrigatórios!");
+            return;
+        }
+
+        if (senha !== confirma) {
+            alert("As senhas não coincidem!");
+            return;
+        }
+
+        const senhaHash = sha256(senha);
+
+        let body = {
+            emailServer: email,
+            senhaServer: senhaHash,
+            tipoContaServer: tipoConta
+        };
+
+        if (tipoConta === "JOGADOR") {
+            body.nome = document.getElementById("input_nome").value.trim();
+            body.gameName = document.getElementById("input_gameName").value.trim();
+            body.tagline = document.getElementById("input_tagline").value.trim();
+            body.idRegiao = document.getElementById("select_regiao").value;
+        } else {
+            body.nomeOrg = document.getElementById("input_nomeOrg").value.trim();
+            body.sigla = document.getElementById("input_sigla").value.trim();
+            body.cnpj = document.getElementById("input_cnpj").value.trim();
+        }
+
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body)
+        })
+        .then(res => {
+            if (res.ok) {
+                alert("Cadastro realizado com sucesso!");
+                window.location.href = "login.html";
+            } else {
+                alert("Erro ao cadastrar!");
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            alert("Erro de conexão com o servidor!");
+        });
+    }
+    </script>
 </body>
 </html>
-<script src="https://cdn.jsdelivr.net/npm/js-sha256@0.9.0/build/sha256.min.js"></script>
-<script>
-function alterarTipoLogin() {
-    const tipoSelecionado = document.querySelector('input[name="tipoUsuario"]:checked').value;
-    document.getElementById("campos_jogador").style.display = tipoSelecionado === "jogador" ? "block" : "none";
-    document.getElementById("campos_organizacao").style.display = tipoSelecionado === "organizacao" ? "block" : "none";
-}
-
-async function cadastrar() {
-    const email = document.getElementById("input_email").value.trim();
-    const senha = document.getElementById("input_senha").value.trim();
-    const confirma = document.getElementById("input_confirmaSenha").value.trim();
-    const tipoConta = document.querySelector('input[name="tipoUsuario"]:checked').value.toUpperCase();
-
-    if (!email || !senha || !confirma) {
-        alert("Preencha todos os campos obrigatórios!");
-        return;
-    }
-
-    if (senha !== confirma) {
-        alert("As senhas não coincidem!");
-        return;
-    }
-
-    const hashBuffer = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(senha));
-    const senhaHash = Array.from(new Uint8Array(hashBuffer))
-        .map(b => b.toString(16).padStart(2, "0"))
-        .join("");
-
-    let body = {
-        emailServer: email,
-        senhaServer: senhaHash,
-        tipoContaServer: tipoConta
-    };
-
-    if (tipoConta === "JOGADOR") {
-        body.nome = document.getElementById("input_nome").value.trim();
-        body.gameName = document.getElementById("input_gameName").value.trim();
-        body.tagline = document.getElementById("input_tagline").value.trim();
-        body.idRegiao = document.getElementById("select_regiao").value;
-    } else {
-        body.nomeOrg = document.getElementById("input_nomeOrg").value.trim();
-        body.sigla = document.getElementById("input_sigla").value.trim();
-        body.cnpj = document.getElementById("input_cnpj").value.trim();
-    }
-
-    fetch("/usuarios/cadastrar", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body)
-    })
-    .then(res => {
-        console.log("Estou no then do Cadastro")
-        if (res.ok) {
-            console.log(body);
-            alert("Cadastro realizado com sucesso!");
-            window.location.href = "login.html";
-        } else {
-            alert("Erro ao cadastrar!");
-        }
-    })
-    .catch(err => {
-        console.error(err);
-        alert("Erro de conexão com o servidor!");
-    });
-}
-</script>

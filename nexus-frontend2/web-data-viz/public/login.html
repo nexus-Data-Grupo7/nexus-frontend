@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,33 +10,26 @@
     <title>NexusData - Login</title>
 </head>
 <body>
-    
     <div class="container">
-
         <section class="containerHomePage">
-
             <header>
                 <nav id="topo">
                     <img src="./images/logoQuemSomos.png" alt="" id="logo">
                     <span id="logoNexus">nexus<span id="logoNexus2">Data</span></span>
                     <div class="centralLinks">
-                        <a href="#">
-                            <ul>
-                                <li><a href="index.html#home">Home</a></li>
-                                <li><a href="index.html#about">Sobre</a></li>
-                                <li><a href="index.html#services">Serviços</a></li>
-                                <li><a href="index.html#values">Valores</a></li>
-                                <li><a href="index.html#team">Equipe</a></li>
-                            </ul>
-                        </a>
+                        <ul>
+                            <li><a href="index.html#home">Home</a></li>
+                            <li><a href="index.html#about">Sobre</a></li>
+                            <li><a href="index.html#services">Serviços</a></li>
+                            <li><a href="index.html#values">Valores</a></li>
+                            <li><a href="index.html#team">Equipe</a></li>
+                        </ul>
                     </div>
-
                     <div class="buttonsNav">
                         <a href="login.html"><button class="login">Login <img src="./images/controle.png" alt=""></button></a>
                         <a href="cadastro.html"><button class="cad">Cadastro</button></a>
                     </div>
                 </nav>
-
                 <div class="hamburger" id="hamburger">
                     <span></span>
                     <span></span>
@@ -45,7 +38,6 @@
             </header>
 
             <div class="homePageContainer">
-
                 <div class="card card-cadastro"> 
                     <h2>Login</h2>         
         
@@ -67,62 +59,54 @@
                         <span>Não possui cadastro?</span>
                         <a href="cadastro.html">Cadastro</a>
                     </div>
-
                 </div>
-
             </div>
-            
         </section>
-        
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/js-sha256@0.9.0/build/sha256.min.js"></script>
 
-    
+    <script>
+    async function entrar() {
+        const email_input = document.getElementById("input_email");
+        const senha_input = document.getElementById("input_senha");
+
+        const email = email_input.value.trim();
+        const senha = senha_input.value.trim();
+
+        if (!email || !senha) {
+            alert("Preencha todos os campos.");
+            return;
+        }
+
+        const senhaHash = sha256(senha);
+
+        try {
+            const resposta = await fetch("/usuarios/autenticar", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    emailServer: email,
+                    senhaServer: senhaHash
+                })
+            });
+
+            if (resposta.ok) {
+                const json = await resposta.json();
+                sessionStorage.ID_USUARIO = json.id;
+                sessionStorage.EMAIL_USUARIO = json.email;
+
+                alert("Login realizado com sucesso!");
+                window.location.href = "dashboard.html";
+            } else {
+                const texto = await resposta.text();
+                alert(texto || "Email e/ou senha inválido(s)");
+            }
+        } catch (erro) {
+            console.error(erro);
+            alert("Erro de conexão com o servidor.");
+        }
+    }
+    </script>
 </body>
 </html>
-
-<script>
-async function entrar() {
-    const email_input = document.getElementById("input_email");
-    const senha_input = document.getElementById("input_senha");
-
-    const email = email_input.value.trim();
-    const senha = senha_input.value.trim();
-
-    if (!email || !senha) {
-        alert("Preencha todos os campos.");
-        return;
-    }
-
-    const hashBuffer = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(senha));
-    const senhaHash = Array.from(new Uint8Array(hashBuffer))
-        .map(b => b.toString(16).padStart(2, "0"))
-        .join("");
-
-    try {
-        const resposta = await fetch("/usuarios/autenticar", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                emailServer: email,
-                senhaServer: senhaHash
-            })
-        });
-
-        if (resposta.ok) {
-            const json = await resposta.json();
-            sessionStorage.ID_USUARIO = json.id;
-            sessionStorage.EMAIL_USUARIO = json.email;
-
-            alert("Login realizado com sucesso!");
-            window.location.href = "dashboard.html";
-        } else {
-            const texto = await resposta.text();
-            alert(texto || "Email e/ou senha inválido(s)");
-        }
-    } catch (erro) {
-        console.error(erro);
-        alert("Erro de conexão com o servidor.");
-    }
-}
-</script>
