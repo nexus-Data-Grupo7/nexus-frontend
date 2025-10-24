@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/cadastro.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>NexusData - Cadastro</title>
+</head>
+<body>
+    
+    <div class="container">
+        <section class="containerHomePage">
+            <header>
+                <nav id="topo">
+                    <img src="./images/logoQuemSomos.png" alt="" id="logo">
+                    <span id="logoNexus">nexus<span id="logoNexus2">Data</span></span>
+                    <div class="centralLinks">
+                        <ul>
+                            <li><a href="index.html#home">Home</a></li>
+                            <li><a href="index.html#about">Sobre</a></li>
+                            <li><a href="index.html#services">Serviços</a></li>
+                            <li><a href="index.html#values">Valores</a></li>
+                            <li><a href="index.html#team">Equipe</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="buttonsNav">
+                        <a href="login.html"><button class="login">Login <img src="./images/controle.png" alt=""></button></a>
+                        <a href="cadastro.html"><button class="cad">Cadastro</button></a>
+                    </div>
+                </nav>
+            </header>
+
+            <div class="homePageContainer">
+                <div class="card card-cadastro">
+                    <h2>Cadastro!</h2>
+
+                    <div class="tipo-usuario" style="margin-bottom: 20px;">
+                        <label style="margin-right: 20px;">
+                            <input type="radio" name="tipoUsuario" value="jogador" checked onchange="alterarTipoLogin()"> Jogador
+                        </label>
+                        <label>
+                            <input type="radio" name="tipoUsuario" value="organizacao" onchange="alterarTipoLogin()"> Organização
+                        </label>
+                    </div>
+
+                    <span>E-mail</span>
+                    <div class="input">
+                        <input type="text" id="input_email" placeholder="xpto@gmail.com">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+
+                    <span>Senha</span>
+                    <div class="input">
+                        <input type="password" id="input_senha" placeholder="*******">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+
+                    <span>Confirmar senha</span>
+                    <div class="input">
+                        <input type="password" id="input_confirmaSenha" placeholder="*******">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+
+                   
+                    <div id="campos_jogador" style="display: block;">
+                        <span>Nome</span>
+                        <div class="input">
+                            <input type="text" id="input_nome" placeholder="Seu nome">
+                        </div>
+
+                        <span>Game Name</span>
+                        <div class="input">
+                            <input type="text" id="input_gameName" placeholder="Ex: Faker">
+                        </div>
+
+                        <span>Tagline</span>
+                        <div class="input">
+                            <input type="text" id="input_tagline" placeholder="Ex: #1234">
+                        </div>
+
+                        <span>Região</span>
+                        <select id="select_regiao">
+                            <option value="1">BR1 - Brasil</option>
+                            <option value="2">NA1 - América do Norte</option>
+                            <option value="3">LA1 - América Latina Norte</option>
+                            <option value="4">LA2 - América Latina Sul</option>
+                            <option value="5">KR - Coreia</option>
+                        </select>
+                    </div>
+
+                    <div id="campos_organizacao" style="display: none;">
+                        <span>Nome da Organização</span>
+                        <div class="input">
+                            <input type="text" id="input_nomeOrg" placeholder="Nome completo da organização">
+                        </div>
+
+                        <span>Sigla</span>
+                        <div class="input">
+                            <input type="text" id="input_sigla" placeholder="Ex: T1, FNC">
+                        </div>
+
+                        <span>CNPJ</span>
+                        <div class="input">
+                            <input type="text" id="input_cnpj" placeholder="Somente números">
+                        </div>
+                    </div>
+
+                    <button class="botao" onclick="cadastrar()">Cadastrar</button> <br><br>
+
+                    <div class="login">
+                        <span>Já possui cadastro?</span>
+                        <a href="login.html">Login</a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
+
+<script>
+function alterarTipoLogin() {
+    const tipoSelecionado = document.querySelector('input[name="tipoUsuario"]:checked').value;
+    document.getElementById("campos_jogador").style.display = tipoSelecionado === "jogador" ? "block" : "none";
+    document.getElementById("campos_organizacao").style.display = tipoSelecionado === "organizacao" ? "block" : "none";
+}
+
+async function cadastrar() {
+    const email = document.getElementById("input_email").value.trim();
+    const senha = document.getElementById("input_senha").value.trim();
+    const confirma = document.getElementById("input_confirmaSenha").value.trim();
+    const tipoConta = document.querySelector('input[name="tipoUsuario"]:checked').value.toUpperCase();
+
+    if (!email || !senha || !confirma) {
+        alert("Preencha todos os campos obrigatórios!");
+        return;
+    }
+
+    if (senha !== confirma) {
+        alert("As senhas não coincidem!");
+        return;
+    }
+
+    const hashBuffer = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(senha));
+    const senhaHash = Array.from(new Uint8Array(hashBuffer))
+        .map(b => b.toString(16).padStart(2, "0"))
+        .join("");
+
+    let body = {
+        emailServer: email,
+        senhaServer: senhaHash,
+        tipoContaServer: tipoConta
+    };
+
+    if (tipoConta === "JOGADOR") {
+        body.nome = document.getElementById("input_nome").value.trim();
+        body.gameName = document.getElementById("input_gameName").value.trim();
+        body.tagline = document.getElementById("input_tagline").value.trim();
+        body.idRegiao = document.getElementById("select_regiao").value;
+    } else {
+        body.nomeOrg = document.getElementById("input_nomeOrg").value.trim();
+        body.sigla = document.getElementById("input_sigla").value.trim();
+        body.cnpj = document.getElementById("input_cnpj").value.trim();
+    }
+
+    fetch("/usuarios/cadastrar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+    })
+    .then(res => {
+        console.log("Estou no then do Cadastro")
+        if (res.ok) {
+            console.log(body);
+            alert("Cadastro realizado com sucesso!");
+            window.location.href = "login.html";
+        } else {
+            alert("Erro ao cadastrar!");
+        }
+    })
+    .catch(err => {
+        console.error(err);
+        alert("Erro de conexão com o servidor!");
+    });
+}
+</script>

@@ -1,0 +1,114 @@
+:root{
+
+    /*Colors nexusData*/
+    --black: #000000 ;
+    --white: #FFFFFF;
+    --blue-line1-nexusData: #1B98E0;
+    --blue1-bottomLogin-nexusData: #247BA0;
+    --blue2-bottomLogin-nexusData: #19546D;
+    --blue3-bottomLogin-nexusData: #134054;
+    --blue4-bottomLogin-nexusData: #103647;
+    --blue5-bottomLogin-nexusData: #0D2D3A;
+    --blue6-borderBottomAcess-nexusData: #1E6787;
+    --blue7-lineGradientServices-nexusData: #1B98E0;
+    --blue8-lineGradientServices-nexusData: #0F537A;
+    --gray-line2-nexusData: #727272;
+    --gray-home-nexusData: #1B1B1B;
+    --gray-tittleWhoWeAre-nexusData: #777777;
+    --gray-lineGradientServices-nexusData:#999999;
+    --gray2-lineGradientServices-nexusData: #CCCCCC;
+    --gray-lineGradientServices2-nexusData: #B9B9B9;
+    --black-home-nexusData: #111111;
+
+    /*Fonts NexusData*/
+    --font-family-modern: 'MuseoModerno';
+    --font-family-texts: 'Inter';
+    --font-size-small: 1rem;
+    --font-size-regular: 1.3rem;
+    --font-size-medium: 1.5rem;
+    --font-size-larguer: 1.8rem;
+    --font-size-extra-larguer: 2.5rem;
+
+    /*Parametros de Weight*/
+    --font-weight-regular: 300;
+    --font-weight-medium: 500;
+    --font-weight-bold: 600;
+
+    /*Backgrounds*/
+    --home-background-gradient: radial-gradient(
+      circle closest-corner at center,
+      var(--gray-home-nexusData),
+      var(--black-home-nexusData)
+    );
+
+    --button-background-gradient: radial-gradient(
+        var(--blue1-bottomLogin-nexusData),
+        var(--blue2-bottomLogin-nexusData),
+        var(--blue3-bottomLogin-nexusData),
+        var(--blue4-bottomLogin-nexusData),
+        var(--blue5-bottomLogin-nexusData)
+    );
+
+    --lineGrayHome-backgroundColor-gradient: radial-gradient(
+        var(--white),
+        var(--gray-line2-nexusData)
+    );
+
+    --lineBlueServices-backgroundColor-gradient: radial-gradient(
+        var(--blue7-lineGradientServices-nexusData),
+        var(--blue8-lineGradientServices-nexusData)
+    );
+
+    --lineGrayServices-backgroundColor-gradient: radial-gradient(
+        var(--gray-lineGradientServices2-nexusData),
+        var(--white),
+        var(--gray-line2-nexusData)
+    );
+
+     --lineGrayServices2-backgroundColor-gradient: radial-gradient(
+        var(--gray2-lineGradientServices-nexusData),
+        var(--white),
+        var(--gray-lineGradientServices-nexusData)
+    );
+
+    --lineBlueServices2-backgroundColor-gradient: radial-gradient(
+        var(--blue8-lineGradientServices-nexusData),
+        var(--blue7-lineGradientServices-nexusData),
+        var(--blue8-lineGradientServices-nexusData)
+    );
+
+    /*Animation Hover*/
+    --mili-seg-5ms: .5s;
+
+    /*Buttons Parametros HOME*/
+    --widht-buttons-home: 220px;
+    --height-buttons-home: 55px;
+    --border-radius-buttons-home: 55px;
+
+
+    /*Config Navbar espaçamentos, tamanhos etc...*/
+    --padding-navbar-top-1900px: 0px 45px 0px 45px;
+    --margin-navbar-top-1900px: 40px; 
+    --height-navbar-left-right-1900px: 55px;
+    --width-navbar-right-1900px: 300px;
+    --width-centralLinks-1900px: 550px;
+    --borderRadius-1900px: 10px;
+    --margin-LEFT-RIGHT-ul-navbar-left-1900px: 10%;
+    --margin-LEFT-RIGHT-left-1900px: 45%;
+    --width-ul-navbar-left-1900px: 100%;
+    --width-height-ul-navbar-right-1900px: 100%;
+    --widht-logo-navbar-1900px: 43px;
+    --height-logo-navbar-1900px: 43px;
+    --margin-left-logo-navbar-1900px: 80px;
+    --margin-top-logo-navbar-1900px: 25px;
+    --margin-top-logoNexus-navbar-1900px: 37px;
+    --margin-top-nav-navbar-1900px: 21px;
+    --margin-top-buttonNav-navbar-1900px: 45px;
+    --margin-top-buttonNavCad-navbar-1900px: 47px;
+    --margin-right-buttonNav-navbar-1900px: 5px;
+    --header-distance-top-1900px: 10px;
+    --padding-ul-navbar-right-1900px: 0px 5px 0px 5px;
+    --widht-button-navbar-right-1900px: 140px;
+    --height-button-navbar-right-1900px: 45px;
+    --border-radius-button-acess-navbar-right-1900px: 40px;
+}
