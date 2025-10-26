@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard com ApexCharts</title>
+    <link rel="stylesheet" href="css/dashboard_individual.css">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+</head>
+
+<body>
+
+    <nav>
+        <div class="navHora">
+            22:10
+            <div class="navData">
+                Segunda-feira, 23 de nov 2020
+            </div>
+        </div>
+
+        <div class="navLinks">
+
+            <div class="navLinksLogo">
+                Home
+                <img src="images/icon_link_home.svg" alt="">
+            </div>
+            <div class="navLinksLogo">
+                Usuarios
+                <img src="images/icon_link_usuarios.svg" alt="">
+            </div>
+            <div class="navLinksLogo">
+                Ranking
+                <img src="images/icon_link_ranking.svg" alt="">
+            </div>
+
+        </div>
+
+        <div class="navUserInfo">
+            <div>
+                <img src="images/icon_camera.svg" alt="">
+            </div>
+
+            <div>
+                <div>
+                    nomesobrenome
+                </div>
+                <div>
+                    email@gmail.com
+                </div>
+            </div>
+        </div>
+
+        <button class="navExit">
+            Sair
+            <div>
+                <img src="images/icon_sair.svg" alt="">
+            </div>
+        </button>
+
+    </nav>
+
+    <div class="graficosContainer">
+        <div class="graficosSup">
+
+            <div class="graficosSupDash">
+                <div class="infoSup">
+                    Maior taxa de vitória
+                </div>
+                <div class="infoValor">
+                    57%
+                </div>
+            </div>
+
+            <div class="graficosSupDash">
+                <div class="infoSup">
+                    KDA médio
+                </div>
+                <div class="infoValor">
+                    10/2/8
+                </div>
+            </div>
+
+            <div class="graficosSupDash">
+                <div class="infoSup">
+                    Farm médio
+                </div>
+                <div class="infoValor">
+                    300/min
+                </div>
+            </div>
+
+        </div>
+
+        <div class="graficosMid">
+            <div class="graficosMid1">
+                <div class="graficoMidBarra" id="graficoMid1"></div>
+            </div>
+
+            <div class="graficosMid2">
+                <div class="graficoMidPizza" id="graficoMid2"></div>
+            </div>
+        </div>
+
+        <div class="graficosInf">
+
+
+            <div class="graficosInfDash">
+                <div class="infoInf">
+                    Total em premiações
+                </div>
+                <div class="infoValor">
+                    R$ 1.250.000,00
+                </div>
+            </div>
+
+            <div class="infoJogadorDetalhes">
+                <div class="infoJogadorDetalhesItem">
+                    Nome: ROBO
+                </div>
+                <div class="infoJogadorDetalhesItem">
+                    Idade: 25 anos
+                </div>
+                <div class="infoJogadorDetalhesItem">
+                    Posição: Mid
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- SCRIPTS DOS GRÁFICOS -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // --- GRÁFICO DE LINHAS ---
+            var optionsLinha = {
+                chart: {
+                    type: 'line',
+                    height: '100%',
+                    toolbar: { show: false },
+                    background: 'transparent'
+                },
+                series: [{
+                    name: 'Partidas Jogadas',
+                    data: [1, 2, 3, 2, 3, 4, 3, 2]
+                }],
+                xaxis: {
+                    categories: ['Vitória', 'Vitória', 'Vitória', 'Derrota', 'Vitória', 'Vitória', 'Derrota', 'Derrota'],
+                    labels: { style: { colors: '#ccc' } }
+                },
+                yaxis: {
+                    labels: { style: { colors: '#ccc' } }
+                },
+                colors: ['#00bcd4'],
+                stroke: {
+                    curve: 'smooth',
+                    width: 3
+                },
+                markers: {
+                    size: 4,
+                    colors: ['#00bcd4'],
+                    strokeColors: '#000',
+                    strokeWidth: 2
+                },
+                dataLabels: { enabled: false },
+                grid: {
+                    borderColor: 'rgba(255,255,255,0.1)'
+                },
+                title: {
+                    text: 'Posições mais jogadas',
+                    align: 'center',
+                    style: {
+                        color: '#fff',
+                        fontSize: '16px'
+                    }
+                },
+                tooltip: {
+                    theme: 'dark'
+                }
+            };
+
+            var chartLinha = new ApexCharts(document.querySelector("#graficoMid1"), optionsLinha);
+            chartLinha.render();
+
+            // --- GRÁFICO DE PIZZA ---
+            var optionsPizza = {
+                chart: {
+                    type: 'pie',
+                    height: '100%',
+                    background: 'transparent'
+                },
+                series: [44, 55, 13],
+                labels: ['AATROX', 'YUMI', 'GAREN'],
+                colors: ['#00bcd4', '#4CAF50', '#E91E63'],
+                legend: {
+                    position: 'right',
+                    labels: {
+                        colors: '#fff'
+                    }
+                },
+                title: {
+                    text: 'Top 3 campeões mais jogados',
+                    align: 'center',
+                    style: {
+                        color: '#fff',
+                        fontSize: '16px'
+                    }
+                },
+                dataLabels: {
+                    style: {
+                        colors: ['#fff']
+                    }
+                },
+                stroke: {
+                    colors: ['#000'],
+                    width: 2
+                }
+            };
+
+            var chartPizza = new ApexCharts(document.querySelector("#graficoMid2"), optionsPizza);
+            chartPizza.render();
+        });
+    </script>
+
+</body>
+
+</html>

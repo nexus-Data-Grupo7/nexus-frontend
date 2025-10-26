@@ -1,79 +1,64 @@
-// eu chamo as informações da model
-var usuarioModel = require("../models/usuarioModel")
+const usuarioModel = require("../models/usuarioModel");
 
-function cadastrar(req, res) {
-    const tipoUsuario = req.params.tipoUsuario;
-    const dados = req.body;
+async function cadastrar(req, res) {
+  const {
+    emailServer,
+    senhaServer,
+    tipoContaServer,
+    idRegiao,
+    gameName,
+    tagline,
+    nome,
+    nomeOrg,
+    sigla,
+    cnpj,
+  } = req.body;
 
-    if (dados.nome == undefined) {
-        res.status(400).send("Seu nome está undefined!");
+  try {
+    const idConta = await usuarioModel.cadastrarConta(
+      emailServer,
+      senhaServer,
+      tipoContaServer
+    );
+
+  
+    if (tipoContaServer === "JOGADOR") {
+      await usuarioModel.cadastrarJogador(idConta, idRegiao, gameName, tagline, nome);
+    } else if (tipoContaServer === "ORGANIZACAO") {
+      await usuarioModel.cadastrarOrganizacao(idConta, nomeOrg, sigla, cnpj);
     }
-    else if (dados.email == undefined) {
-        res.status(400).send("Seu email está undefined!");
-    }
-    else if (dados.senha == undefined) {
-        res.status(400).send("Sua senha está undefined!");
-    }
-    else {
-        if (tipoUsuario == "jogador") {
-            usuarioModel.cadastrarJogador(dados.nome, dados.email, dados.cpf, dados.senha)
-                .then(resultado => {
-                    res.status(201).json(resultado);
-                })
-                .catch(erro => {
-                    res.status(500).json(erro);
-                });
-        } else if (tipoUsuario == "organizacao") {
-            usuarioModel.cadastrarOrganizacao(dados.nome, dados.email, dados.cnpj, dados.senha)
-                .then(resultado => {
-                    res.status(201).json(resultado);
-                })
-                .catch(erro => {
-                    res.status(500).json(erro);
-                });
-        } else {
-            res.status(400).send("Tipo de usuário inválido!");
-        }
-    }
+
+    res.status(201).json({ mensagem: "Cadastro realizado com sucesso!" });
+  } catch (erro) {
+    console.error("Erro no cadastro:", erro);
+    res.status(500).json({ erro: erro.message });
+  }
 }
 
-function entrar(req, res) {
-    const tipoUsuario = req.params.tipoUsuario;
-    const dados = req.body;
-    if (dados.email == undefined) {
-        res.status(400).send("Seu email está undefined!");
-    } else if (dados.senha == undefined) {
-        res.status(400).send("Sua senha está undefined!");
-    } else {
-        if (tipoUsuario == "jogador") {
-            usuarioModel.entrarJogador(dados.email, dados.senha)
-                .then(resultado => {
-                    if (resultado.length > 0) {
-                        res.status(200).json(resultado[0]);
-                    } else {
-                        res.status(403).send("Email e/ou senha inválido(s)");
-                    }
-                })
-                .catch(erro => {
-                    res.status(500).json(erro);
-                });
-        } else if (tipoUsuario == "organizacao") {
-            usuarioModel.entrarOrganizacao(dados.email, dados.senha)
-                .then(resultado => {
-                    if (resultado.length > 0) {
-                        res.status(200).json(resultado[0]);
-                    } else {
-                        res.status(403).send("Email e/ou senha inválido(s)");
-                    }
-                })
-                .catch(erro => {
-                    res.status(500).json(erro);
-                });
-        }
-    }
+async function autenticar(req, res) {
+  const email = req.body.emailServer;
+  const senhaHash = req.body.senhaServer;
+
+  if (!email || !senhaHash) {
+    return res.status(400).send("Email ou senha não informados!");
+  }
+
+  try {
+    const usuario = await usuarioModel.autenticar(email, senhaHash);
+
+    if (!usuario) return res.status(403).send("Email e/ou senha inválido(s)");
+
+    res.json({
+      id: usuario.id_conta,
+      email: usuario.email
+    });
+  } catch (erro) {
+    console.error(erro);
+    res.status(500).send("Erro no servidor ao autenticar.");
+  }
 }
 
 module.exports = {
-    cadastrar,
-    entrar
-}
+  cadastrar,
+  autenticar
+};

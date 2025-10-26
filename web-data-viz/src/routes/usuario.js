@@ -1,14 +1,10 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 
-var usuarioController = require("../controllers/usuarioController");
+const usuarioController = require("../controllers/usuarioController");
 
-router.post("/cadastrar/:tipoUsuario", function (req, res) {
-    usuarioController.cadastrar(req, res)
-})
+router.post("/cadastrar", usuarioController.cadastrar);
 
-router.post("/login/:tipoUsuario", function (req, res) {
-    usuarioController.entrar(req, res)
-})
+router.post('/autenticar', usuarioController.autenticar);
 
 module.exports = router;

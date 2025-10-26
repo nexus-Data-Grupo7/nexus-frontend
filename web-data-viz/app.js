@@ -31,9 +31,9 @@ app.use((req, res, next) => {
     next();
 }); 
 
-app.use("/usuario", usuarioRouter)
+app.use("/usuarios", usuarioRouter);
 
-app.listen(PORTA_APP, function () {
+app.listen(PORTA_APP, HOST_APP, function () {
     console.log(`
     \n\n\n                                                                                                 
     Servidor do seu site já está rodando! Acesse o caminho a seguir para visualizar .: http://${HOST_APP}:${PORTA_APP} :. \n\n

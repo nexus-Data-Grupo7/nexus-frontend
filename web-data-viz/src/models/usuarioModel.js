@@ -1,47 +1,81 @@
-var database = require("../database/config")
+require("dotenv").config();
+const mysql = require("mysql2/promise");
 
-// Crio uma instrução para o MySql inserir um novo usuário
-function cadastrarJogador(nome, email, cpf, senha) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha)
+const pool = mysql.createPool({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
+});
 
-    var instrucaoSql = `
-    INSERT INTO jogador (nomeJogador, emailJogador, cpfJogador, senhaJogador) VALUES
-    ('${nome}', '${email}', '${cpf}', '${senha}')`
+async function cadastrarConta(email, senhaHash, tipoConta) {
+  const conection = await pool.getConnection();
+  try {
+    await conection.beginTransaction();
 
-    console.log("Executando a instrução SQL: \n" + instrucaoSql)
-    return database.executar(instrucaoSql);
+    const [resConta] = await conection.execute(
+      "INSERT INTO conta (email, senha_hash, tipo_conta) VALUES (?, ?, ?)",
+      [email, senhaHash, tipoConta]
+    );
+
+    const idConta = resConta.insertId;
+
+    await conection.commit();
+    conection.release();
+    return idConta;
+  } catch (error) {
+    await conection.rollback();
+    conection.release();
+    throw error;
+  }
 }
 
-function cadastrarOrganizacao(nome, email, cnpj, senha) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha)
-
-    var instrucaoSql = `
-    INSERT INTO organizacao (nomeOrganizacao, emailOrganizacao, cnpjOrganizacao, senhaOrganizacao) VALUES
-    ('${nome}', '${email}', '${cnpj}', '${senha}')`
-
-
-    console.log("Executando a instrução SQL: \n" + instrucaoSql)
-    return database.executar(instrucaoSql);
+async function cadastrarJogador(idConta, idRegiao, gameName, tagline, nome) {
+  const conection = await pool.getConnection();
+  try {
+    await conection.execute(
+      "INSERT INTO jogador (id_conta, id_regiao, game_name, tagline, nome) VALUES (?, ?, ?, ?, ?)",
+      [idConta, idRegiao, gameName, tagline, nome]
+    );
+    conection.release();
+  } catch (error) {
+    conection.release();
+    throw error;
+  }
 }
 
-function entrarJogador(email, senha) {
-    var instrucaoSql = `
-    SELECT * FROM jogador WHERE emailJogador = '${email}' AND senhaJogador = '${senha}';`
-
-    console.log("Executando a instrução SQL: \n" + instrucaoSql)
-    return database.executar(instrucaoSql);
+async function cadastrarOrganizacao(idConta, nomeOrg, sigla, cnpj) {
+  const conection = await pool.getConnection();
+  try {
+    await conection.execute(
+      "INSERT INTO organizacao (id_conta, nome_org, sigla, cnpj) VALUES (?, ?, ?, ?)",
+      [idConta, nomeOrg, sigla, cnpj]
+    );
+    conection.release();
+  } catch (error) {
+    conection.release();
+    throw error;
+  }
 }
-function entrarOrganizacao(email, senha) {
-    var instrucaoSql = `
-    SELECT * FROM organizacao WHERE emailOrganizacao = '${email}' AND senhaOrganizacao = '${senha}';`
-    
-    console.log("Executando a instrução SQL: \n" + instrucaoSql)
-    return database.executar(instrucaoSql);
+
+async function autenticar(email, senhaHash) {
+  const conection = await pool.getConnection();
+  try {
+    const [rows] = await conection.execute(
+      "SELECT id_conta, email, senha_hash FROM conta WHERE email = ? AND senha_hash = ?",
+      [email, senhaHash]
+    );
+
+    if (rows.length === 0) return null;
+    return rows[0];
+  } finally {
+    conection.release();
+  }
 }
 
 module.exports = {
-    cadastrarJogador,
-    cadastrarOrganizacao,
-    entrarJogador,
-    entrarOrganizacao
-}
+  cadastrarConta,
+  cadastrarJogador,
+  cadastrarOrganizacao,
+  autenticar
+};
