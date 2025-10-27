@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard com ApexCharts</title>
+    <link rel="stylesheet" href="css/ranking.css">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <style>
+        .graficoWinrate {
+            width: 200px;
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="navHora">
+            22:10
+            <div class="navData">
+                Segunda-feira, 23 de nov 2020
+            </div>
+        </div>
+
+        <div class="navLinks">
+            <div class="navLinksLogo">
+                Home
+                <img src="images/icon_link_home.svg" alt="">
+            </div>
+            <div class="navLinksLogo">
+                Usuarios
+                <img src="images/icon_link_usuarios.svg" alt="">
+            </div>
+            <div class="navLinksLogo">
+                Ranking
+                <img src="images/icon_link_ranking.svg" alt="">
+            </div>
+        </div>
+
+        <div class="navUserInfo">
+            <div>
+                <img src="images/icon_camera.svg" alt="">
+            </div>
+            <div>
+                <div>nomesobrenome</div>
+                <div>email@gmail.com</div>
+            </div>
+        </div>
+
+        <button class="navExit">
+            Sair
+            <div>
+                <img src="images/icon_sair.svg" alt="">
+            </div>
+        </button>
+    </nav>
+
+    <div class="graficosContainer">
+        <div class="barraPesquisa">
+            <input type="text" placeholder="nome do jogador">
+            <button class="botaoBusca">
+                <img src="images/lupa.svg" alt="">
+            </button>
+        </div>
+
+        <div class="containerInformacoes">
+            <div class="filtrosRanking">
+                Selecione um filtro:
+                <select name="filtro" id="1">
+                    <option value="todos">Todos</option>
+                    <option value="premiacoes">Premiações</option>
+                    <option value="pontuacao">Pontuação</option>
+                    <option value="vitoria">Vitórias</option>
+                </select>
+            </div>
+
+            <div class="dadosJogadores">
+                <div class="cabecalhoTabelaRanking">
+                    <div class="cabecalhoTabelaRankingNumero">
+                        #
+                    </div>
+                    <div class="cabecalhoTabelaRankingNome">
+                        Summoner
+                    </div>
+                    <div class="cabecalhoTabelaRankingElo">
+                        Elo
+                    </div>
+                    <div class="cabecalhoTabelaRankingCampeoes">
+                        Mais campeões
+                    </div>
+                    <div class="cabecalhoTabelaRankingWinrate">
+                        Taxa de vitória
+                    </div>
+                </div>
+
+                <div class="linhaTabelaRanking">
+                    <div class="linhaTabelaRankingNumero">
+                        1º
+                    </div>
+                    <div class="linhaTabelaRankingNome">
+                        Nome do Jogador
+                    </div>
+                    <div class="linhaTabelaRankingElo">
+                        Ouro
+                    </div>
+                    <div class="linhaTabelaRankingCampeoes">
+                        <img src="images/campeões/Aatrox.png" alt="">
+                        <img src="images/campeões/Ahri.png" alt="">
+                        <img src="images/campeões/Akali.png" alt="">
+                    </div>
+                    <div class="graficoWinrate" id="graficoWinrate1">
+
+                    </div>
+                </div>
+
+                <div class="linhaTabelaRanking">
+                    <div class="linhaTabelaRankingNumero">
+                        2º
+                    </div>
+                    <div class="linhaTabelaRankingNome">
+                        Nome do Jogador
+                    </div>
+                    <div class="linhaTabelaRankingElo">
+                        Ouro
+                    </div>
+                    <div class="linhaTabelaRankingCampeoes">
+                        <img src="images/campeões/Annie.png" alt="">
+                        <img src="images/campeões/Darius.png" alt="">
+                        <img src="images/campeões/Zyra.png" alt="">
+                    </div>
+                    <div class="graficoWinrate" id="graficoWinrate2">
+
+                    </div>
+                </div>
+
+                <div class="linhaTabelaRanking">
+                    <div class="linhaTabelaRankingNumero">
+                        3º
+                    </div>
+                    <div class="linhaTabelaRankingNome">
+                        Nome do Jogador
+                    </div>
+                    <div class="linhaTabelaRankingElo">
+                        Ouro
+                    </div>
+                    <div class="linhaTabelaRankingCampeoes">
+                        <img src="images/campeões/Blitzcrank.png" alt="">
+                        <img src="images/campeões/Fiddlesticks.png" alt="">
+                        <img src="images/campeões/Garen.png" alt="">
+                    </div>
+                    <div class="graficoWinrate" id="graficoWinrate3">
+
+                    </div>
+                </div>
+
+                <div class="linhaTabelaRanking">
+                    <div class="linhaTabelaRankingNumero">
+                        4º
+                    </div>
+                    <div class="linhaTabelaRankingNome">
+                        Nome do Jogador
+                    </div>
+                    <div class="linhaTabelaRankingElo">
+                        Ouro
+                    </div>
+                    <div class="linhaTabelaRankingCampeoes">
+                        <img src="images/campeões/Kai'Sa.png" alt="">
+                        <img src="images/campeões/Lux.png" alt="">
+                        <img src="images/campeões/Qiyana.png" alt="">
+                    </div>
+                    <div class="graficoWinrate" id="graficoWinrate4">
+
+                    </div>
+                </div>
+
+                <div class="linhaTabelaRanking">
+                    <div class="linhaTabelaRankingNumero">
+                        5º
+                    </div>
+                    <div class="linhaTabelaRankingNome">
+                        Nome do Jogador
+                    </div>
+                    <div class="linhaTabelaRankingElo">
+                        Ouro
+                    </div>
+                    <div class="linhaTabelaRankingCampeoes">
+                        <img src="images/campeões/Dr_Mundo.png" alt="">
+                        <img src="images/campeões/Annie.png" alt="">
+                        <img src="images/campeões/Aurelion_Sol.png" alt="">
+                    </div>
+                    <div class="graficoWinrate" id="graficoWinrate5">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>
+
+<script>
+
+
+    for (let i = 1; i <= 5; i++) {
+        document.querySelector(`#graficoWinrate${i}`).innerHTML = "";
+
+        const wins = Math.floor(Math.random() * 500);
+        const losses = Math.floor(Math.random() * 500);
+        const total = wins + losses;
+        const winrate = Math.round((wins / total) * 100);
+
+        const options = {
+            chart: {
+                type: 'bar',
+                stacked: true,
+                stackType: '100%',
+                width: '100%',     
+                height: 30,
+                toolbar: { show: false },
+                sparkline: { enabled: true }
+            },
+            series: [
+                { name: 'Vitórias', data: [wins] },
+                { name: 'Derrotas', data: [losses] }
+            ],
+            plotOptions: {
+                bar: {
+                    horizontal: true,
+                    barHeight: '100%',
+                    borderRadius: 5
+                }
+            },
+            colors: ['#3b82f6', '#ef4444'],
+            dataLabels: {
+                enabled: true,
+                formatter: (val, opts) => {
+                    if (opts.seriesIndex === 0) return `${wins}W`;
+                    if (opts.seriesIndex === 1) return `${losses}L`;
+                },
+                style: { colors: ['#fff'] }
+            },
+            tooltip: { enabled: false },
+            xaxis: {
+                categories: [''],
+                labels: { show: false },
+                axisBorder: { show: false },
+                axisTicks: { show: false },
+            },
+            yaxis: { show: false },
+            grid: { show: false },
+            legend: { show: false },
+            annotations: {
+                position: 'front',
+                texts: [
+                    {
+                        x: '100%',
+                        text: `${winrate}%`,
+                        style: {
+                            color: '#ef4444',
+                            fontWeight: 600
+                        }
+                    }
+                ]
+            }
+        };
+        const chart = new ApexCharts(document.querySelector(`#graficoWinrate${i}`), options);
+        chart.render();
+
+    }
+</script>
