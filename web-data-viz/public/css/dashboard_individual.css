@@ -26,6 +26,8 @@ body {
     padding-bottom: 10vh;
     padding-left: 5vh;
     padding-right: 5vh;
+    justify-content: center;
+    align-items: center;
 }
 
 nav {
@@ -43,7 +45,7 @@ nav {
 }
 
 .navHora {
-    width: 100%;
+    width: auto;
     font-size: 2.5rem;
     display: flex;
     flex-direction: column;
@@ -51,7 +53,7 @@ nav {
 }
 
 .navData {
-    width: 100%;
+    width: auto;
     font-size: 0.7rem;
     display: flex;
     flex-direction: column;
@@ -59,15 +61,31 @@ nav {
 }
 
 .navLinks {
-    width: 100%;
-    margin-top: 20vh;
+    width: auto;
+    margin-top: 10vh;
     font-size: 1.1rem;
     display: flex;
     flex-direction: column;
-    gap: 5vh;
+    gap: 3vh;
     justify-content: center;
     align-items: center;
 }
+
+.navLinks a {
+    color: white;
+    text-decoration: none;
+}
+
+.navLinks a {
+    border-bottom: 0.3vh solid transparent;
+    transition: border-bottom-color 0.3s ease, transform 0.3s ease;
+}
+
+.navLinks a:hover {
+    transform: scale(1.02);
+    border-bottom-color: white;
+}
+
 
 .navLinksLogo {
     width: 100%;
@@ -338,7 +356,7 @@ nav button {
     font-weight: bold;
     font-family: 'Inter';
     /* background: linear-gradient(to right, #d0a259, #805c1f); */
-    /* -webkit-background-clip: text;
+/* -webkit-background-clip: text;
     -webkit-text-fill-color: transparent; }*/
 
 

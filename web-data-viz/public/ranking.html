@@ -26,18 +26,18 @@
         </div>
 
         <div class="navLinks">
-            <div class="navLinksLogo">
-                Home
+            <a href="dashboard.html" class="navLinksLogo">
                 <img src="images/icon_link_home.svg" alt="">
-            </div>
-            <div class="navLinksLogo">
-                Usuarios
+                Home
+            </a>
+            <a href="" class="navLinksLogo">
                 <img src="images/icon_link_usuarios.svg" alt="">
-            </div>
-            <div class="navLinksLogo">
-                Ranking
+                Usuarios
+            </a>
+            <a href="ranking.html" class="navLinksLogo">
                 <img src="images/icon_link_ranking.svg" alt="">
-            </div>
+                Ranking
+            </a>
         </div>
 
         <div class="navUserInfo">
@@ -77,7 +77,7 @@
                 </select>
             </div>
 
-            <div class="dadosJogadores">
+            <div class="rankingContainer">
                 <div class="cabecalhoTabelaRanking">
                     <div class="cabecalhoTabelaRankingNumero">
                         #
@@ -96,104 +96,148 @@
                     </div>
                 </div>
 
-                <div class="linhaTabelaRanking">
-                    <div class="linhaTabelaRankingNumero">
-                        1º
-                    </div>
-                    <div class="linhaTabelaRankingNome">
-                        Nome do Jogador
-                    </div>
-                    <div class="linhaTabelaRankingElo">
-                        Ouro
-                    </div>
-                    <div class="linhaTabelaRankingCampeoes">
-                        <img src="images/campeões/Aatrox.png" alt="">
-                        <img src="images/campeões/Ahri.png" alt="">
-                        <img src="images/campeões/Akali.png" alt="">
-                    </div>
-                    <div class="graficoWinrate" id="graficoWinrate1">
+                <div class="dadosJogadores">
 
-                    </div>
-                </div>
+                    <div class="linhaTabelaRanking">
+                        <div class="linhaTabelaRankingNumero">
+                            1º
+                        </div>
+                        <div class="linhaTabelaRankingNome">
+                            Nome do Jogador
+                        </div>
+                        <div class="linhaTabelaRankingElo">
+                            Ouro
+                        </div>
+                        <div class="linhaTabelaRankingCampeoes">
+                            <img src="images/campeões/Aatrox.png" alt="">
+                            <img src="images/campeões/Ahri.png" alt="">
+                            <img src="images/campeões/Akali.png" alt="">
+                        </div>
+                        <div class="graficoWinrate" id="graficoWinrate1">
 
-                <div class="linhaTabelaRanking">
-                    <div class="linhaTabelaRankingNumero">
-                        2º
+                        </div>
                     </div>
-                    <div class="linhaTabelaRankingNome">
-                        Nome do Jogador
-                    </div>
-                    <div class="linhaTabelaRankingElo">
-                        Ouro
-                    </div>
-                    <div class="linhaTabelaRankingCampeoes">
-                        <img src="images/campeões/Annie.png" alt="">
-                        <img src="images/campeões/Darius.png" alt="">
-                        <img src="images/campeões/Zyra.png" alt="">
-                    </div>
-                    <div class="graficoWinrate" id="graficoWinrate2">
 
-                    </div>
-                </div>
+                    <div class="linhaTabelaRanking">
+                        <div class="linhaTabelaRankingNumero">
+                            2º
+                        </div>
+                        <div class="linhaTabelaRankingNome">
+                            Nome do Jogador
+                        </div>
+                        <div class="linhaTabelaRankingElo">
+                            Ouro
+                        </div>
+                        <div class="linhaTabelaRankingCampeoes">
+                            <img src="images/campeões/Annie.png" alt="">
+                            <img src="images/campeões/Darius.png" alt="">
+                            <img src="images/campeões/Zyra.png" alt="">
+                        </div>
+                        <div class="graficoWinrate" id="graficoWinrate2">
 
-                <div class="linhaTabelaRanking">
-                    <div class="linhaTabelaRankingNumero">
-                        3º
+                        </div>
                     </div>
-                    <div class="linhaTabelaRankingNome">
-                        Nome do Jogador
-                    </div>
-                    <div class="linhaTabelaRankingElo">
-                        Ouro
-                    </div>
-                    <div class="linhaTabelaRankingCampeoes">
-                        <img src="images/campeões/Blitzcrank.png" alt="">
-                        <img src="images/campeões/Fiddlesticks.png" alt="">
-                        <img src="images/campeões/Garen.png" alt="">
-                    </div>
-                    <div class="graficoWinrate" id="graficoWinrate3">
 
-                    </div>
-                </div>
+                    <div class="linhaTabelaRanking">
+                        <div class="linhaTabelaRankingNumero">
+                            3º
+                        </div>
+                        <div class="linhaTabelaRankingNome">
+                            Nome do Jogador
+                        </div>
+                        <div class="linhaTabelaRankingElo">
+                            Ouro
+                        </div>
+                        <div class="linhaTabelaRankingCampeoes">
+                            <img src="images/campeões/Blitzcrank.png" alt="">
+                            <img src="images/campeões/Fiddlesticks.png" alt="">
+                            <img src="images/campeões/Garen.png" alt="">
+                        </div>
+                        <div class="graficoWinrate" id="graficoWinrate3">
 
-                <div class="linhaTabelaRanking">
-                    <div class="linhaTabelaRankingNumero">
-                        4º
+                        </div>
                     </div>
-                    <div class="linhaTabelaRankingNome">
-                        Nome do Jogador
-                    </div>
-                    <div class="linhaTabelaRankingElo">
-                        Ouro
-                    </div>
-                    <div class="linhaTabelaRankingCampeoes">
-                        <img src="images/campeões/Kai'Sa.png" alt="">
-                        <img src="images/campeões/Lux.png" alt="">
-                        <img src="images/campeões/Qiyana.png" alt="">
-                    </div>
-                    <div class="graficoWinrate" id="graficoWinrate4">
 
-                    </div>
-                </div>
+                    <div class="linhaTabelaRanking">
+                        <div class="linhaTabelaRankingNumero">
+                            4º
+                        </div>
+                        <div class="linhaTabelaRankingNome">
+                            Nome do Jogador
+                        </div>
+                        <div class="linhaTabelaRankingElo">
+                            Ouro
+                        </div>
+                        <div class="linhaTabelaRankingCampeoes">
+                            <img src="images/campeões/Kai'Sa.png" alt="">
+                            <img src="images/campeões/Lux.png" alt="">
+                            <img src="images/campeões/Qiyana.png" alt="">
+                        </div>
+                        <div class="graficoWinrate" id="graficoWinrate4">
 
-                <div class="linhaTabelaRanking">
-                    <div class="linhaTabelaRankingNumero">
-                        5º
+                        </div>
                     </div>
-                    <div class="linhaTabelaRankingNome">
-                        Nome do Jogador
-                    </div>
-                    <div class="linhaTabelaRankingElo">
-                        Ouro
-                    </div>
-                    <div class="linhaTabelaRankingCampeoes">
-                        <img src="images/campeões/Dr_Mundo.png" alt="">
-                        <img src="images/campeões/Annie.png" alt="">
-                        <img src="images/campeões/Aurelion_Sol.png" alt="">
-                    </div>
-                    <div class="graficoWinrate" id="graficoWinrate5">
 
+                    <div class="linhaTabelaRanking">
+                        <div class="linhaTabelaRankingNumero">
+                            5º
+                        </div>
+                        <div class="linhaTabelaRankingNome">
+                            Nome do Jogador
+                        </div>
+                        <div class="linhaTabelaRankingElo">
+                            Ouro
+                        </div>
+                        <div class="linhaTabelaRankingCampeoes">
+                            <img src="images/campeões/Dr_Mundo.png" alt="">
+                            <img src="images/campeões/Annie.png" alt="">
+                            <img src="images/campeões/Aurelion_Sol.png" alt="">
+                        </div>
+                        <div class="graficoWinrate" id="graficoWinrate5">
+
+                        </div>
                     </div>
+
+                    <div class="linhaTabelaRanking">
+                        <div class="linhaTabelaRankingNumero">
+                            6º
+                        </div>
+                        <div class="linhaTabelaRankingNome">
+                            Nome do Jogador
+                        </div>
+                        <div class="linhaTabelaRankingElo">
+                            Ouro
+                        </div>
+                        <div class="linhaTabelaRankingCampeoes">
+                            <img src="images/campeões/Dr_Mundo.png" alt="">
+                            <img src="images/campeões/Annie.png" alt="">
+                            <img src="images/campeões/Aurelion_Sol.png" alt="">
+                        </div>
+                        <div class="graficoWinrate" id="graficoWinrate6">
+
+                        </div>
+                    </div>
+
+                    <div class="linhaTabelaRanking">
+                        <div class="linhaTabelaRankingNumero">
+                            7º
+                        </div>
+                        <div class="linhaTabelaRankingNome">
+                            Nome do Jogador
+                        </div>
+                        <div class="linhaTabelaRankingElo">
+                            Ouro
+                        </div>
+                        <div class="linhaTabelaRankingCampeoes">
+                            <img src="images/campeões/Dr_Mundo.png" alt="">
+                            <img src="images/campeões/Annie.png" alt="">
+                            <img src="images/campeões/Aurelion_Sol.png" alt="">
+                        </div>
+                        <div class="graficoWinrate" id="graficoWinrate7">
+
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
@@ -209,7 +253,7 @@
 <script>
 
 
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= 7; i++) {
         document.querySelector(`#graficoWinrate${i}`).innerHTML = "";
 
         const wins = Math.floor(Math.random() * 500);
@@ -222,7 +266,7 @@
                 type: 'bar',
                 stacked: true,
                 stackType: '100%',
-                width: '100%',     
+                width: '100%',
                 height: 30,
                 toolbar: { show: false },
                 sparkline: { enabled: true }
