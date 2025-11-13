@@ -314,3 +314,46 @@ nav button {
     width: 100% !important;
     height: 100% !important;
 }
+
+.resultadoBusca {
+    position: absolute;
+    top: 18vh;
+width: 40%;
+margin-right: 5%;
+    max-height: 30vh;
+    background-color: #1a1919;
+    border-radius: 1vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #666 #1f1f1f;
+    z-index: 1000;
+}
+
+.barraPesquisa-linhaResultado {
+    width: 100%;
+    padding: 1vh;
+    border-bottom: 0.1vh solid #333;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1vh;
+}
+
+.barraPesquisa-nomeJogador,
+.barraPesquisa-eloJogador,
+.barraPesquisa-top3campeoes {
+    font-size: 1rem;
+}
+
+.barraPesquisa-top3campeoes {
+    display: flex;
+    gap: 0.5vh;
+
+    img {
+        width: 4vh;
+        height: 4vh;
+        border-radius: 0.5vh;
+    }
+}

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>NexusData - Login</title>
 </head>
+
 <body>
     <div class="container">
         <section class="containerHomePage">
@@ -26,7 +28,8 @@
                         </ul>
                     </div>
                     <div class="buttonsNav">
-                        <a href="login.html"><button class="login">Login <img src="./images/controle.png" alt=""></button></a>
+                        <a href="login.html"><button class="login">Login <img src="./images/controle.png"
+                                    alt=""></button></a>
                         <a href="cadastro.html"><button class="cad">Cadastro</button></a>
                     </div>
                 </nav>
@@ -38,9 +41,9 @@
             </header>
 
             <div class="homePageContainer">
-                <div class="card card-cadastro"> 
-                    <h2>Login</h2>         
-        
+                <div class="card card-cadastro">
+                    <h2>Login</h2>
+
                     <span>E-mail</span>
                     <div class="input">
                         <input type="text" id="input_email" placeholder="xpto@gmail.com">
@@ -67,46 +70,47 @@
     <script src="https://cdn.jsdelivr.net/npm/js-sha256@0.9.0/build/sha256.min.js"></script>
 
     <script>
-    async function entrar() {
-        const email_input = document.getElementById("input_email");
-        const senha_input = document.getElementById("input_senha");
+        async function entrar() {
+            const email_input = document.getElementById("input_email");
+            const senha_input = document.getElementById("input_senha");
 
-        const email = email_input.value.trim();
-        const senha = senha_input.value.trim();
+            const email = email_input.value.trim();
+            const senha = senha_input.value.trim();
 
-        if (!email || !senha) {
-            alert("Preencha todos os campos.");
-            return;
-        }
-
-        const senhaHash = sha256(senha);
-
-        try {
-            const resposta = await fetch("/usuarios/autenticar", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    emailServer: email,
-                    senhaServer: senhaHash
-                })
-            });
-
-            if (resposta.ok) {
-                const json = await resposta.json();
-                sessionStorage.ID_USUARIO = json.id;
-                sessionStorage.EMAIL_USUARIO = json.email;
-
-                alert("Login realizado com sucesso!");
-                window.location.href = "dashboard.html";
-            } else {
-                const texto = await resposta.text();
-                alert(texto || "Email e/ou senha inválido(s)");
+            if (!email || !senha) {
+                alert("Preencha todos os campos.");
+                return;
             }
-        } catch (erro) {
-            console.error(erro);
-            alert("Erro de conexão com o servidor.");
+
+            const senhaHash = sha256(senha);
+
+            try {
+                const resposta = await fetch("/usuarios/autenticar", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        emailServer: email,
+                        senhaServer: senhaHash
+                    })
+                });
+
+                if (resposta.ok) {
+                    const json = await resposta.json();
+                    sessionStorage.ID_USUARIO = json.id;
+                    sessionStorage.EMAIL_USUARIO = json.email;
+
+                    alert("Login realizado com sucesso!");
+                    window.location.href = "ranking.html";
+                } else {
+                    const texto = await resposta.text();
+                    alert(texto || "Email e/ou senha inválido(s)");
+                }
+            } catch (erro) {
+                console.error(erro);
+                alert("Erro de conexão com o servidor.");
+            }
         }
-    }
     </script>
 </body>
+
 </html>
