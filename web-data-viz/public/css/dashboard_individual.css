@@ -367,4 +367,94 @@ nav button {
 }
 
 
-/* #d0a259 #805c1f
+/* #d0a259 #805c1f */
+
+
+@media (max-width: 1024px) {
+    body {
+        flex-direction: column;
+        align-items: center;
+        gap: 4vh;
+        padding: 5vh;
+    }
+
+
+    nav {
+        width: 90%;
+        height: auto;
+    }
+
+
+    .graficosSupDash,
+    .graficosMid1,
+    .graficosMid2,
+    .graficosInfDash,
+    .graficosInfDash1 {
+        width: 45%;
+    }
+}
+
+@media (max-width: 768px) {
+    nav {
+        width: 100%;
+    }
+
+
+    .navLinks {
+        margin-top: 4vh;
+        gap: 3vh;
+    }
+
+
+    .graficosSupDash,
+    .graficosMid1,
+    .graficosMid2,
+    .graficosInfDash,
+    .graficosInfDash1 {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        right: 20px;
+    }
+
+    .graficosInf{
+        position: relative;
+        left: 52.5px;
+    }
+
+}
+
+@media (max-width: 480px) {
+    nav{
+        position: relative;
+        left: 25px;
+    }
+
+    body {
+        padding: 2vh;
+    }
+
+
+    .navHora {
+        font-size: 1.8rem;
+    }
+
+
+    .graficosSupDash,
+    .graficosMid1,
+    .graficosMid2,
+    .graficosInfDash,
+    .graficosInfDash1 {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        right: 1px;
+    }
+
+    .infoJogador,
+    .infoJogadorInf {
+        font-size: 2rem;
+    }
+}

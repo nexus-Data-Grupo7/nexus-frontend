@@ -348,3 +348,103 @@ nav button {
     width: 2rem;
     height: 2rem;
 }
+
+@media (max-width: 1024px) {
+  body {
+    flex-direction: column;
+    align-items: center;
+    padding: 3vh;
+  }
+
+  nav {
+    width: 90%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+  .graficosSup,
+  .graficosMid,
+  .graficosInf {
+    padding-left: 0;
+    justify-content: center;
+  }
+
+  .graficosMid1,
+  .graficosMid2,
+  .graficosSupDash,
+  .graficosInfDash,
+  .graficosInfDash1 {
+    width: 45%;
+  }
+}
+
+@media (max-width: 768px) {
+  nav {
+    width: 100%;
+  }
+
+  .graficosMid1,
+  .graficosMid2,
+  .graficosSupDash,
+  .graficosInfDash,
+  .graficosInfDash1 {
+    width: 80%;
+  }
+
+  .navLinks {
+    margin-top: 4vh;
+    gap: 3vh;
+  }
+
+  .graficoInfTopJogador img {
+    width: 2rem;
+    height: 2rem;
+}
+
+.topNomeJogador {
+    margin-left: 1vh;
+    font-size: 0.8rem;
+}
+
+  .infoSup,
+  .infoValor,
+  .infoJogador{
+    font-size: 1.4rem;
+  }
+  
+.graficoInfTopJogador img {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+}
+
+
+@media (max-width: 480px) {
+  body {
+    padding: 2vh;
+  }
+
+  .graficosMid1,
+  .graficosMid2,
+  .graficosSupDash,
+  .graficosInfDash,
+  .graficosInfDash1 {
+    width: 100%;
+  }
+
+  .infoValor,
+  .infoValorInf {
+    font-size: 2rem;
+  }
+
+  .infoSup,
+  .infoValor,
+  .infoJogador{
+    font-size: 1.3rem;
+  }
+
+  .navHora {
+    font-size: 1.8rem;
+  }
+}

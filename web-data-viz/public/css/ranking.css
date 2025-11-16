@@ -267,6 +267,7 @@ nav button {
     flex: 0 0 8%;
     justify-content: center;
     display: flex;
+    font-size: 1em;
 }
 
 .cabecalhoTabelaRankingNome,
@@ -274,6 +275,7 @@ nav button {
     flex: 0 0 25%;
     justify-content: center;
     display: flex;
+    font-size: 1em;
 }
 
 .cabecalhoTabelaRankingElo,
@@ -281,6 +283,7 @@ nav button {
     flex: 0 0 15%;
     justify-content: center;
     display: flex;
+    font-size: 1em;
 }
 
 .cabecalhoTabelaRankingCampeoes,
@@ -289,6 +292,7 @@ nav button {
     justify-content: center;
     display: flex;
     gap: 1vh;
+    font-size: 1em;
 }
 
 .linhaTabelaRankingCampeoes img {
@@ -318,8 +322,8 @@ nav button {
 .resultadoBusca {
     position: absolute;
     top: 18vh;
-width: 40%;
-margin-right: 5%;
+    width: 40%;
+    margin-right: 5%;
     max-height: 30vh;
     background-color: #1a1919;
     border-radius: 1vh;
@@ -355,5 +359,109 @@ margin-right: 5%;
         width: 4vh;
         height: 4vh;
         border-radius: 0.5vh;
+    }
+}
+
+@media (max-width: 1024px) {
+    body {
+        flex-direction: column;
+        align-items: center;
+        gap: 4vh;
+    }
+
+
+    nav {
+        width: 90%;
+        height: auto;
+    }
+
+
+    .resultadoBusca {
+        width: 80%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+
+    .cabecalhoTabelaRanking,
+    .linhaTabelaRanking {
+        width: 95%;
+    }
+}
+
+
+@media (max-width: 768px) {
+    nav {
+        width: 100%;
+    }
+
+
+    .barraPesquisa {
+        width: 95%;
+    }
+
+
+    .resultadoBusca {
+        width: 90%;
+    }
+
+
+    .cabecalhoTabelaRanking,
+    .linhaTabelaRanking {
+        font-size: 0.7rem;
+        flex-wrap: nowrap;
+        height: auto;
+        padding: 1vh;
+        width: 100%;
+    }
+
+
+    .cabecalhoTabelaRankingCampeoes,
+    .linhaTabelaRankingCampeoes {
+        flex: 0 0 40%;
+    }
+
+    .cabecalhoTabelaRankingWinrate {
+        position: relative;
+        right: 50px;
+    }
+}
+
+
+@media (max-width: 480px) {
+    body {
+        padding: 2vh;
+    }
+
+
+    .navHora {
+        font-size: 1.8rem;
+    }
+
+
+    .barraPesquisa {
+        width: 100%;
+    }
+
+    .resultadoBusca {
+        width: 100%;
+    }
+
+    .cabecalhoTabelaRanking,
+    .linhaTabelaRanking {
+        flex-direction: column;
+        gap: 1vh;
+        text-align: center;
+    }
+
+    .cabecalhoTabelaRankingWinrate {
+        position: relative;
+        left: 0px;
+    }
+
+
+    .linhaTabelaRankingCampeoes img {
+        width: 4vh;
+        height: 4vh;
     }
 }
