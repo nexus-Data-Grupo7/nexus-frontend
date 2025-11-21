@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página de Perfil</title>
+  <link rel="stylesheet" href="./css/perfil.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+
+    <nav>
+        <div class="navHora">
+            22:10
+            <div class="navData">
+                Segunda-feira, 23 de nov 2020
+            </div>
+        </div>
+
+        <div class="navLinks">
+            <a href="dashboard.html" class="navLinksLogo">
+                <img src="images/icon_link_home.svg" alt="">
+                Home
+            </a>
+            <a href="" class="navLinksLogo">
+                <img src="images/icon_link_usuarios.svg" alt="">
+                Usuarios
+            </a>
+            <a href="ranking.html" class="navLinksLogo">
+                <img src="images/icon_link_ranking.svg" alt="">
+                Ranking
+            </a>
+        </div>
+
+        <div class="navUserInfo">
+            <div>
+                <img src="images/icon_camera.svg" alt="">
+            </div>
+            <div>
+                <div>nomesobrenome</div>
+                <div>email@gmail.com</div>
+            </div>
+        </div>
+
+        <button class="navExit">
+            Sair
+            <div>
+                <img src="images/icon_sair.svg" alt="">
+            </div>
+        </button>
+    </nav>
+
+
+    <div class="container">
+
+        <div class="top-section">
+            <div class="circle">
+                <div class="edit-btn"><i class="fa-solid fa-pencil"></i></div>
+            </div>
+
+            <div class="box-graph">
+                Gráfico da preferência de vcs
+            </div>
+        </div>
+
+        <div class="box-rank">
+            <p>Seu ranking atual</p>
+            <div class="rank">
+                <span>Nick name</span>
+                <span class="sub">Top 324 - há 2 dias atrás</span>
+                <span><i class="fa-regular fa-calendar"></i></span>
+            </div>
+        </div>
+
+        <div class="box-bio">
+            <p>Biografia</p>
+            <textarea id="texto" placeholder="Texto" style="resize: none;"></textarea>
+        </div>
+        
+    </div>
+        
+
+    <div class="form-box">
+
+        <div>
+            <label>Nome</label>
+            <input type="text">
+
+            <label>E-mail</label>
+            <input type="email">
+
+            <label>Senha</label>
+            <input type="password">
+
+            <label>CNPJ / ID DE JOGADOR</label>
+            <select>
+                <option disabled selected>Selecione uma opção</option>
+            
+                <option>CNPJ</option>
+                <option>ID de jogador</option>
+            </select>   
+
+            <button class="save-btn">Salvar alteração</button>
+        </div>
+        
+    </div>
+
+</body>
+</html>
