@@ -74,16 +74,16 @@ nav {
 .navLinks a {
     color: white;
     text-decoration: none;
-}
-
-.navLinks a {
     border-bottom: 0.3vh solid transparent;
-    transition: border-bottom-color 0.3s ease, transform 0.3s ease;
+    transition: width 1s ease,
+                border-bottom-color 0.6s ease,
+                transform 0.6s ease;
 }
 
 .navLinks a:hover {
-    transform: scale(1.02);
+    width: 50%;
     border-bottom-color: white;
+    transform: scale(1.03);
 }
 
 
