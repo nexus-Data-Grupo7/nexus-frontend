@@ -56,7 +56,7 @@
     <div class="graficosContainer">
         <div class="graficosSup">
 
-            <div class="graficosSupDash">
+            <div class="graficosSupDash" id="divTaxaVitoria">
                 <div class="infoSup">
                     Maior taxa de vitória
                 </div>
@@ -65,7 +65,7 @@
                 </div>
             </div>
 
-            <div class="graficosSupDash">
+            <div class="graficosSupDash" id="divKdaMedio">
                 <div class="infoSup">
                     KDA médio
                 </div>
@@ -74,7 +74,7 @@
                 </div>
             </div>
 
-            <div class="graficosSupDash">
+            <div class="graficosSupDash" id="divFarmMedio">
                 <div class="infoSup">
                     Farm médio
                 </div>
@@ -98,12 +98,11 @@
         <div class="graficosInf">
 
 
-            <div class="graficosInfDash">
+            <div class="graficosInfDash" id="divPremiacao">
                 <div class="infoInf">
                     Total em premiações
                 </div>
                 <div class="infoValor">
-                    R$ 1.250.000,00
                 </div>
             </div>
 
@@ -124,98 +123,8 @@
 
     </div>
 
-    <!-- SCRIPTS DOS GRÁFICOS -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // --- GRÁFICO DE LINHAS ---
-            var optionsLinha = {
-                chart: {
-                    type: 'line',
-                    height: '100%',
-                    toolbar: { show: false },
-                    background: 'transparent'
-                },
-                series: [{
-                    name: 'Partidas Jogadas',
-                    data: [1, 2, 3, 2, 3, 4, 3, 2]
-                }],
-                xaxis: {
-                    categories: ['Vitória', 'Vitória', 'Vitória', 'Derrota', 'Vitória', 'Vitória', 'Derrota', 'Derrota'],
-                    labels: { style: { colors: '#ccc' } }
-                },
-                yaxis: {
-                    labels: { style: { colors: '#ccc' } }
-                },
-                colors: ['#00bcd4'],
-                stroke: {
-                    curve: 'smooth',
-                    width: 3
-                },
-                markers: {
-                    size: 4,
-                    colors: ['#00bcd4'],
-                    strokeColors: '#000',
-                    strokeWidth: 2
-                },
-                dataLabels: { enabled: false },
-                grid: {
-                    borderColor: 'rgba(255,255,255,0.1)'
-                },
-                title: {
-                    text: 'Histórico de partidas jogadas',
-                    align: 'center',
-                    style: {
-                        color: '#fff',
-                        fontSize: '16px'
-                    }
-                },
-                tooltip: {
-                    theme: 'dark'
-                }
-            };
+    <script src="scripts/dashboard_individual.js"></script>
 
-            var chartLinha = new ApexCharts(document.querySelector("#graficoMid1"), optionsLinha);
-            chartLinha.render();
-
-            // --- GRÁFICO DE PIZZA ---
-            var optionsPizza = {
-                chart: {
-                    type: 'pie',
-                    height: '100%',
-                    background: 'transparent'
-                },
-                series: [44, 55, 13],
-                labels: ['AATROX', 'YUMI', 'GAREN'],
-                colors: ['#00bcd4', '#4CAF50', '#E91E63'],
-                legend: {
-                    position: 'right',
-                    labels: {
-                        colors: '#fff'
-                    }
-                },
-                title: {
-                    text: 'Top 3 campeões mais jogados',
-                    align: 'center',
-                    style: {
-                        color: '#fff',
-                        fontSize: '16px'
-                    }
-                },
-                dataLabels: {
-                    style: {
-                        colors: ['#fff']
-                    }
-                },
-                stroke: {
-                    colors: ['#000'],
-                    width: 2
-                }
-            };
-
-            var chartPizza = new ApexCharts(document.querySelector("#graficoMid2"), optionsPizza);
-            chartPizza.render();
-        });
-    </script>
 
 </body>
 
