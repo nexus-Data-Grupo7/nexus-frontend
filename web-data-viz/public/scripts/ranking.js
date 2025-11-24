@@ -9,7 +9,7 @@ function irParaPerfil(idJogador) {
     sessionStorage.setItem('idJogadorSelecionado', idJogador);
     console.log("ID do jogador selecionado:", idJogador);
 
-    // window.location.href = 'dashboard_individual.html';
+    window.location.href = 'dashboard_individual.html';
 }
 
 function atualizarRanking() {
