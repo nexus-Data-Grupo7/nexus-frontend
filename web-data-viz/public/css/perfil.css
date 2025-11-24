@@ -12,6 +12,7 @@
     scroll-behavior: smooth;
     font-family: var(--font-family-texts);
     transition: all .6s ease-in-out;
+
 }
 
 body {
@@ -20,8 +21,8 @@ body {
     color: white;
     display: flex;
     flex-direction: row;
-    padding-top: 10vh;
-    padding-bottom: 10vh;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
     padding-left: 5vh;
     padding-right: 5vh;
     justify-content: center;
@@ -85,6 +86,7 @@ nav {
     border-bottom-color: white;
 }
 
+
 .navLinksLogo {
     width: 100%;
     display: flex;
@@ -121,19 +123,18 @@ nav button {
     gap: 1vh;
 }
 
+
 .container {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 2vh;
     padding: 5vh;
-    max-width: 100%;
 }
 
 .top-section {
     display: flex;
     gap: 3vh;
-    flex-wrap: wrap;
 }
 
 .circle {
@@ -142,7 +143,6 @@ nav button {
     background: #D9D9D9;
     border-radius: 50%;
     position: relative;
-    flex-shrink: 0;
 }
 
 .edit-btn {
@@ -156,18 +156,8 @@ nav button {
     cursor: pointer;
 }
 
-.box-graph {
-    background: #D9D9D9;
-    width: 70vh;
-    padding: 1vh;
-    border-radius: 2vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #777;
-    font-size: 2vh;
-    flex: 1;
-    min-width: 200px;
+.personal-data {
+    padding: 2vh;
 }
 
 .box-rank {
@@ -175,8 +165,8 @@ nav button {
     color: black;
     padding: 2vh;
     border-radius: 1vh;
-    width: 100%;
-    max-width: 96vh;
+    width: 96vh;
+    height: 12vh;
 }
 
 .rank {
@@ -185,10 +175,7 @@ nav button {
     display: flex;
     justify-content: space-between;
     margin-top: 1vh;
-    width: 100%;
-    max-width: 90vh;
-    flex-wrap: wrap;
-    gap: 1vh;
+    width: 90vh;
 }
 
 .sub {
@@ -197,21 +184,21 @@ nav button {
     color: #808080;
 }
 
-.box-bio p {
+.box-bio p{
     padding: 1vh;
 }
 
 textarea {
     height: 30vh;
     border-radius: 1vh;
-    width: 100%;
-    max-width: 96vh;
+    width: 96vh;
     color: white;
     background: linear-gradient(to right, #111111, #1d1d1d);
 }
 
-textarea::placeholder {
+textarea::placeholder{
     padding: 1vh;
+    
 }
 
 select {
@@ -226,8 +213,8 @@ select {
 
 input {
     width: 100%;
-    height: 8vh;
-    padding: 4vh;
+    height: 6vh;
+    padding: 2vh;
     margin-bottom: 2vh;
     border-radius: 1vh;
     border: none;
@@ -239,382 +226,22 @@ input {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    max-width: 90vh;
-    height: auto;
-    min-height: 78vh;
+    width: 150vh;
+    height: 55vh;
     background: linear-gradient(to right, #111111, #1d1d1d);
     border-radius: 1vh;
     padding: 5vh;
 }
 
 .save-btn {
-    margin-top: 2vh;
-    border: none;
-    padding: 2vh;
-    background: #D9D9D9;
-    border-radius: 1vh;
+  margin-top: 2vh;
+  border: none;
+  padding: 2vh;
+  background: #D9D9D9;
+  border-radius: 1vh;
 }
 
 .save-btn:hover {
-    background: #555;
-    color: white;
-}
-
-/* ==================================
-   MEDIA QUERIES - RESPONSIVIDADE
-   ================================== */
-
-@media screen and (max-width: 1200px) {
-    body {
-        padding: 5vh 3vh;
-    }
-
-    nav {
-        width: 30vh;
-        height: 75vh;
-    }
-
-    .box-graph {
-        width: 55vh;
-    }
-}
-
-@media screen and (max-width: 1024px) {
-    body {
-        flex-direction: column;
-        padding: 3vh 2vh;
-        align-items: center;
-    }
-
-    nav {
-        width: 100%;
-        max-width: 500px;
-        height: auto;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-around;
-        padding: 2vh 3vh;
-        margin-right: 0;
-        margin-bottom: 3vh;
-    }
-
-    .navHora {
-        font-size: 2rem;
-    }
-
-    .navLinks {
-        flex-direction: row;
-        flex-wrap: wrap;
-        margin-top: 2vh;
-        gap: 2vh;
-        width: 100%;
-        justify-content: center;
-    }
-
-    .navLinksLogo {
-        margin-top: 2vh;
-    }
-
-    .navUserInfo {
-        margin-top: 2vh;
-        width: 100%;
-    }
-
-    .container {
-        width: 100%;
-        max-width: 500px;
-        padding: 2vh;
-    }
-
-    .top-section {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .circle {
-        width: 20vh;
-        height: 20vh;
-    }
-
-    .box-graph {
-        width: 100%;
-        min-height: 18vh;
-    }
-
-    .box-rank {
-        max-width: 100%;
-    }
-
-    .rank {
-        max-width: 100%;
-    }
-
-    textarea {
-        max-width: 100%;
-        height: 25vh;
-    }
-
-    .form-box {
-        max-width: 100%;
-        min-height: auto;
-        padding: 3vh;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    body {
-        padding: 2vh 1.5vh;
-    }
-
-    nav {
-        max-width: 100%;
-        padding: 2vh;
-        border-radius: 20px;
-    }
-
-    .navHora {
-        font-size: 1.8rem;
-    }
-
-    .navData {
-        font-size: 0.65rem;
-    }
-
-    .navLinks {
-        font-size: 0.95rem;
-        gap: 1.5vh;
-    }
-
-    .container {
-        padding: 1.5vh;
-    }
-
-    .circle {
-        width: 18vh;
-        height: 18vh;
-    }
-
-    .box-graph {
-        font-size: 1.8vh;
-    }
-
-    .box-rank {
-        padding: 1.5vh;
-    }
-
-    .rank {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    textarea {
-        height: 22vh;
-    }
-
-    .form-box {
-        padding: 2.5vh;
-    }
-
-    input, select {
-        height: 6vh;
-    }
-
-    .save-btn {
-        width: 100%;
-        padding: 1.5vh;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    body {
-        padding: 1.5vh 1vh;
-    }
-
-    nav {
-        flex-direction: column;
-        align-items: center;
-        padding: 2.5vh 2vh;
-    }
-
-    .navHora {
-        font-size: 2rem;
-    }
-
-    .navData {
-        font-size: 0.7rem;
-    }
-
-    .navLinks {
-        flex-direction: column;
-        gap: 2vh;
-        margin-top: 3vh;
-    }
-
-    .navLinks a {
-        font-size: 1rem;
-    }
-
-    .navUserInfo {
-        flex-direction: column;
-        gap: 1.5vh;
-        margin-top: 3vh;
-    }
-
-    .navExit {
-        justify-content: center;
-    }
-
-    nav button {
-        font-size: 0.9rem;
-    }
-
-    .container {
-        padding: 1vh;
-    }
-
-    .circle {
-        width: 20vh;
-        height: 20vh;
-    }
-
-    .box-graph {
-        min-height: 15vh;
-        font-size: 1.6vh;
-    }
-
-    .box-rank h3 {
-        font-size: 1rem;
-    }
-
-    .rank {
-        font-size: 0.9rem;
-    }
-
-    .sub {
-        font-size: 0.8rem;
-    }
-
-    textarea {
-        height: 20vh;
-        font-size: 0.9rem;
-    }
-
-    .form-box {
-        padding: 2vh;
-    }
-
-    input, select {
-        height: 6vh;
-        font-size: 0.9rem;
-    }
-
-    .save-btn {
-        font-size: 0.9rem;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    body {
-        padding: 1vh 0.8vh;
-    }
-
-    nav {
-        padding: 2vh 1.5vh;
-        border-radius: 15px;
-    }
-
-    .navHora {
-        font-size: 1.8rem;
-    }
-
-    .navLinks a {
-        font-size: 0.9rem;
-    }
-
-    .circle {
-        width: 17vh;
-        height: 17vh;
-    }
-
-    .box-graph {
-        min-height: 12vh;
-        border-radius: 1.5vh;
-    }
-
-    .box-rank {
-        padding: 1.2vh;
-    }
-
-    .rank {
-        font-size: 0.85rem;
-    }
-
-    textarea {
-        height: 18vh;
-    }
-
-    .form-box {
-        padding: 1.5vh;
-    }
-
-    input, select {
-        height: 5.5vh;
-        font-size: 0.85rem;
-    }
-
-    .save-btn {
-        padding: 1.2vh;
-        font-size: 0.85rem;
-    }
-}
-
-@media screen and (max-width: 360px) {
-    nav {
-        padding: 1.5vh 1vh;
-    }
-
-    .navHora {
-        font-size: 1.5rem;
-    }
-
-    .navData {
-        font-size: 0.6rem;
-    }
-
-    .navLinks {
-        gap: 1.5vh;
-    }
-
-    .navLinks a {
-        font-size: 0.85rem;
-    }
-
-    .circle {
-        width: 15vh;
-        height: 15vh;
-    }
-
-    .box-graph {
-        min-height: 10vh;
-        font-size: 1.4vh;
-    }
-
-    .rank {
-        font-size: 0.8rem;
-    }
-
-    textarea {
-        height: 15vh;
-        font-size: 0.85rem;
-    }
-
-    input, select {
-        height: 5vh;
-        font-size: 0.8rem;
-    }
-
-    .save-btn {
-        font-size: 0.8rem;
-    }
+  background: #555;
+  color: white;
 }
