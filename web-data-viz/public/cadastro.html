@@ -1,72 +1,74 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
     <link rel="stylesheet" href="./css/cadastro.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>NexusData - Cadastro</title>
 </head>
+
 <body>
+
     <div class="container">
-        <section class="containerHomePage">
-            <header>
-                <nav id="topo">
-                    <img src="./images/logoQuemSomos.png" alt="" id="logo">
-                    <span id="logoNexus">nexus<span id="logoNexus2">Data</span></span>
-                    <div class="centralLinks">
-                        <ul>
-                            <li><a href="index.html#home">Home</a></li>
-                            <li><a href="index.html#about">Sobre</a></li>
-                            <li><a href="index.html#services">Serviços</a></li>
-                            <li><a href="index.html#values">Valores</a></li>
-                            <li><a href="index.html#team">Equipe</a></li>
-                        </ul>
-                    </div>
-                    <div class="buttonsNav">
-                        <a href="login.html"><button class="login">Login <img src="./images/controle.png" alt=""></button></a>
-                        <a href="cadastro.html"><button class="cad">Cadastro</button></a>
-                    </div>
-                </nav>
-            </header>
 
-            <div class="homePageContainer">
-                <div class="card card-cadastro">
-                    <h2>Cadastro!</h2>
+        <div class="left-area">
+            <div class="phone-box">
+                <img src="./images/celularNexus.png" class="phone-img">
+            </div>
+            <div class="grupo-linhas">
+                <img src="images/linhas_grupo.svg" alt="">
+            </div>
 
-                    <div class="tipo-usuario" style="margin-bottom: 20px;">
-                        <label style="margin-right: 20px;">
-                            <input type="radio" name="tipoUsuario" value="jogador" checked onchange="alterarTipoLogin()"> Jogador
-                        </label>
-                        <label>
-                            <input type="radio" name="tipoUsuario" value="organizacao" onchange="alterarTipoLogin()"> Organização
-                        </label>
-                    </div>
+            <div class="description">
+                Nosso propósito é <strong>fortalecer a comunidade gamer</strong>, dar visibilidade a novos talentos
+                e apoiar organizações e <strong>patrocinadores</strong> com <strong>dados confiáveis</strong>.
+            </div>
+        </div>
+
+        <div class="form-area">
+            <h1>Cadastro</h1>
+
+            <div class="tipo-usuario">
+                <label><input type="radio" name="tipoUsuario" value="jogador" checked onchange="alterarTipoLogin()">
+                    Jogador</label>
+                <label><input type="radio" name="tipoUsuario" value="organizacao" onchange="alterarTipoLogin()">
+                    Organização</label>
+            </div>
+
+            <div class="form-container">
+
+                <div class="form-area parte-1">
 
                     <span>E-mail</span>
                     <div class="input">
                         <input type="text" id="input_email" placeholder="xpto@gmail.com">
-                        <i class="fa-solid fa-envelope"></i>
                     </div>
 
                     <span>Senha</span>
                     <div class="input">
                         <input type="password" id="input_senha" placeholder="*******">
-                        <i class="fa-solid fa-lock"></i>
                     </div>
 
                     <span>Confirmar senha</span>
                     <div class="input">
                         <input type="password" id="input_confirmaSenha" placeholder="*******">
-                        <i class="fa-solid fa-lock"></i>
                     </div>
 
-                    <div id="campos_jogador" style="display: block;">
+                    <div id="campos_jogador">
                         <span>Nome</span>
                         <div class="input">
                             <input type="text" id="input_nome" placeholder="Seu nome">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-area parte-2">
+
+                    <div>
+                        <span>Data de nascimento</span>
+                        <div class="input">
+                            <input type="text" id="input_idade">
                         </div>
 
                         <span>Game Name</span>
@@ -89,6 +91,7 @@
                         </select>
                     </div>
 
+
                     <div id="campos_organizacao" style="display: none;">
                         <span>Nome da Organização</span>
                         <div class="input">
@@ -105,81 +108,81 @@
                             <input type="text" id="input_cnpj" placeholder="Somente números">
                         </div>
                     </div>
-
-                    <button class="botao" onclick="cadastrar()">Cadastrar</button> <br><br>
-
-                    <div class="login">
-                        <span>Já possui cadastro?</span>
-                        <a href="login.html">Login</a>
-                    </div>
-
                 </div>
+
             </div>
-        </section>
+
+
+
+            <button class="btn">Cadastrar</button>
+
+            <div class="login-text">Já possui uma conta? <a href="#">clique aqui</a></div>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/js-sha256@0.9.0/build/sha256.min.js"></script>
 
     <script>
-    function alterarTipoLogin() {
-        const tipoSelecionado = document.querySelector('input[name="tipoUsuario"]:checked').value;
-        document.getElementById("campos_jogador").style.display = tipoSelecionado === "jogador" ? "block" : "none";
-        document.getElementById("campos_organizacao").style.display = tipoSelecionado === "organizacao" ? "block" : "none";
-    }
-
-    async function cadastrar() {
-        const email = document.getElementById("input_email").value.trim();
-        const senha = document.getElementById("input_senha").value.trim();
-        const confirma = document.getElementById("input_confirmaSenha").value.trim();
-        const tipoConta = document.querySelector('input[name="tipoUsuario"]:checked').value.toUpperCase();
-
-        if (!email || !senha || !confirma) {
-            alert("Preencha todos os campos obrigatórios!");
-            return;
+        function alterarTipoLogin() {
+            const tipoSelecionado = document.querySelector('input[name="tipoUsuario"]:checked').value;
+            document.getElementById("campos_jogador").style.display = tipoSelecionado === "jogador" ? "block" : "none";
+            document.getElementById("campos_organizacao").style.display = tipoSelecionado === "organizacao" ? "block" : "none";
         }
 
-        if (senha !== confirma) {
-            alert("As senhas não coincidem!");
-            return;
-        }
+        async function cadastrar() {
+            const email = document.getElementById("input_email").value.trim();
+            const senha = document.getElementById("input_senha").value.trim();
+            const confirma = document.getElementById("input_confirmaSenha").value.trim();
+            const tipoConta = document.querySelector('input[name="tipoUsuario"]:checked').value.toUpperCase();
 
-        const senhaHash = sha256(senha);
-
-        let body = {
-            emailServer: email,
-            senhaServer: senhaHash,
-            tipoContaServer: tipoConta
-        };
-
-        if (tipoConta === "JOGADOR") {
-            body.nome = document.getElementById("input_nome").value.trim();
-            body.gameName = document.getElementById("input_gameName").value.trim();
-            body.tagline = document.getElementById("input_tagline").value.trim();
-            body.idRegiao = document.getElementById("select_regiao").value;
-        } else {
-            body.nomeOrg = document.getElementById("input_nomeOrg").value.trim();
-            body.sigla = document.getElementById("input_sigla").value.trim();
-            body.cnpj = document.getElementById("input_cnpj").value.trim();
-        }
-
-        fetch("/usuarios/cadastrar", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(body)
-        })
-        .then(res => {
-            if (res.ok) {
-                alert("Cadastro realizado com sucesso!");
-                window.location.href = "login.html";
-            } else {
-                alert("Erro ao cadastrar!");
+            if (!email || !senha || !confirma) {
+                alert("Preencha todos os campos obrigatórios!");
+                return;
             }
-        })
-        .catch(err => {
-            console.error(err);
-            alert("Erro de conexão com o servidor!");
-        });
-    }
+
+            if (senha !== confirma) {
+                alert("As senhas não coincidem!");
+                return;
+            }
+
+            const senhaHash = sha256(senha);
+
+            let body = {
+                emailServer: email,
+                senhaServer: senhaHash,
+                tipoContaServer: tipoConta
+            };
+
+            if (tipoConta === "JOGADOR") {
+                body.nome = document.getElementById("input_nome").value.trim();
+                body.gameName = document.getElementById("input_gameName").value.trim();
+                body.tagline = document.getElementById("input_tagline").value.trim();
+                body.idRegiao = document.getElementById("select_regiao").value;
+            } else {
+                body.nomeOrg = document.getElementById("input_nomeOrg").value.trim();
+                body.sigla = document.getElementById("input_sigla").value.trim();
+                body.cnpj = document.getElementById("input_cnpj").value.trim();
+            }
+
+            fetch("/usuarios/cadastrar", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body)
+            })
+                .then(res => {
+                    if (res.ok) {
+                        alert("Cadastro realizado com sucesso!");
+                        window.location.href = "login.html";
+                    } else {
+                        alert("Erro ao cadastrar!");
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    alert("Erro de conexão com o servidor!");
+                });
+        }
     </script>
 </body>
+
 </html>

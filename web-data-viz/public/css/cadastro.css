@@ -1,250 +1,182 @@
-@import url("./variaveis/variaveis-nexus.css");
-@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Chewy&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Keania+One&family=Lalezar&family=League+Gothic&family=Orbitron:wght@400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap');
-
-*{
-    margin: 0; 
-    padding: 0;
-    text-decoration: none; 
-    box-sizing: border-box;
-    list-style: none; 
-    scroll-behavior: smooth;
-    font-size: var(--font-size-small); 
-    font-family: var(--font-family-texts);
-    transition: all .6s ease-in-out;
-}
-
-body{
-    background: var(--home-background-gradient);
-    margin: auto;
-}
-
-header #topo{
-    display: flex;
-    justify-content: space-between;
-    gap: 80px;
-}
-
-header #topo #logo{
-    margin-left: var(--margin-left-logo-navbar-1900px);
-    margin-top: var(--margin-top-logo-navbar-1900px);
-    width: 4vw; 
-    height: 8vh;
-}
-
-header #topo #logoNexus{
-    position: relative;
-    font-family: Poppins;
-    font-weight: 500;
-    font-style: Medium;
-    font-size: 1.3rem;
-    leading-trim: NONE;
-    line-height: 100%;
-    letter-spacing: 0.5px;
-    color: var(--white);
-    right: 78px;
-    top: 37px;
-}
-
-header #topo #logoNexus2{
-    position: absolute;
-    font-family: Poppins;
-    font-weight: 700;
-    font-style: Bold;
-    font-size: 1.3rem;
-    leading-trim: NONE;
-    line-height: 100%;
-    letter-spacing: 0.5px;
-    color: var(--white);
-}
-
-header #topo .centralLinks{
-    display: flex;
-    position: relative; 
-    align-items: center;
-    justify-content: center;
-    background-color: var(--black);
-    width: 37vw; 
-    height: 9vh;
-    border-radius: var(--borderRadius-1900px); 
-    opacity: 0.72;
-    transition: all 0.3s ease-in-out;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 25px;
-    right: 7px;
-}
-
-
-header #topo .centralLinks ul{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 37vw;
-    margin-left: var(--margin-LEFT-RIGHT-ul-navbar-left-1900px); 
-    margin-right: var(--margin-LEFT-RIGHT-ul-navbar-left-1900px);
-}
-
-header #topo .centralLinks ul li{
-    margin-left: auto;
-    margin-right: auto;
-}
-
-header #topo .centralLinks ul li a{
-    font-family: Inter;
-    color: var(--white);
-}
-
-
-header #topo .buttonsNav{
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
-    position: relative;
-    gap: 22px;
-    width: 18vw; 
-    height: 13vh;
-    bottom: 9px;
-    right: 30px;
-    border-radius: var(--borderRadius-1900px);
-}
-
-header #topo .buttonsNav .login{
-    display: flex;
-    position: relative;
-    align-items: center;
-    justify-content: center;
-    width: 9vw;
-    height: 6.5vh;
-    top: 22px;
-    right: 25px;
-    font-family: MuseoModerno;
-    background: var(--button-background-gradient);
-    color: var(--white);
-    border-top-right-radius: 20px;
-    border-bottom-left-radius: 20px;
-    border: none;
-    transition: var(--mili-seg-5ms);
-    cursor: pointer;
-}
-
-header #topo .buttonsNav .login img{
-    width: 1.5vw;
-    height: 3vh;
-}
-
-header #topo .buttonsNav .cad{
-    display: flex;
-    position: relative;
-    align-items: center;
-    justify-content: center;
-    width: 9vw;
-    height: 6.5vh;
-    background: none;
-    font-family: MuseoModerno;
-    color: var(--white);
-    top: 23px;
-    right: 25px;
-    border-top-right-radius: 20px;
-    border-bottom-left-radius: 20px;
-    border-color: var(--white);
-    transition: var(--mili-seg-5ms);
-    cursor: pointer;
-}
-
-.homePageContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 3%;
-}
-
-.card-cadastro {
+html, body {
+    height: 100vh; 
+    margin: 0;
+    background: #0e0e0e;
+    font-family: "Arial", sans-serif;
     color: white;
-    width: 82vh;
-    background-color: rgba(0, 0, 0, 0.356);
-    border: 0.6vh solid transparent;
-    border-image: linear-gradient(to right, #247BA0, #0D2D3A) 1;
-    padding: 5vh;
-    display: flex;
-    flex-direction: column;
 }
 
-.homePageContainer h2 {
-    margin-bottom: 2vh;
-    font-size: 7vh;
-    font-weight: 600;
-    background: -webkit-linear-gradient(#247BA0, #0D2D3A);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.container {
     display: flex;
     justify-content: center;
+    align-items: center;
+    /* Adicione esta linha: */
+    height: 100%; 
+}
+
+
+.left-area {
+    width: 45%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center ;
+}
+
+.grupo-linhas {
+    position: absolute; 
+    z-index: 0; 
+    width: 100%; 
+    top: 0; 
+    left: 0; 
+    overflow: hidden;
+    height: 100%; 
+}
+
+.grupo-linhas img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.phone-box {
+    width: 100%;
+    z-index: 10; 
+    position: relative;
+    left: 13vh;
+}
+
+.phone-img {
+    width: 60%;
+}
+
+.description {
+    z-index: 10; 
+    position: relative;
+        margin-top: 40px;
+    width: 380px;
+    background: rgba(0, 0, 0, 0.45);
+    padding: 20px;
+    border-radius: 12px;
+    font-size: 15px;
+    line-height: 22px;
+}
+
+
+.form-area {
+    width: 50%;
+    /* CORREÇÃO 2: Fazer a form-area pegar a altura total do container */
+    height: 100%; 
+    /* background-color: violet; */
+    /* CORREÇÃO 3: Ajustar box-sizing para o padding não criar uma barra de rolagem */
+    box-sizing: border-box; 
+}
+
+/* Área geral do formulário */
+.form-container {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;   /* espaço entre os dois blocos */
+    width: 100%;
+}
+
+/* Bloco 1 */
+.parte-1 {
+    background: #141414;
+    padding: 25px;
+    border-radius: 14px;
+    border: 1px solid #222;
+}
+
+/* Bloco 2 */
+.parte-2 {
+    background: #141414;
+    padding: 25px;
+    border-radius: 14px;
+    border: 1px solid #222;
+}
+
+/* Ajuste dos títulos quando existirem */
+.parte-1 h1 {
+    margin-top: 0;
+}
+
+
+h1 {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+.tipo-usuario {
+    margin-bottom: 20px;
+    font-size: 15px;
+}
+
+.tipo-usuario label {
+    margin-right: 30px;
+    cursor: pointer;
+}
+
+span {
+    font-size: 14px;
 }
 
 .input {
-    width: 100%;
-    height: 5vh;
-    position: relative;
-    display: flex;
-    align-items: center;
-    margin-bottom: 0.7vh;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 12px;
+    margin-top: 5px;
+    margin-bottom: 15px;
 }
 
 .input input {
-    position: absolute;
-    height: 100%;
     width: 100%;
+    background: none;
     border: none;
-    padding-left: 5vh;
+    outline: none;
+    color: white;
+    font-size: 15px;
 }
 
-.input i {
-    position: absolute;
-    left: 0.7vh;
-    color: #6d6d6d;
-    margin-left: 0.7vh;
+select {
+    width: 100%;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 12px;
+    color: white;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    font-size: 15px;
 }
 
-.botao {
-    position: relative;
-    width: 20vh;
-    height: 6vh;
-    font-size: 2vh;
-    color: #fff;
-    background: transparent;
-    border: none;
+.btn {
+    width: 100%;
+    background: linear-gradient(90deg, #3b3b3b, #1f1f1f);
+    border: 1px solid #444;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 17px;
+    color: white;
     cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 1vh;
-    border-radius: 0.7vh;
+    margin-top: 10px;
+    transition: .2s;
 }
 
-button{
-    display: block;
-    margin: 0 auto;
+.btn:hover {
+    background: linear-gradient(90deg, #555, #2c2c2c);
 }
 
-.botao::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    padding: 0.3vh;
-    background: linear-gradient(90deg, #247BA0, #0D2D3A);
-    border-radius: inherit;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: xor;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
+.login-text {
+    margin-top: 18px;
+    font-size: 14px;
 }
 
-.botao:hover {
-    transform: translateY(-0.3vh);
-    filter: brightness(1.2);
+.login-text a {
+    color: #7aa2ff;
+    text-decoration: none;
 }
-
-.login a {
-  color: #247BA0;
-}
-
