@@ -12,59 +12,50 @@
 </head>
 
 <body>
-    <div class="container">
-        <section class="containerHomePage">
-            <header>
-                <nav id="topo">
-                    <img src="./images/logoQuemSomos.png" alt="" id="logo">
-                    <span id="logoNexus">nexus<span id="logoNexus2">Data</span></span>
-                    <div class="centralLinks">
-                        <ul>
-                            <li><a href="index.html#home">Home</a></li>
-                            <li><a href="index.html#about">Sobre</a></li>
-                            <li><a href="index.html#services">Serviços</a></li>
-                            <li><a href="index.html#values">Valores</a></li>
-                            <li><a href="index.html#team">Equipe</a></li>
-                        </ul>
-                    </div>
-                    <div class="buttonsNav">
-                        <a href="login.html"><button class="login">Login <img src="./images/controle.png"
-                                    alt=""></button></a>
-                        <a href="cadastro.html"><button class="cad">Cadastro</button></a>
-                    </div>
-                </nav>
-                <div class="hamburger" id="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </header>
 
-            <div class="homePageContainer">
-                <div class="card card-cadastro">
-                    <h2>Login</h2>
+     <div class="container">
+
+        <div class="left-area">
+            <div class="phone-box">
+                <img src="./images/celularNexus.png" class="phone-img">
+            </div>
+            <div class="grupo-linhas">
+                <img src="images/linhas_grupo.svg" alt="">
+            </div>
+
+            <div class="description">
+                Nosso propósito é <strong>fortalecer a comunidade gamer</strong>, dar visibilidade a novos talentos
+                e apoiar organizações e <strong>patrocinadores</strong> com <strong>dados confiáveis</strong>.
+            </div>
+        </div>
+
+        <div class="form-area">
+            <h1>Login</h1>
+
+            <div class="form-container">
+
+                <div class="form-area parte-1">
 
                     <span>E-mail</span>
                     <div class="input">
                         <input type="text" id="input_email" placeholder="xpto@gmail.com">
-                        <i class="fa-solid fa-envelope"></i>
                     </div>
 
                     <span>Senha</span>
                     <div class="input">
                         <input type="password" id="input_senha" placeholder="*******">
-                        <i class="fa-solid fa-lock"></i>
                     </div>
 
-                    <button class="botao" onclick="entrar()">Entrar</button> <br><br>
-
-                    <div class="cadastro">
-                        <span>Não possui cadastro?</span>
-                        <a href="cadastro.html">Cadastro</a>
-                    </div>
                 </div>
+
             </div>
-        </section>
+
+
+
+            <button class="btn">Login</button>
+
+            <div class="login-text">Não possui conta? <a href="#">clique aqui</a></div>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/js-sha256@0.9.0/build/sha256.min.js"></script>
