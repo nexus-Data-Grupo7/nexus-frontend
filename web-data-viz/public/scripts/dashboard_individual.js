@@ -144,7 +144,7 @@ function carregarGraficoPizza() {
             }
 
             const nomesCampeoes = data.map(item => item.nome_campeao);
-            const qtdPartidas = data.map(item => item.qtd_partidas); 
+            const qtdPartidas = data.map(item => item.qtd_partidas);
 
             var optionsPizza = {
                 chart: {
@@ -152,9 +152,9 @@ function carregarGraficoPizza() {
                     height: '100%',
                     background: 'transparent'
                 },
-                series: qtdPartidas, 
-                labels: nomesCampeoes, 
-                colors: ['#00bcd4', '#4CAF50', '#E91E63'],                 legend: {
+                series: qtdPartidas,
+                labels: nomesCampeoes,
+                colors: ['#00bcd4', '#4CAF50', '#E91E63'], legend: {
                     position: 'right',
                     labels: {
                         colors: '#fff'
@@ -232,9 +232,40 @@ function carregarPremiacao() {
         });
 }
 
+function carregaInfoJogador() {
+    const idJogador = sessionStorage.getItem('idJogadorSelecionado');
+    if (!idJogador) return;
+
+    fetch(`/jogador/infoJogador/${idJogador}`)
+        .then(response => response.json())
+        .then(data => {
+            const divJogadorDetalhes = document.getElementById("divJogadorDetalhes");
+            var idade = `${data[0].idade} anos`;
+            if (data[0].idade === null || data[0].idade === undefined || data[0].idade === 0) {
+                idade = "Sem dados"
+            }
+
+            divJogadorDetalhes.innerHTML = `
+            <div class="infoJogadorDetalhesItem">
+                    Nome: ${data[0].nome}
+                </div>
+                <div class="infoJogadorDetalhesItem">
+                    Idade: ${idade}
+                </div>
+                <div class="infoJogadorDetalhesItem">
+                    Posição: ${data[0].posicao_mais_jogada}
+                </div>`
+            console.log("Dados do jogador recebidos:", data);
+        })
+        .catch(error => {
+            console.error("Erro ao carregar informações do jogador:", error);
+        });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     carregarDadosJogador();
-    carregarGrafico();       
-    carregarGraficoPizza(); 
+    carregarGrafico();
+    carregarGraficoPizza();
     carregarPremiacao()
+    carregaInfoJogador();
 });

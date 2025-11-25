@@ -22,6 +22,8 @@ var app = express()
 // Deixe apenas as rotas que você realmente criou.
 var usuarioRouter = require("./src/routes/usuario");
 var rankingRouter = require("./src/routes/ranking");
+var jogadorRouter = require("./src/routes/jogador");
+var dashboardRouter = require("./src/routes/dashboard");
 
 
 app.use(express.json());
@@ -39,6 +41,8 @@ app.use((req, res, next) => {
 // Use apenas as rotas que você importou
 app.use("/usuario", usuarioRouter)
 app.use("/ranking", rankingRouter)
+app.use("/jogador", jogadorRouter)
+app.use("/dashboard", dashboardRouter)
 
 
 // Corrigido para usar HOST_APP e PORTA_APP

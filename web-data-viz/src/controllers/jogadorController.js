@@ -41,9 +41,20 @@ async function premiacao(req, res) {
     }
 }
 
+async function infoJogador(req, res) {
+    try {
+        const resultados = await jogadorModel.infoJogador(req.params.idJogador);
+        res.status(200).json(resultados);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Erro ao buscar informações do jogador." });
+    }
+}
+
 module.exports = {
     dadosDashboardIndividual,
     dadosGraficoJogador,
     dadosGraficoJogadorPizza,
-    premiacao
+    premiacao,
+    infoJogador
 };

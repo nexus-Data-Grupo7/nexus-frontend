@@ -108,9 +108,43 @@ async function premiacao(idJogador) {
     }
 }
 
+function infoJogador(idJogador) {
+    const query = `
+    SELECT 
+    j.nome, 
+    j.idade,
+    (
+        SELECT f.nome_funcao
+        FROM desempenho_partida dp
+        JOIN funcao f ON dp.id_funcao = f.id_funcao
+        WHERE dp.id_jogador = j.id_jogador
+        GROUP BY f.id_funcao
+        ORDER BY COUNT(*) DESC
+        LIMIT 1
+    ) AS posicao_mais_jogada
+FROM 
+    jogador j WHERE j.id_jogador = ${idJogador};`;
+    let connection;
+    return new Promise(async (resolve, reject) => {
+        try {
+            connection = await pool.getConnection();
+            const [rows] = await connection.query(query);
+            resolve(rows);
+        } catch (error) {
+            console.error("Erro no model ao buscar informações do jogador:", error);
+            reject(error);
+        } finally {
+            if (connection) {
+                connection.release();
+            }
+        }
+    });
+}
+
 module.exports = {
     dadosDashboardIndividual,
     dadosGraficoJogador,
     dadosGraficoJogadorPizza,
-    premiacao
+    premiacao,
+    infoJogador
 };

@@ -60,7 +60,7 @@
     <div class="graficosContainer">
         <div class="graficosSup">
 
-            <div class="graficosSupDash">
+            <div class="graficosSupDash" id="divTaxaVitoria">
                 <div class="infoSup">
                     Maior taxa de vitória
                 </div>
@@ -72,7 +72,7 @@
                 </div>
             </div>
 
-            <div class="graficosSupDash">
+            <div class="graficosSupDash" id="divMelhorKDA">
                 <div class="infoSup">
                     Melhor KDA
                 </div>
@@ -84,7 +84,7 @@
                 </div>
             </div>
 
-            <div class="graficosSupDash">
+            <div class="graficosSupDash" id="divJogadorDestaque">
                 <div class="infoSup">
                     Jogador destaque
                 </div>
@@ -149,7 +149,7 @@
 
             </div>
 
-            <div class="graficosInfDash">
+            <div class="graficosInfDash" id="divPremiacao">
                 <div class="infoInf">
                     Jogador com maior premiação
                 </div>
@@ -164,93 +164,8 @@
         </div>
 
     </div>
+    <script src="scripts/dashboard.js"></script>
 
-    <!-- SCRIPTS DOS GRÁFICOS -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // --- GRÁFICO DE BARRAS ---
-            var optionsBarra = {
-                chart: {
-                    type: 'bar',
-                    height: '100%',
-                    toolbar: { show: false },
-                    background: 'transparent'
-                },
-                series: [{
-                    name: 'Partidas Jogadas',
-                    data: [35, 52, 41, 67, 89]
-                }],
-                xaxis: {
-                    categories: ['Top', 'Mid', 'Jungle', 'Sup', 'ADC'],
-                    labels: { style: { colors: '#ccc' } }
-                },
-                yaxis: {
-                    labels: { style: { colors: '#ccc' } }
-                },
-                colors: ['#00bcd4'],
-                plotOptions: {
-                    bar: {
-                        borderRadius: 4,
-                        horizontal: false,
-                        columnWidth: '55%'
-                    }
-                },
-                dataLabels: { enabled: false },
-                grid: {
-                    borderColor: 'rgba(255,255,255,0.1)'
-                },
-                title: {
-                    text: 'Posições mais jogadas',
-                    align: 'center',
-                    style: {
-                        color: '#fff',
-                        fontSize: '16px'
-                    }
-                }
-            };
-
-            var chartBarra = new ApexCharts(document.querySelector("#graficoMid1"), optionsBarra);
-            chartBarra.render();
-
-            // --- GRÁFICO DE PIZZA ---
-            var optionsPizza = {
-                chart: {
-                    type: 'pie',
-                    height: '100%',
-                    background: 'transparent'
-                },
-                series: [44, 55, 13],
-                labels: ['AATROX', 'YUMI', 'GAREN'],
-                colors: ['#00bcd4', '#4CAF50', '#E91E63'],
-                legend: {
-                    position: 'right',
-                    labels: {
-                        colors: '#fff'
-                    }
-                },
-                title: {
-                    text: 'Top 3 campeões mais jogados',
-                    align: 'center',
-                    style: {
-                        color: '#fff',
-                        fontSize: '16px'
-                    }
-                },
-                dataLabels: {
-                    style: {
-                        colors: ['#fff']
-                    }
-                },
-                stroke: {
-                    colors: ['#000'],
-                    width: 2
-                }
-            };
-
-            var chartPizza = new ApexCharts(document.querySelector("#graficoMid2"), optionsPizza);
-            chartPizza.render();
-        });
-    </script>
 
 </body>
 

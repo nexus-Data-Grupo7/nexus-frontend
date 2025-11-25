@@ -8,5 +8,6 @@ router.get("/dadosDashboardIndividual/:idJogador", jogadorController.dadosDashbo
 router.get("/dadosGraficoJogador/:idJogador", jogadorController.dadosGraficoJogador);
 router.get("/dadosGraficoJogadorPizza/:idJogador", jogadorController.dadosGraficoJogadorPizza);
 router.get("/premiacao/:idJogador", jogadorController.premiacao);
+router.get("/infoJogador/:idJogador", jogadorController.infoJogador);
 
 module.exports = router;
