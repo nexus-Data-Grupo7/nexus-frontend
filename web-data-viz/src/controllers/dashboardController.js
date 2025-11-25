@@ -22,7 +22,18 @@ async function carregarDashboardGraficos(req, res) {
     }
 }
 
+async function carregarDashboardTop3(req, res) {
+    try {
+        const dadosTop3 = await dashboardModel.carregarDashboardTop3();
+        res.status(200).json(dadosTop3);
+    } catch (error) {
+        console.error("Erro ao carregar dados do Top 3:", error);
+        res.status(500).json({ error: "Erro ao carregar dados do Top 3." });
+    }
+}
+
 module.exports = {
     carregarDashboard,
-    carregarDashboardGraficos
+    carregarDashboardGraficos,
+    carregarDashboardTop3
 };

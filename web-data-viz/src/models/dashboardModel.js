@@ -119,9 +119,60 @@ UNION ALL
     }
 }
 
+async function carregarDashboardTop3() {
+    const query = `
+WITH UltimasDuas AS (
+    SELECT 
+        h.id_jogador,
+        h.posicao,
+        h.data_registro,
+        ROW_NUMBER() OVER (PARTITION BY h.id_jogador ORDER BY h.data_registro DESC) AS ordem
+    FROM ranking_historico h
+),
+
+Ultima AS (
+    SELECT id_jogador, posicao AS posicao_atual, data_registro
+    FROM UltimasDuas
+    WHERE ordem = 1
+),
+
+Penultima AS (
+    SELECT id_jogador, posicao AS posicao_anterior
+    FROM UltimasDuas
+    WHERE ordem = 2
+)
+
+SELECT
+    j.game_name,
+    u.id_jogador,
+    u.posicao_atual,
+    p.posicao_anterior,
+    u.data_registro AS data_atualizacao
+FROM Ultima u
+LEFT JOIN Penultima p ON p.id_jogador = u.id_jogador
+JOIN jogador j ON j.id_jogador = u.id_jogador
+ORDER BY u.posicao_atual
+LIMIT 3;
+`;
+    let connection;
+    try {
+        connection = await pool.getConnection();
+        const [rows] = await connection.query(query);
+        return rows;
+    } catch (error) {
+        console.error("Erro no model ao buscar dados do dashboard gráficos:", error);
+        throw error;
+    } finally {
+        if (connection) {
+            connection.release();
+        }
+    }
+}
+
 
 
 module.exports = {
     carregarDashboard,
-    carregarDashboardGraficos
+    carregarDashboardGraficos,
+    carregarDashboardTop3
 };

@@ -1,3 +1,57 @@
+function tempoDesde(dataIso) {
+    const data = new Date(dataIso);
+    const diffMs = Date.now() - data.getTime();
+    const dias = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+    if (dias === 0) return "hoje";
+    if (dias === 1) return "há 1 dia atrás";
+    return `há ${dias} dias atrás`;
+}
+
+function renderTop3(top3) {
+    const container = document.getElementById("top3-container");
+    container.innerHTML = "";
+
+    top3.forEach(player => {
+        const dias = tempoDesde(player.data_atualizacao);
+        const icone = getIcon(player);
+
+        const card = `
+            <div class="graficoInfTopJogador">
+                <img src="${icone}" alt="">
+                <div class="topJogadorInfo">
+                    <div class="topNomeJogador">
+                        ${player.game_name}
+                    </div>
+                    <div class="topJogadorData">
+                        Top ${player.posicao_atual} - ${dias}
+                    </div>
+                </div>
+            </div>
+        `;
+
+        container.insertAdjacentHTML("beforeend", card);
+    });
+}
+
+
+function getIcon(player) {
+    if (!player.posicao_anterior) {
+        return "images/estatico.svg";
+    }
+
+    if (player.posicao_anterior > player.posicao_atual) {
+        return "images/seta_para_cima.svg";
+    }
+
+    if (player.posicao_anterior < player.posicao_atual) {
+        return "images/seta_para_baixo.svg";
+    }
+
+    return "images/estatico.svg";
+}
+
+
 function carregarDashboard() {
 
     fetch(`dashboard/carregarDashboard`, { method: "GET" })
@@ -37,7 +91,7 @@ function carregarDashboard() {
 
             let rotasNomes = [];
             let rotasValores = [];
-            
+
             let campeoesNomes = [];
             let campeoesValores = [];
 
@@ -88,7 +142,7 @@ function carregarDashboard() {
                 }
             };
 
-            document.querySelector("#graficoMid1").innerHTML = ""; 
+            document.querySelector("#graficoMid1").innerHTML = "";
             var chartBarra = new ApexCharts(document.querySelector("#graficoMid1"), optionsBarra);
             chartBarra.render();
 
@@ -127,6 +181,17 @@ function carregarDashboard() {
         .catch(error => {
             console.error("Erro ao carregar dados dos gráficos:", error);
         });
+
+
+    fetch(`dashboard/carregarDashboard/top3`, { method: "GET" })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Dados do Top 3 recebido:", data);
+            renderTop3(data);
+        })
+        .catch(error =>
+            console.error("Erro ao carregar Top 3:", error));
+
 }
 
 document.addEventListener("DOMContentLoaded", () => {

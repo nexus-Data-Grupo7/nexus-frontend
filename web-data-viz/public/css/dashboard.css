@@ -264,8 +264,7 @@ nav button {
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
-    padding-left: 9.5vh;
+    justify-content: center;
 }
 
 .graficosInfDash {
