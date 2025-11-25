@@ -1,19 +1,19 @@
 html, body {
-    height: 100vh; 
+    height: 100vh;
     margin: 0;
     background: #0e0e0e;
     font-family: "Arial", sans-serif;
     color: white;
 }
 
+/* ---------- CONTAINER GERAL ---------- */
+
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Adicione esta linha: */
-    height: 100%; 
+    height: 100%;
 }
-
 
 .left-area {
     width: 45%;
@@ -22,17 +22,17 @@ html, body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center ;
+    align-items: center;
 }
 
 .grupo-linhas {
-    position: absolute; 
-    z-index: 0; 
-    width: 100%; 
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
     top: 0; 
     left: 0; 
     overflow: hidden;
-    height: 100%; 
 }
 
 .grupo-linhas img {
@@ -41,96 +41,96 @@ html, body {
     object-fit: cover;
 }
 
+/* ---------- IMAGEM DO CELULAR ---------- */
+
 .phone-box {
     width: 100%;
     z-index: 10; 
     position: relative;
-    left: 13vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 20vh;
 }
 
 .phone-img {
-    width: 60%;
+    width: 40%;
 }
+
+/* ---------- DESCRIÇÃO ---------- */
 
 .description {
-    z-index: 10; 
+    z-index: 10;
     position: relative;
-        margin-top: 40px;
-    width: 380px;
+    margin-top: 25vh;
+    width: 45vh;
     background: rgba(0, 0, 0, 0.45);
-    padding: 20px;
-    border-radius: 12px;
-    font-size: 15px;
-    line-height: 22px;
+    padding: 3vh;
+    border-radius: 2vh;
+    font-size: 0.95rem;
+    line-height: 1.4rem;
 }
 
+/* ---------- FORM AREA ---------- */
 
 .form-area {
     width: 50%;
-    /* CORREÇÃO 2: Fazer a form-area pegar a altura total do container */
-    height: 100%; 
-    /* background-color: violet; */
-    /* CORREÇÃO 3: Ajustar box-sizing para o padding não criar uma barra de rolagem */
-    box-sizing: border-box; 
+    height: 100%;
+    box-sizing: border-box;
 }
 
-/* Área geral do formulário */
+/* ---------- DOIS BLOCOS ---------- */
+
 .form-container {
     display: flex;
     flex-direction: row;
-    gap: 30px;   /* espaço entre os dois blocos */
+    gap: 4vh;
     width: 100%;
 }
 
-/* Bloco 1 */
-.parte-1 {
-    background: #141414;
-    padding: 25px;
-    border-radius: 14px;
-    border: 1px solid #222;
-}
-
-/* Bloco 2 */
+.parte-1,
 .parte-2 {
     background: #141414;
-    padding: 25px;
-    border-radius: 14px;
-    border: 1px solid #222;
+    padding: 3vh;
+    border-radius: 2vh;
+    border: 0.15vh solid #222;
 }
 
-/* Ajuste dos títulos quando existirem */
 .parte-1 h1 {
     margin-top: 0;
 }
 
+/* ---------- TIPOGRAFIA ---------- */
 
 h1 {
-    font-size: 40px;
+    font-size: 2.5rem;
     font-weight: bold;
-    margin-bottom: 25px;
+    margin-bottom: 3vh;
 }
 
 .tipo-usuario {
-    margin-bottom: 20px;
-    font-size: 15px;
+    margin-bottom: 3vh;
+    font-size: 0.95rem;
 }
 
 .tipo-usuario label {
-    margin-right: 30px;
+    margin-right: 4vh;
     cursor: pointer;
 }
 
 span {
-    font-size: 14px;
+    font-size: 0.9rem;
 }
+
+/* ---------- INPUTS ---------- */
 
 .input {
     background: #1a1a1a;
-    border: 1px solid #333;
-    border-radius: 10px;
-    padding: 12px;
-    margin-top: 5px;
-    margin-bottom: 15px;
+    border: 0.15vh solid #333;
+    border-radius: 1.4vh;
+    padding: 1.6vh;
+    margin-top: 0.8vh;
+    margin-bottom: 2vh;
 }
 
 .input input {
@@ -139,31 +139,33 @@ span {
     border: none;
     outline: none;
     color: white;
-    font-size: 15px;
+    font-size: 1rem;
 }
 
 select {
     width: 100%;
     background: #1a1a1a;
-    border: 1px solid #333;
-    border-radius: 10px;
-    padding: 12px;
+    border: 0.15vh solid #333;
+    border-radius: 1.4vh;
+    padding: 1.6vh;
     color: white;
-    margin-top: 5px;
-    margin-bottom: 20px;
-    font-size: 15px;
+    margin-top: 0.8vh;
+    margin-bottom: 2.5vh;
+    font-size: 1rem;
 }
+
+/* ---------- BOTÃO ---------- */
 
 .btn {
     width: 100%;
     background: linear-gradient(90deg, #3b3b3b, #1f1f1f);
-    border: 1px solid #444;
-    padding: 15px;
-    border-radius: 12px;
-    font-size: 17px;
+    border: 0.2vh solid #444;
+    padding: 2.2vh;
+    border-radius: 1.6vh;
+    font-size: 1.1rem;
     color: white;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: 1vh;
     transition: .2s;
 }
 
@@ -171,9 +173,11 @@ select {
     background: linear-gradient(90deg, #555, #2c2c2c);
 }
 
+/* ---------- TEXTO LOGIN ---------- */
+
 .login-text {
-    margin-top: 18px;
-    font-size: 14px;
+    margin-top: 2.5vh;
+    font-size: 0.9rem;
 }
 
 .login-text a {
