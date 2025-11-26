@@ -6,8 +6,6 @@ html, body {
     color: white;
 }
 
-/* ---------- CONTAINER GERAL ---------- */
-
 .container {
     display: flex;
     justify-content: center;
@@ -41,8 +39,6 @@ html, body {
     object-fit: cover;
 }
 
-/* ---------- IMAGEM DO CELULAR ---------- */
-
 .phone-box {
     width: 100%;
     z-index: 10; 
@@ -57,8 +53,6 @@ html, body {
     width: 40%;
 }
 
-/* ---------- DESCRIÇÃO ---------- */
-
 .description {
     z-index: 10;
     position: relative;
@@ -71,15 +65,11 @@ html, body {
     line-height: 1.4rem;
 }
 
-/* ---------- FORM AREA ---------- */
-
 .form-area {
     width: 50%;
     height: 100%;
     box-sizing: border-box;
 }
-
-/* ---------- DOIS BLOCOS ---------- */
 
 .form-container {
     display: flex;
@@ -100,8 +90,6 @@ html, body {
     margin-top: 0;
 }
 
-/* ---------- TIPOGRAFIA ---------- */
-
 h1 {
     font-size: 2.5rem;
     font-weight: bold;
@@ -121,8 +109,6 @@ h1 {
 span {
     font-size: 0.9rem;
 }
-
-/* ---------- INPUTS ---------- */
 
 .input {
     background: #1a1a1a;
@@ -154,8 +140,6 @@ select {
     font-size: 1rem;
 }
 
-/* ---------- BOTÃO ---------- */
-
 .btn {
     width: 100%;
     background: linear-gradient(90deg, #3b3b3b, #1f1f1f);
@@ -173,8 +157,6 @@ select {
     background: linear-gradient(90deg, #555, #2c2c2c);
 }
 
-/* ---------- TEXTO LOGIN ---------- */
-
 .login-text {
     margin-top: 2.5vh;
     font-size: 0.9rem;
@@ -183,4 +165,294 @@ select {
 .login-text a {
     color: #7aa2ff;
     text-decoration: none;
+}
+
+@media (max-width: 1024px) {
+    .left-area {
+        width: 40%;
+    }
+    
+    .form-area {
+        width: 60%;
+        padding: 2vh;
+        overflow-y: auto;
+    }
+    
+    .phone-img {
+        width: 50%;
+    }
+    
+    .description {
+        width: 80%;
+        font-size: 0.85rem;
+    }
+    
+    .form-container {
+        gap: 2vh;
+    }
+    
+    .parte-1,
+    .parte-2 {
+        padding: 2.5vh;
+    }
+    
+    h1 {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    html, body {
+        height: auto;
+        min-height: 100vh;
+    }
+    
+    .container {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    .left-area {
+        width: 100%;
+        height: 40vh;
+        min-height: 300px;
+    }
+    
+    .phone-box {
+        top: 8vh;
+    }
+    
+    .phone-img {
+        width: 30%;
+        max-width: 200px;
+    }
+    
+    .description {
+        margin-top: 10vh;
+        width: 80%;
+        padding: 2.5vh;
+        font-size: 0.85rem;
+    }
+    
+    .form-area {
+        width: 100%;
+        height: auto;
+        padding: 3vh;
+    }
+    
+    h1 {
+        font-size: 2rem;
+        text-align: center;
+    }
+    
+    .tipo-usuario {
+        text-align: center;
+        margin-bottom: 2.5vh;
+    }
+    
+    .form-container {
+        flex-direction: column;
+        gap: 2.5vh;
+    }
+    
+    .parte-1,
+    .parte-2 {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .left-area {
+        height: 35vh;
+        min-height: 250px;
+    }
+    
+    .phone-box {
+        top: 5vh;
+    }
+    
+    .phone-img {
+        width: 40%;
+    }
+    
+    .description {
+        margin-top: 8vh;
+        width: 90%;
+        padding: 2vh;
+        font-size: 0.8rem;
+        line-height: 1.3rem;
+    }
+    
+    .form-area {
+        padding: 2vh;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+        margin-bottom: 2vh;
+    }
+    
+    .tipo-usuario {
+        margin-bottom: 2vh;
+        font-size: 0.9rem;
+    }
+    
+    .tipo-usuario label {
+        display: block;
+        margin-bottom: 1vh;
+        margin-right: 0;
+    }
+    
+    .form-container {
+        gap: 2vh;
+    }
+    
+    .parte-1,
+    .parte-2 {
+        padding: 2vh;
+    }
+    
+    span {
+        font-size: 0.85rem;
+    }
+    
+    .input {
+        padding: 1.4vh;
+        margin-bottom: 1.5vh;
+    }
+    
+    .input input {
+        font-size: 0.95rem;
+    }
+    
+    select {
+        padding: 1.4vh;
+        margin-bottom: 2vh;
+        font-size: 0.95rem;
+    }
+    
+    .btn {
+        padding: 2vh;
+        font-size: 1rem;
+    }
+    
+    .login-text {
+        text-align: center;
+        font-size: 0.85rem;
+    }
+}
+
+/* Smartphones pequenos */
+@media (max-width: 360px) {
+    .left-area {
+        height: 30vh;
+        min-height: 220px;
+    }
+    
+    .description {
+        font-size: 0.75rem;
+        line-height: 1.2rem;
+        padding: 1.5vh;
+    }
+    
+    h1 {
+        font-size: 1.6rem;
+    }
+    
+    .tipo-usuario {
+        font-size: 0.85rem;
+    }
+    
+    .parte-1,
+    .parte-2 {
+        padding: 1.5vh;
+    }
+    
+    span {
+        font-size: 0.8rem;
+    }
+    
+    .input {
+        padding: 1.2vh;
+    }
+    
+    .input input {
+        font-size: 0.9rem;
+    }
+    
+    select {
+        padding: 1.2vh;
+        font-size: 0.9rem;
+    }
+    
+    .btn {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+    .container {
+        flex-direction: row;
+    }
+    
+    .left-area {
+        width: 35%;
+        height: 100vh;
+    }
+    
+    .phone-box {
+        top: 5vh;
+    }
+    
+    .phone-img {
+        width: 50%;
+    }
+    
+    .description {
+        margin-top: 8vh;
+        font-size: 0.75rem;
+        padding: 1.5vh;
+    }
+    
+    .form-area {
+        width: 65%;
+        height: 100vh;
+        overflow-y: auto;
+        padding: 2vh;
+    }
+    
+    h1 {
+        font-size: 1.6rem;
+        margin-bottom: 1.5vh;
+    }
+    
+    .tipo-usuario {
+        margin-bottom: 1.5vh;
+    }
+    
+    .form-container {
+        flex-direction: row;
+        gap: 2vh;
+    }
+    
+    .parte-1,
+    .parte-2 {
+        padding: 1.5vh;
+        flex: 1;
+    }
+    
+    .input {
+        padding: 1.2vh;
+        margin-bottom: 1.2vh;
+    }
+    
+    select {
+        padding: 1.2vh;
+        margin-bottom: 1.5vh;
+    }
+    
+    .btn {
+        padding: 1.5vh;
+        margin-top: 1vh;
+    }
 }

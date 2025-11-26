@@ -12,7 +12,13 @@
 
 <body>
 
-    <nav>
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Abrir menu">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <div class="overlay" onclick="toggleMenu()"></div>
+
+    <nav id="nav">
         <div class="navHora">
             22:10
             <div class="navData">
@@ -106,3 +112,44 @@
         
 </body>
 </html>
+
+<script>
+
+     function toggleMenu() {
+        const nav = document.getElementById('nav');
+        const overlay = document.querySelector('.overlay');
+        const menuToggle = document.querySelector('.menu-toggle');
+
+        nav.classList.toggle('active');
+        overlay.classList.toggle('active');
+
+        const icon = menuToggle.querySelector('i');
+        if (nav.classList.contains('active')) {
+            icon.classList.replace('fa-bars', 'fa-times');
+            menuToggle.setAttribute('aria-label', 'Fechar menu');
+            document.body.style.overflow = 'hidden';
+        } else {
+            icon.classList.replace('fa-times', 'fa-bars');
+            menuToggle.setAttribute('aria-label', 'Abrir menu');
+            document.body.style.overflow = '';
+        }
+    }
+
+    document.querySelectorAll('.navLinksLogo').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                toggleMenu();
+            }
+        });
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const nav = document.getElementById('nav');
+            if (nav.classList.contains('active')) {
+                toggleMenu();
+            }
+        }
+    });
+
+</script>
