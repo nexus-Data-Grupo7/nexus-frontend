@@ -111,19 +111,23 @@ async function premiacao(idJogador) {
 function infoJogador(idJogador) {
     const query = `
     SELECT 
-    j.nome, 
-    j.idade,
-    (
-        SELECT f.nome_funcao
-        FROM desempenho_partida dp
-        JOIN funcao f ON dp.id_funcao = f.id_funcao
-        WHERE dp.id_jogador = j.id_jogador
-        GROUP BY f.id_funcao
-        ORDER BY COUNT(*) DESC
-        LIMIT 1
-    ) AS posicao_mais_jogada
-FROM 
-    jogador j WHERE j.id_jogador = ${idJogador};`;
+        j.nome, 
+        j.dt_nascimento,
+        TIMESTAMPDIFF(YEAR, j.dt_nascimento, CURDATE()) AS idade,
+        (
+            SELECT f.nome_funcao
+            FROM desempenho_partida dp
+            JOIN funcao f ON dp.id_funcao = f.id_funcao
+            WHERE dp.id_jogador = j.id_jogador
+            GROUP BY f.id_funcao
+            ORDER BY COUNT(*) DESC
+            LIMIT 1
+        ) AS posicao_mais_jogada
+    FROM 
+        jogador j 
+    WHERE j.id_jogador = ${idJogador};
+    `;
+
     let connection;
     return new Promise(async (resolve, reject) => {
         try {

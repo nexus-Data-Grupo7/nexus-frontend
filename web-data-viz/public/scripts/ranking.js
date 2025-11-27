@@ -1,31 +1,41 @@
 const selectFiltro = document.getElementById("filtroRanking");
 
 function irParaPerfil(idJogador) {
-    if (!idJogador) {
-        console.error("ID do jogador inválido.");
-        return;
+    if (!idJogador) return;
+    sessionStorage.setItem('idJogadorSelecionado', idJogador);
+    window.location.href = 'dashboard_individual.html';
+}
+
+// --- NOVA FUNÇÃO PARA GERAR A SETINHA ---
+function getRankingIcon(posicaoAtual, posicaoAnterior) {
+    if (!posicaoAnterior) {
+        // Se não tem histórico (novo jogador), fica estático
+        return `<img src="images/estatico.svg" class="icone-status" title="Sem histórico anterior">`;
     }
 
-    sessionStorage.setItem('idJogadorSelecionado', idJogador);
-    console.log("ID do jogador selecionado:", idJogador);
+    const atual = parseInt(posicaoAtual);
+    const anterior = parseInt(posicaoAnterior);
 
-    window.location.href = 'dashboard_individual.html';
+    // No ranking, MENOR É MELHOR.
+    if (atual < anterior) {
+        // Ex: Era 10, virou 5. SUBIU!
+        return `<img src="images/seta_para_cima.svg" class="icone-status" title="Subiu de ${anterior}° para ${atual}°">`;
+    } else if (atual > anterior) {
+        // Ex: Era 1, virou 3. DESCEU!
+        return `<img src="images/seta_para_baixo.svg" class="icone-status" title="Caiu de ${anterior}° para ${atual}°">`;
+    } else {
+        // Igual
+        return `<img src="images/estatico.svg" class="icone-status" title="Manteve a posição">`;
+    }
 }
 
 function atualizarRanking() {
     const filtroRanking = selectFiltro.value;
     let url = "";
 
-    if (filtroRanking === "todos") {
-        console.log("Filtro Todos selecionado");
-        url = "/ranking/filtroTodos";
-    } else if (filtroRanking === "premiacoes") {
-        console.log("Filtro Premiações selecionado");
-        url = "/ranking/filtroPremiacoes";
-    } else if (filtroRanking === "vitoria") {
-        console.log("Filtro Vitórias selecionado");
-        url = "/ranking/filtroVitoria";
-    }
+    if (filtroRanking === "todos") url = "/ranking/filtroTodos";
+    else if (filtroRanking === "premiacoes") url = "/ranking/filtroPremiacoes";
+    else if (filtroRanking === "vitoria") url = "/ranking/filtroVitoria";
 
     if (url) {
         fetch(url, { method: "GET" })
@@ -35,11 +45,21 @@ function atualizarRanking() {
                 let htmlTotal = "";
 
                 data.forEach(jogador => {
+                    
+                    // AQUI CHAMAMOS A FUNÇÃO DA SETINHA (Só funciona se o filtro for 'todos' que tem a query ajustada)
+                    let setaHtml = "";
+                    if(filtroRanking === "todos") {
+                        setaHtml = getRankingIcon(jogador.posicao_ranking, jogador.posicao_anterior);
+                    } else {
+                        // Nos outros filtros, deixamos estático ou vazio pois não alteramos a query deles ainda
+                        setaHtml = `<img src="images/estatico.svg" class="icone-status">`;
+                    }
+
                     htmlTotal += `
             <div class="linhaTabelaRanking" onclick="irParaPerfil(${jogador.id_jogador})" style="cursor: pointer;">
                 <div class="linhaTabelaRankingNumero">
                     ${jogador.posicao_ranking}°
-                </div>
+                    ${setaHtml} </div>
                 <div class="linhaTabelaRankingNome">
                     ${jogador.game_name}
                 </div>
@@ -58,42 +78,114 @@ function atualizarRanking() {
                 });
 
                 dadosJogadoresDiv.innerHTML = htmlTotal;
-
-                data.forEach(jogador => {
-                    const wins = parseInt(jogador.vitorias, 10);
-                    const losses = parseInt(jogador.derrotas, 10);
-                    const total = wins + losses;
-                    const winrate = total > 0 ? Math.round((wins / total) * 100) : 0;
-
-                    const options = {
-                        chart: {
-                            type: 'bar', stacked: true, stackType: '100%', width: '100%', height: 30,
-                            toolbar: { show: false }, sparkline: { enabled: true },
-                            events: {
-                                click: function (event, chartContext, config) {
-                                    irParaPerfil(jogador.id_jogador);
-                                }
-                            }
-                        },
-                        series: [{ name: 'Vitórias', data: [wins] }, { name: 'Derrotas', data: [losses] }],
-                        plotOptions: { bar: { horizontal: true, barHeight: '100%', borderRadius: 5 } },
-                        colors: ['#3b82f6', '#ef4444'],
-                        dataLabels: { enabled: true, formatter: (val, opts) => opts.seriesIndex === 0 ? `${wins}W` : `${losses}L`, style: { colors: ['#fff'] } },
-                        tooltip: { enabled: false },
-                        xaxis: { categories: [''], labels: { show: false }, axisBorder: { show: false }, axisTicks: { show: false } },
-                        yaxis: { show: false }, grid: { show: false }, legend: { show: false },
-                        annotations: { position: 'front', texts: [{ x: '100%', text: `${winrate}%`, style: { color: '#ef4444', fontWeight: 600 } }] }
-                    };
-
-                    const chartEl = document.querySelector(`#graficoWinrate${jogador.id_jogador}`);
-                    if (chartEl) {
-                        const chart = new ApexCharts(chartEl, options);
-                        chart.render();
-                    }
-                });
+                renderizarGraficosWinrate(data); // Separei a função de gráfico para ficar limpo
             })
             .catch(error => console.error("Erro ao buscar dados de ranking:", error));
     }
+}
+
+function renderizarGraficosWinrate(data) {
+    data.forEach(jogador => {
+        const wins = parseInt(jogador.vitorias, 10) || 0; // Garante 0 se for NaN
+        const losses = parseInt(jogador.derrotas, 10) || 0; // Garante 0 se for NaN
+        const total = wins + losses;
+
+        // Se o jogador não tiver partidas, não renderiza nada para não quebrar
+        if (total === 0) return;
+
+        const winrate = Math.round((wins / total) * 100);
+
+        const options = {
+            chart: {
+                type: 'bar',
+                stacked: true,
+                stackType: '100%', // Garante que ocupe toda a largura
+                width: '100%',
+                height: '100%', // Usa 100% da div pai
+                sparkline: { enabled: false }, // Mantemos false para ter os números
+                parentHeightOffset: 0, // <--- O SEGREDO: Remove margem extra do SVG
+                toolbar: { show: false },
+                events: {
+                    click: function () {
+                        irParaPerfil(jogador.id_jogador);
+                    }
+                }
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: true,
+                    barHeight: '100%', // Ocupa toda a altura disponível
+                    borderRadius: 4,   // Bordas arredondadas
+                    dataLabels: {
+                        position: 'center', // Texto no meio da barra
+                        hideOverflowingLabels: false // Força mostrar o texto mesmo se for apertado
+                    }
+                }
+            },
+            dataLabels: {
+                enabled: true,
+                style: {
+                    fontSize: '11px',
+                    fontWeight: 'bold',
+                    colors: ['#fff']
+                },
+                formatter: function (val, opts) {
+                    // Mostra o número apenas se for maior que 0
+                    if (opts.seriesIndex === 0 && wins > 0) return wins + "W";
+                    if (opts.seriesIndex === 1 && losses > 0) return losses + "L";
+                    return "";
+                },
+                dropShadow: { enabled: true, top: 1, left: 1, blur: 1, opacity: 0.5 }
+            },
+            series: [
+                { name: 'Vitórias', data: [wins] },
+                { name: 'Derrotas', data: [losses] }
+            ],
+            colors: ['#3b82f6', '#ef4444'], // Azul e Vermelho
+            
+            // Removemos Eixos e Grades para limpar o visual
+            grid: {
+                show: false,
+                padding: { top: 0, bottom: 0, left: 0, right: 0 } // <--- IMPORTANTE: Zera margens
+            },
+            xaxis: {
+                labels: { show: false },
+                axisBorder: { show: false },
+                axisTicks: { show: false }
+            },
+            yaxis: {
+                show: false
+            },
+            legend: { show: false },
+            tooltip: { enabled: false },
+
+            // Texto da % (Winrate) flutuando à direita
+            annotations: {
+                position: 'front',
+                texts: [{
+                    x: '100%',
+                    y: '50%', // Centraliza verticalmente
+                    textAnchor: 'end', // Alinha à direita
+                    style: {
+                        color: '#ef4444',
+                        fontWeight: '800',
+                        fontSize: '12px',
+                        background: 'transparent',
+                        padding: { right: 5 }
+                    }
+                }]
+            }
+        };
+
+        const chartId = `#graficoWinrate${jogador.id_jogador}`;
+        const chartEl = document.querySelector(chartId);
+        
+        if (chartEl) {
+            chartEl.innerHTML = ""; // Limpa gráfico antigo
+            const chart = new ApexCharts(chartEl, options);
+            chart.render();
+        }
+    });
 }
 
 selectFiltro.addEventListener("change", atualizarRanking);

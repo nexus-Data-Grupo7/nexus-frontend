@@ -8,43 +8,51 @@ const pool = mysql.createPool({
     database: process.env.DB_DATABASE,
 });
 
-
 async function filtroTodos() {
 
     const query = `
-    /* 1. Calcula estatísticas de performance (KDA, WinRate) */
-    WITH EstatisticasJogador AS (
+    /* 1. Prepara o Histórico: Pega o Último e o Penúltimo registro de cada jogador */
+    WITH HistoricoOrdenado AS (
+        SELECT 
+            id_jogador, 
+            posicao, 
+            data_registro,
+            ROW_NUMBER() OVER (PARTITION BY id_jogador ORDER BY data_registro DESC) as rn
+        FROM ranking_historico
+    ),
+    ComparacaoHistorico AS (
+        SELECT 
+            h1.id_jogador,
+            h1.posicao AS posicao_atual,   -- O registro mais recente (rn=1)
+            h2.posicao AS posicao_anterior -- O registro anterior (rn=2)
+        FROM HistoricoOrdenado h1
+        LEFT JOIN HistoricoOrdenado h2 
+            ON h1.id_jogador = h2.id_jogador AND h2.rn = 2
+        WHERE h1.rn = 1 -- Queremos apenas a linha mais recente como base
+    ),
+
+    /* 2. Calcula estatísticas de performance (Apenas para exibir na tela, não para ranquear) */
+    EstatisticasJogador AS (
         SELECT
             id_jogador,
             COUNT(*) AS total_jogos,
             SUM(CASE WHEN resultado = 'VITORIA' THEN 1 ELSE 0 END) AS vitorias,
             SUM(CASE WHEN resultado = 'DERROTA' THEN 1 ELSE 0 END) AS derrotas,
-            /* Taxa de Vitória (0 a 100) */
             (SUM(CASE WHEN resultado = 'VITORIA' THEN 1 ELSE 0 END) * 100.0 / COUNT(*)) AS taxa_vitorias,
-            /* KDA: (Abates + Assistências) / Mortes. (Evita divisão por zero) */
             (SUM(abates) + SUM(assistencias)) / GREATEST(SUM(mortes), 1) AS kda_ratio
-        FROM
-            desempenho_partida
-        GROUP BY
-            id_jogador
+        FROM desempenho_partida
+        GROUP BY id_jogador
     ),
 
-    /* 2. Define os Top 3 Campeões de cada jogador */
+    /* 3. Top 3 Campeões */
     CampeoesJogados AS (
         SELECT
             dp.id_jogador,
             c.nome_campeao,
-            COUNT(*) AS total_jogos_campeao,
-            ROW_NUMBER() OVER (
-                PARTITION BY dp.id_jogador
-                ORDER BY COUNT(*) DESC
-            ) AS rn
-        FROM
-            desempenho_partida AS dp
-        JOIN
-            campeao AS c ON dp.id_campeao = c.id_campeao
-        GROUP BY
-            dp.id_jogador, c.nome_campeao
+            ROW_NUMBER() OVER (PARTITION BY dp.id_jogador ORDER BY COUNT(*) DESC) AS rn
+        FROM desempenho_partida AS dp
+        JOIN campeao AS c ON dp.id_campeao = c.id_campeao
+        GROUP BY dp.id_jogador, c.nome_campeao
     ),
     Top3Campeoes AS (
         SELECT
@@ -52,78 +60,44 @@ async function filtroTodos() {
             MAX(CASE WHEN rn = 1 THEN nome_campeao END) AS campeao1,
             MAX(CASE WHEN rn = 2 THEN nome_campeao END) AS campeao2,
             MAX(CASE WHEN rn = 3 THEN nome_campeao END) AS campeao3
-        FROM
-            CampeoesJogados
-        WHERE
-            rn <= 3
-        GROUP BY
-            id_jogador
+        FROM CampeoesJogados WHERE rn <= 3 GROUP BY id_jogador
     )
 
-    /* 3. SELECT FINAL - Une tudo e gera o Ranking */
+    /* 4. SELECT FINAL */
     SELECT
-        RANK() OVER (
-            ORDER BY
-                e.ordem_classificacao DESC, /* 1º Critério: Elo (Desafiante > Ferro) */
-                j.divisao ASC,              /* 2º Critério: Divisão (I > IV) - String ASC funciona aqui */
-                est.taxa_vitorias DESC,     /* 3º Critério: Quem ganha mais % */
-                est.kda_ratio DESC,         /* 4º Critério: Performance individual (KDA) */
-                j.premiacao DESC            /* 5º Critério: Dinheiro ganho */
-        ) AS posicao_ranking,
-
+        /* Agora usamos a posição salva no banco, não calculada na hora */
+        ch.posicao_atual AS posicao_ranking, 
+        
         j.id_jogador,
         j.game_name,
         j.nome AS nome_jogador,
-        j.premiacao,
-        
-        /* Dados de Elo */
         e.nome_elo,
-        j.divisao,
+        
+        /* Posição do registro anterior para comparação */
+        ch.posicao_anterior,
 
-        /* Estatísticas Calculadas */
-        est.vitorias,
-        est.derrotas,
-        est.total_jogos,
-        ROUND(est.taxa_vitorias, 1) as taxa_vitorias,
-        ROUND(est.kda_ratio, 2) as kda,
+        t3.campeao1, t3.campeao2, t3.campeao3,
+        est.vitorias, est.derrotas, est.taxa_vitorias
 
-        /* Top 3 Campeões */
-        t3.campeao1,
-        t3.campeao2,
-        t3.campeao3
+    FROM ComparacaoHistorico ch
+    JOIN jogador AS j ON ch.id_jogador = j.id_jogador
+    LEFT JOIN elo AS e ON j.id_elo = e.id_elo
+    LEFT JOIN EstatisticasJogador AS est ON j.id_jogador = est.id_jogador
+    LEFT JOIN Top3Campeoes AS t3 ON j.id_jogador = t3.id_jogador
 
-    FROM
-        jogador AS j
-    LEFT JOIN
-        elo AS e ON j.id_elo = e.id_elo
-    LEFT JOIN
-        EstatisticasJogador AS est ON j.id_jogador = est.id_jogador
-    LEFT JOIN
-        Top3Campeoes AS t3 ON j.id_jogador = t3.id_jogador
-
-    WHERE
-        j.id_elo IS NOT NULL
-        AND est.total_jogos > 0 
-        /* Opcional: AND est.total_jogos >= 5 (para evitar ranking distorcido por quem jogou 1 vez) */
-
-    ORDER BY
-        posicao_ranking ASC;`;
+    /* Ordena pela posição que está salva no banco */
+    ORDER BY ch.posicao_atual ASC;`;
 
     let connection;
     try {
         connection = await pool.getConnection();
-
         const [rows] = await connection.query(query);
-
         return rows;
-
     } catch (error) {
-        console.error("Erro no model ao buscar ranking:", error);
+        console.error("Erro no model ranking:", error);
         throw error;
     } finally {
-        if (connection) {
-            connection.release();
-        }
+        if (connection) connection.release();
     }
 }
 
