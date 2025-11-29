@@ -13,7 +13,22 @@
 
 <body>
 
-     <div class="container">
+    <div class="container">
+
+        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Abrir menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <div class="overlay" onclick="toggleMenu()"></div>
+
+        <nav id="nav">
+            <div class="navLinks">
+                <a href="index.html" class="navLinksLogo">
+                    <img src="images/icon_link_home.svg" alt="">
+                    Site
+                </a>
+            </div>
+        </nav>
 
         <div class="left-area">
             <div class="phone-box">
@@ -64,77 +79,115 @@
 </html>
 
 <script>
-        function validarEmail(email) {
-            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return regex.test(email);
+
+    function toggleMenu() {
+        const nav = document.getElementById('nav');
+        const overlay = document.querySelector('.overlay');
+        const menuToggle = document.querySelector('.menu-toggle');
+
+        nav.classList.toggle('active');
+        overlay.classList.toggle('active');
+
+        const icon = menuToggle.querySelector('i');
+        if (nav.classList.contains('active')) {
+            icon.classList.replace('fa-bars', 'fa-times');
+            menuToggle.setAttribute('aria-label', 'Fechar menu');
+            document.body.style.overflow = 'hidden';
+        } else {
+            icon.classList.replace('fa-times', 'fa-bars');
+            menuToggle.setAttribute('aria-label', 'Abrir menu');
+            document.body.style.overflow = '';
         }
+    }
 
-        async function entrar() {
-            const email_input = document.getElementById("input_email");
-            const senha_input = document.getElementById("input_senha");
-
-            const email = email_input.value.trim();
-            const senha = senha_input.value.trim();
-
-          
-            if (!email || !senha) {
-                alert("Preencha todos os campos.");
-                return;
+    document.querySelectorAll('.navLinksLogo').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                toggleMenu();
             }
-
-            if (!validarEmail(email)) {
-                alert("Digite um e-mail válido!");
-                return;
-            }
-
-            if (senha.length < 6) {
-                alert("A senha deve ter no mínimo 6 caracteres!");
-                return;
-            }
-
-            const senhaHash = sha256(senha);
-
-            try {
-                const resposta = await fetch("/usuarios/autenticar", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        emailServer: email,
-                        senhaServer: senhaHash
-                    })
-                });
-
-                const json = await resposta.json();
-
-                if (resposta.ok) {
-                    sessionStorage.setItem("ID_USUARIO", json.id);
-                    sessionStorage.setItem("EMAIL_USUARIO", json.email);
-                    sessionStorage.setItem("TIPO_CONTA", json.tipoConta);
-
-                    alert("Login realizado com sucesso!");
-                    
-                    if (json.tipoConta === "JOGADOR") {
-                        window.location.href = "dashboard.html";
-                    } else if (json.tipoConta === "ORGANIZACAO") {
-                        window.location.href = "dashboard.html";
-                    } else {
-                        window.location.href = "index.html";
-                    }
-                } else {
-                    alert(json.erro || "Email e/ou senha inválido(s)");
-                }
-            } catch (erro) {
-                console.error("Erro completo:", erro);
-                alert("Erro de conexão com o servidor.");
-            }
-        }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            const senhaInput = document.getElementById("input_senha");
-            senhaInput.addEventListener("keypress", function(event) {
-                if (event.key === "Enter") {
-                    entrar();
-                }
-            });
         });
-    </script>
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const nav = document.getElementById('nav');
+            if (nav.classList.contains('active')) {
+                toggleMenu();
+            }
+        }
+    });
+
+    function validarEmail(email) {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+    }
+
+    async function entrar() {
+        const email_input = document.getElementById("input_email");
+        const senha_input = document.getElementById("input_senha");
+
+        const email = email_input.value.trim();
+        const senha = senha_input.value.trim();
+
+
+        if (!email || !senha) {
+            alert("Preencha todos os campos.");
+            return;
+        }
+
+        if (!validarEmail(email)) {
+            alert("Digite um e-mail válido!");
+            return;
+        }
+
+        if (senha.length < 6) {
+            alert("A senha deve ter no mínimo 6 caracteres!");
+            return;
+        }
+
+        const senhaHash = sha256(senha);
+
+        try {
+            const resposta = await fetch("/usuarios/autenticar", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    emailServer: email,
+                    senhaServer: senhaHash
+                })
+            });
+
+            const json = await resposta.json();
+
+            if (resposta.ok) {
+                sessionStorage.setItem("ID_USUARIO", json.id);
+                sessionStorage.setItem("EMAIL_USUARIO", json.email);
+                sessionStorage.setItem("TIPO_CONTA", json.tipoConta);
+
+                alert("Login realizado com sucesso!");
+
+                if (json.tipoConta === "JOGADOR") {
+                    window.location.href = "dashboard.html";
+                } else if (json.tipoConta === "ORGANIZACAO") {
+                    window.location.href = "dashboard.html";
+                } else {
+                    window.location.href = "index.html";
+                }
+            } else {
+                alert(json.erro || "Email e/ou senha inválido(s)");
+            }
+        } catch (erro) {
+            console.error("Erro completo:", erro);
+            alert("Erro de conexão com o servidor.");
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const senhaInput = document.getElementById("input_senha");
+        senhaInput.addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                entrar();
+            }
+        });
+    });
+</script>
