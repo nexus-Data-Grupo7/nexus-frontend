@@ -6,13 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard com ApexCharts</title>
     <link rel="stylesheet" href="css/dashboard_individual.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
 </head>
 
 <body>
 
-    <nav>
+     <button class="menu-toggle" onclick="toggleMenu()" aria-label="Abrir menu">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <div class="overlay" onclick="toggleMenu()"></div>
+
+    <nav id="nav">
         <div class="navHora">
             22:10
             <div class="navData">
@@ -33,7 +42,7 @@
                 <img src="images/icon_link_ranking.svg" alt="">
                 Ranking
             </a>
-            <a href="" class="navLinksLogo">
+            <a href="perfil.html" class="navLinksLogo">
                 <img src="images/icon_link_usuarios.svg" alt="">
                 Perfil
             </a>
@@ -133,3 +142,42 @@
 </body>
 
 </html>
+
+<script>
+    function toggleMenu() {
+        const nav = document.getElementById('nav');
+        const overlay = document.querySelector('.overlay');
+        const menuToggle = document.querySelector('.menu-toggle');
+
+        nav.classList.toggle('active');
+        overlay.classList.toggle('active');
+
+        const icon = menuToggle.querySelector('i');
+        if (nav.classList.contains('active')) {
+            icon.classList.replace('fa-bars', 'fa-times');
+            menuToggle.setAttribute('aria-label', 'Fechar menu');
+            document.body.style.overflow = 'hidden';
+        } else {
+            icon.classList.replace('fa-times', 'fa-bars');
+            menuToggle.setAttribute('aria-label', 'Abrir menu');
+            document.body.style.overflow = '';
+        }
+    }
+
+    document.querySelectorAll('.navLinksLogo').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                toggleMenu();
+            }
+        });
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const nav = document.getElementById('nav');
+            if (nav.classList.contains('active')) {
+                toggleMenu();
+            }
+        }
+    });
+</script>
