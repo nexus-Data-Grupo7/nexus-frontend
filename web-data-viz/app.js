@@ -39,7 +39,7 @@ app.use((req, res, next) => {
 
 // --- CORREÇÃO AQUI ---
 // Use apenas as rotas que você importou
-app.use("/usuario", usuarioRouter)
+app.use("/usuarios", usuarioRouter)
 app.use("/ranking", rankingRouter)
 app.use("/jogador", jogadorRouter)
 app.use("/dashboard", dashboardRouter)

@@ -52,15 +52,23 @@
 
 
 
-            <button class="btn">Login</button>
+            <button class="btn" onclick="entrar()">Login</button>
 
             <div class="login-text">Não possui conta? <a href="./cadastro.html">clique aqui</a></div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/js-sha256@0.9.0/build/sha256.min.js"></script>
+</body>
 
-    <script>
+</html>
+
+<script>
+        function validarEmail(email) {
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(email);
+        }
+
         async function entrar() {
             const email_input = document.getElementById("input_email");
             const senha_input = document.getElementById("input_senha");
@@ -68,8 +76,19 @@
             const email = email_input.value.trim();
             const senha = senha_input.value.trim();
 
+          
             if (!email || !senha) {
                 alert("Preencha todos os campos.");
+                return;
+            }
+
+            if (!validarEmail(email)) {
+                alert("Digite um e-mail válido!");
+                return;
+            }
+
+            if (senha.length < 6) {
+                alert("A senha deve ter no mínimo 6 caracteres!");
                 return;
             }
 
@@ -85,23 +104,37 @@
                     })
                 });
 
+                const json = await resposta.json();
+
                 if (resposta.ok) {
-                    const json = await resposta.json();
-                    sessionStorage.ID_USUARIO = json.id;
-                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.setItem("ID_USUARIO", json.id);
+                    sessionStorage.setItem("EMAIL_USUARIO", json.email);
+                    sessionStorage.setItem("TIPO_CONTA", json.tipoConta);
 
                     alert("Login realizado com sucesso!");
-                    window.location.href = "ranking.html";
+                    
+                    if (json.tipoConta === "JOGADOR") {
+                        window.location.href = "dashboard.html";
+                    } else if (json.tipoConta === "ORGANIZACAO") {
+                        window.location.href = "dashboard.html";
+                    } else {
+                        window.location.href = "index.html";
+                    }
                 } else {
-                    const texto = await resposta.text();
-                    alert(texto || "Email e/ou senha inválido(s)");
+                    alert(json.erro || "Email e/ou senha inválido(s)");
                 }
             } catch (erro) {
-                console.error(erro);
+                console.error("Erro completo:", erro);
                 alert("Erro de conexão com o servidor.");
             }
         }
-    </script>
-</body>
 
-</html>
+        document.addEventListener("DOMContentLoaded", function() {
+            const senhaInput = document.getElementById("input_senha");
+            senhaInput.addEventListener("keypress", function(event) {
+                if (event.key === "Enter") {
+                    entrar();
+                }
+            });
+        });
+    </script>

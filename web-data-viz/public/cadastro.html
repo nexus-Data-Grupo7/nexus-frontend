@@ -37,11 +37,12 @@
 
             <div class="form-container">
 
+                <!-- ===================== COLUNA ESQUERDA ===================== -->
                 <div class="form-area parte-1">
 
                     <span>E-mail</span>
                     <div class="input">
-                        <input type="text" id="input_email" placeholder="xpto@gmail.com">
+                        <input type="email" id="input_email" placeholder="xpto@gmail.com">
                     </div>
 
                     <span>Senha</span>
@@ -54,7 +55,8 @@
                         <input type="password" id="input_confirmaSenha" placeholder="*******">
                     </div>
 
-                    <div id="campos_jogador">
+                    <!-- CAMPOS DO JOGADOR -->
+                    <div id="campos_jogador_parte1">
                         <span>Nome</span>
                         <div class="input">
                             <input type="text" id="input_nome" placeholder="Seu nome">
@@ -63,12 +65,14 @@
 
                 </div>
 
+                <!-- ===================== COLUNA DIREITA ===================== -->
                 <div class="form-area parte-2">
 
-                    <div>
+                    <!-- CAMPOS DO JOGADOR -->
+                    <div id="campos_jogador_parte2">
                         <span>Data de nascimento</span>
                         <div class="input">
-                            <input type="text" id="input_idade">
+                            <input type="date" id="input_dataNascimento">
                         </div>
 
                         <span>Game Name</span>
@@ -91,8 +95,9 @@
                         </select>
                     </div>
 
+                    <!-- CAMPOS DA ORGANIZAÇÃO -->
+                    <div id="campos_org_parte2" style="display: none;">
 
-                    <div id="campos_organizacao" style="display: none;">
                         <span>Nome da Organização</span>
                         <div class="input">
                             <input type="text" id="input_nomeOrg" placeholder="Nome completo da organização">
@@ -105,84 +110,168 @@
 
                         <span>CNPJ</span>
                         <div class="input">
-                            <input type="text" id="input_cnpj" placeholder="Somente números">
+                            <input type="text" id="input_cnpj" placeholder="Somente números" maxlength="14">
                         </div>
-                    </div>
-                </div>
 
+                    </div>
+
+                </div>
             </div>
 
+            <button class="btn" onclick="cadastrar()">Cadastrar</button>
 
-
-            <button class="btn">Cadastrar</button>
-
-            <div class="login-text">Já possui uma conta? <a href="#">clique aqui</a></div>
+            <div class="login-text">Já possui uma conta? <a href="login.html">clique aqui</a></div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/js-sha256@0.9.0/build/sha256.min.js"></script>
 
-    <script>
-        function alterarTipoLogin() {
-            const tipoSelecionado = document.querySelector('input[name="tipoUsuario"]:checked').value;
-            document.getElementById("campos_jogador").style.display = tipoSelecionado === "jogador" ? "block" : "none";
-            document.getElementById("campos_organizacao").style.display = tipoSelecionado === "organizacao" ? "block" : "none";
+</body>
+</html>
+
+
+<script>
+
+    function alterarTipoLogin() {
+        const tipo = document.querySelector('input[name="tipoUsuario"]:checked').value;
+
+        const jog1 = document.getElementById("campos_jogador_parte1");
+        const jog2 = document.getElementById("campos_jogador_parte2");
+        const org2 = document.getElementById("campos_org_parte2");
+
+        if (tipo === "jogador") {
+            jog1.style.display = "block";
+            jog2.style.display = "block";
+            org2.style.display = "none";
+        } else {
+            jog1.style.display = "none";
+            jog2.style.display = "none";
+            org2.style.display = "block";
+        }
+    }
+
+    function calcularIdade(dataNascimento) {
+        const hoje = new Date();
+        const nascimento = new Date(dataNascimento);
+        let idade = hoje.getFullYear() - nascimento.getFullYear();
+        const mesAtual = hoje.getMonth();
+        const mesNascimento = nascimento.getMonth();
+        
+        if (mesAtual < mesNascimento || (mesAtual === mesNascimento && hoje.getDate() < nascimento.getDate())) {
+            idade--;
+        }
+        
+        return idade;
+    }
+
+    function validarEmail(email) {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+    }
+
+    function validarCNPJ(cnpj) {
+        return cnpj.length === 14 && /^\d+$/.test(cnpj);
+    }
+
+    async function cadastrar() {
+        const email = document.getElementById("input_email").value.trim();
+        const senha = document.getElementById("input_senha").value.trim();
+        const confirma = document.getElementById("input_confirmaSenha").value.trim();
+        const tipoConta = document.querySelector('input[name="tipoUsuario"]:checked').value.toUpperCase();
+
+        // Validações básicas
+        if (!email || !senha || !confirma) {
+            alert("Preencha todos os campos obrigatórios!");
+            return;
         }
 
-        async function cadastrar() {
-            const email = document.getElementById("input_email").value.trim();
-            const senha = document.getElementById("input_senha").value.trim();
-            const confirma = document.getElementById("input_confirmaSenha").value.trim();
-            const tipoConta = document.querySelector('input[name="tipoUsuario"]:checked').value.toUpperCase();
+        if (!validarEmail(email)) {
+            alert("Digite um e-mail válido!");
+            return;
+        }
 
-            if (!email || !senha || !confirma) {
-                alert("Preencha todos os campos obrigatórios!");
+        if (senha.length < 6) {
+            alert("A senha deve ter no mínimo 6 caracteres!");
+            return;
+        }
+
+        if (senha !== confirma) {
+            alert("As senhas não coincidem!");
+            return;
+        }
+
+        const senhaHash = sha256(senha);
+
+        let body = {
+            emailServer: email,
+            senhaServer: senhaHash,
+            tipoContaServer: tipoConta
+        };
+
+        if (tipoConta === "JOGADOR") {
+            const nome = document.getElementById("input_nome").value.trim();
+            const gameName = document.getElementById("input_gameName").value.trim();
+            const tagline = document.getElementById("input_tagline").value.trim();
+            const dataNascimento = document.getElementById("input_dataNascimento").value;
+            const idRegiao = document.getElementById("select_regiao").value;
+
+            if (!nome || !gameName || !tagline || !dataNascimento) {
+                alert("Preencha todos os campos do jogador!");
                 return;
             }
 
-            if (senha !== confirma) {
-                alert("As senhas não coincidem!");
+            const idade = calcularIdade(dataNascimento);
+            
+            if (idade < 13) {
+                alert("Você deve ter pelo menos 13 anos para se cadastrar!");
                 return;
             }
 
-            const senhaHash = sha256(senha);
+            body.nome = nome;
+            body.gameName = gameName;
+            body.tagline = tagline;
+            body.idade = parseInt(idade); // Converte para número
+            body.idRegiao = parseInt(idRegiao); // Converte para número
 
-            let body = {
-                emailServer: email,
-                senhaServer: senhaHash,
-                tipoContaServer: tipoConta
-            };
+        } else {
+            const nomeOrg = document.getElementById("input_nomeOrg").value.trim();
+            const sigla = document.getElementById("input_sigla").value.trim();
+            const cnpj = document.getElementById("input_cnpj").value.trim();
 
-            if (tipoConta === "JOGADOR") {
-                body.nome = document.getElementById("input_nome").value.trim();
-                body.gameName = document.getElementById("input_gameName").value.trim();
-                body.tagline = document.getElementById("input_tagline").value.trim();
-                body.idRegiao = document.getElementById("select_regiao").value;
-            } else {
-                body.nomeOrg = document.getElementById("input_nomeOrg").value.trim();
-                body.sigla = document.getElementById("input_sigla").value.trim();
-                body.cnpj = document.getElementById("input_cnpj").value.trim();
+            if (!nomeOrg || !sigla || !cnpj) {
+                alert("Preencha todos os campos da organização!");
+                return;
             }
 
-            fetch("/usuarios/cadastrar", {
+            if (!validarCNPJ(cnpj)) {
+                alert("CNPJ inválido! Deve conter 14 dígitos numéricos.");
+                return;
+            }
+
+            body.nomeOrg = nomeOrg;
+            body.sigla = sigla;
+            body.cnpj = cnpj;
+        }
+
+        try {
+            const response = await fetch("/usuarios/cadastrar", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body)
-            })
-                .then(res => {
-                    if (res.ok) {
-                        alert("Cadastro realizado com sucesso!");
-                        window.location.href = "login.html";
-                    } else {
-                        alert("Erro ao cadastrar!");
-                    }
-                })
-                .catch(err => {
-                    console.error(err);
-                    alert("Erro de conexão com o servidor!");
-                });
-        }
-    </script>
-</body>
+            });
 
-</html>
+            const data = await response.json();
+
+            if (response.ok) {
+                alert("Cadastro realizado com sucesso!");
+                window.location.href = "login.html";
+            } else {
+                alert(data.erro || "Erro ao cadastrar!");
+            }
+        } catch (err) {
+            console.error(err);
+            alert("Erro de conexão com o servidor!");
+        }
+    }
+
+</script>

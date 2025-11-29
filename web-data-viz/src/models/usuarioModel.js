@@ -9,67 +9,74 @@ const pool = mysql.createPool({
 });
 
 async function cadastrarConta(email, senhaHash, tipoConta) {
-  const conection = await pool.getConnection();
+  const connection = await pool.getConnection();
   try {
-    await conection.beginTransaction();
+    await connection.beginTransaction();
 
-    const [resConta] = await conection.execute(
+    const [resConta] = await connection.execute(
       "INSERT INTO conta (email, senha_hash, tipo_conta) VALUES (?, ?, ?)",
       [email, senhaHash, tipoConta]
     );
 
     const idConta = resConta.insertId;
 
-    await conection.commit();
-    conection.release();
+    await connection.commit();
     return idConta;
   } catch (error) {
-    await conection.rollback();
-    conection.release();
+    await connection.rollback();
     throw error;
+  } finally {
+    connection.release();
   }
 }
 
-async function cadastrarJogador(idConta, idRegiao, gameName, tagline, nome) {
-  const conection = await pool.getConnection();
+async function cadastrarJogador(idConta, idRegiao, gameName, tagline, nome, idade) {
+  const connection = await pool.getConnection();
   try {
-    await conection.execute(
-      "INSERT INTO jogador (id_conta, id_regiao, game_name, tagline, nome) VALUES (?, ?, ?, ?, ?)",
-      [idConta, idRegiao, gameName, tagline, nome]
-    );
-    conection.release();
+    const query = "INSERT INTO jogador (id_conta, id_regiao, game_name, tagline, nome, idade) VALUES (?, ?, ?, ?, ?, ?)";
+    const params = [idConta, idRegiao, gameName, tagline, nome, idade];
+    
+    console.log("Query:", query);
+    console.log("Params:", params);
+    
+    const result = await connection.execute(query, params);
+    
+    console.log("Insert realizado com sucesso!");
+    return result;
   } catch (error) {
-    conection.release();
+    console.error("Erro no model cadastrarJogador:", error);
     throw error;
+  } finally {
+    connection.release();
   }
 }
 
 async function cadastrarOrganizacao(idConta, nomeOrg, sigla, cnpj) {
-  const conection = await pool.getConnection();
+  const connection = await pool.getConnection();
   try {
-    await conection.execute(
+    await connection.execute(
       "INSERT INTO organizacao (id_conta, nome_org, sigla, cnpj) VALUES (?, ?, ?, ?)",
       [idConta, nomeOrg, sigla, cnpj]
     );
-    conection.release();
   } catch (error) {
-    conection.release();
     throw error;
+  } finally {
+    connection.release();
   }
 }
 
 async function autenticar(email, senhaHash) {
-  const conection = await pool.getConnection();
+  const connection = await pool.getConnection();
   try {
-    const [rows] = await conection.execute(
-      "SELECT id_conta, email, senha_hash FROM conta WHERE email = ? AND senha_hash = ?",
+    const [rows] = await connection.execute(
+      "SELECT id_conta, email, tipo_conta FROM conta WHERE email = ? AND senha_hash = ?",
       [email, senhaHash]
     );
 
     if (rows.length === 0) return null;
     return rows[0];
   } finally {
-    conection.release();
+    connection.release();
   }
 }
 
