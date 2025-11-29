@@ -179,7 +179,6 @@
         const confirma = document.getElementById("input_confirmaSenha").value.trim();
         const tipoConta = document.querySelector('input[name="tipoUsuario"]:checked').value.toUpperCase();
 
-        // Validações básicas
         if (!email || !senha || !confirma) {
             alert("Preencha todos os campos obrigatórios!");
             return;
@@ -230,8 +229,8 @@
             body.nome = nome;
             body.gameName = gameName;
             body.tagline = tagline;
-            body.idade = parseInt(idade); // Converte para número
-            body.idRegiao = parseInt(idRegiao); // Converte para número
+            body.idade = parseInt(idade);
+            body.idRegiao = parseInt(idRegiao);
 
         } else {
             const nomeOrg = document.getElementById("input_nomeOrg").value.trim();
