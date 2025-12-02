@@ -277,6 +277,8 @@
 
             const idade = calcularIdade(dataNascimento);
 
+            // Validação de idade continua aqui para regra de negócio,
+            // mas o que enviamos pro banco é a DATA.
             if (idade < 13) {
                 alert("Você deve ter pelo menos 13 anos para se cadastrar!");
                 return;
@@ -285,7 +287,10 @@
             body.nome = nome;
             body.gameName = gameName;
             body.tagline = tagline;
-            body.idade = parseInt(idade);
+
+            // ALTERAÇÃO: Enviando a data bruta (String YYYY-MM-DD) ao invés da idade
+            body.dtNascimento = dataNascimento;
+
             body.idRegiao = parseInt(idRegiao);
 
         } else {

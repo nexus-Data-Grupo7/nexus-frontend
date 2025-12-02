@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Página de Perfil</title>
-  <link rel="stylesheet" href="./css/perfil.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Perfil</title>
+    <link rel="stylesheet" href="./css/perfil.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
@@ -63,8 +64,13 @@
     <div class="container">
 
         <div class="top-section">
-            <div class="circle">
-                <div class="edit-btn"><i class="fa-solid fa-pencil"></i></div>
+            <div class="circle" onclick="abrirModalCampeao()">
+                <img src="./images/foto_perfil.png" id="img_perfil_atual" class="profile-img-display"
+                    alt="Foto de Perfil">
+
+                <div class="edit-btn">
+                    <i class="fa-solid fa-pencil"></i>
+                </div>
             </div>
 
             <div class="right-perfil">
@@ -72,13 +78,13 @@
                     <div class="nome">
                         <span>Nome Fulano de Tal</span>
                     </div>
-                    
+
                     <div class="idade">
                         <span>idade</span>
                     </div>
-                    
+
                 </div>
-        
+
                 <div class="box-rank">
                     <p>Seu ranking atual</p>
                     <div class="rank">
@@ -88,7 +94,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
 
         <div class="form-box">
@@ -96,60 +102,34 @@
                 ALTERAR INFORMAÇÕES <br><br>
 
                 <label>Nome</label>
-                <input type="text">
+                <input type="text" id="inputNome">
 
                 <label>E-mail</label>
-                <input type="email">
+                <input type="email" id="inputEmail">
 
                 <label>Senha</label>
-                <input type="password">  
+                <input type="password" id="inputSenha">
 
-                <button class="save-btn">Salvar alteração</button>
+                <button class="save-btn" onclick="alterarInformacoes()">Salvar alteração</button>
+                <button class="save-btn" onclick="excluirConta()">Excluir conta</button>
             </div>
         </div>
-        
+
     </div>
-        
+
+    <div id="modalCampeao" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Escolha seu Campeão</h3>
+                <span class="close-modal" onclick="fecharModalCampeao()">&times;</span>
+            </div>
+
+            <div id="listaCampeoes" class="grid-campeoes">
+            </div>
+        </div>
+    </div>
+
 </body>
+
 </html>
-
-<script>
-
-     function toggleMenu() {
-        const nav = document.getElementById('nav');
-        const overlay = document.querySelector('.overlay');
-        const menuToggle = document.querySelector('.menu-toggle');
-
-        nav.classList.toggle('active');
-        overlay.classList.toggle('active');
-
-        const icon = menuToggle.querySelector('i');
-        if (nav.classList.contains('active')) {
-            icon.classList.replace('fa-bars', 'fa-times');
-            menuToggle.setAttribute('aria-label', 'Fechar menu');
-            document.body.style.overflow = 'hidden';
-        } else {
-            icon.classList.replace('fa-times', 'fa-bars');
-            menuToggle.setAttribute('aria-label', 'Abrir menu');
-            document.body.style.overflow = '';
-        }
-    }
-
-    document.querySelectorAll('.navLinksLogo').forEach(link => {
-        link.addEventListener('click', () => {
-            if (window.innerWidth <= 768) {
-                toggleMenu();
-            }
-        });
-    });
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            const nav = document.getElementById('nav');
-            if (nav.classList.contains('active')) {
-                toggleMenu();
-            }
-        }
-    });
-
-</script>
+<script src="scripts/perfil.js"></script>

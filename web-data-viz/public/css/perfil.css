@@ -12,7 +12,6 @@
     scroll-behavior: smooth;
     font-family: var(--font-family-texts);
     transition: all .6s ease-in-out;
-
 }
 
 body {
@@ -137,24 +136,55 @@ nav button {
     gap: 3vh;
 }
 
+/* ========================================================
+   ESTILOS ATUALIZADOS DA FOTO DE PERFIL
+   ======================================================== */
 .circle {
     width: 23vh;
     height: 23vh;
     background: #D9D9D9;
     border-radius: 50%;
     position: relative;
+    /* REMOVIDO OVERFLOW: HIDDEN PARA O BOTÃO NÃO CORTAR */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer; /* Mãozinha em tudo */
+    transition: transform 0.3s ease;
+}
+
+.circle:hover {
+    transform: scale(1.02); /* Efeito de zoom */
+}
+
+.profile-img-display {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%; /* A imagem é redonda */
+    border: 3px solid #D9D9D9; /* Borda opcional para acabamento */
 }
 
 .edit-btn {
     position: absolute;
-    bottom: 1vh;
-    right: 1vh;
+    bottom: 0; /* Bem na borda de baixo */
+    right: 5px; /* Bem na borda direita */
     background: rgb(0, 0, 0);
     color: rgb(255, 255, 255);
     border-radius: 50%;
-    padding: 0.9vh;
-    cursor: pointer;
+    width: 45px; /* Tamanho fixo */
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10; /* Fica por cima da imagem */
+    border: 2px solid #212121; /* Borda da cor do fundo para destacar */
 }
+
+.edit-btn i {
+    font-size: 1.2rem;
+}
+/* ======================================================== */
 
 .personal-data {
     padding: 2vh;
@@ -285,19 +315,13 @@ input {
     .circle {
         width: 18vh;
         height: 18vh;
-        background: #D9D9D9;
-        border-radius: 50%;
-        position: absolute;
-    }
-
-    .edit-btn {
-        position: absolute;
-        padding: 0.9vh;
+        /* Remover position absolute daqui para manter fluxo se possível, 
+           mas se layout exigir, mantenha. O importante é o botão dentro dele */
     }
 
     .right-perfil {
         position: relative;
-        left: 220px;
+        left: 0; /* Ajustado para evitar quebra de layout */
     }
 
     .box-rank {
@@ -322,10 +346,6 @@ input {
 
     .container {
         padding: 3vh;
-    }
-
-    .circle{
-        position: relative;    
     }
 
     .form-box {
@@ -436,6 +456,14 @@ input {
     .circle {
         width: 20vh;
         height: 20vh;
+    }
+    
+    /* Ajuste do botão no mobile */
+    .edit-btn {
+        width: 40px;
+        height: 40px;
+        right: 0;
+        bottom: 0;
     }
 
     .right-perfil {
@@ -550,9 +578,7 @@ input {
         height: 15vh;
     }
 
-    .edit-btn {
-        padding: 0.7vh;
-    }
+    /* .edit-btn ajuste já feito no media 768px */
 
     .nome {
         font-size: 1.3rem;
@@ -637,11 +663,6 @@ input {
     .circle {
         width: 13vh;
         height: 13vh;
-    }
-
-    .edit-btn {
-        padding: 0.5vh;
-        font-size: 0.8rem;
     }
 
     .nome {
@@ -823,4 +844,105 @@ nav {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
     }
+}
+
+
+/* ========================================================
+   ESTILOS DO MODAL DE SELEÇÃO DE CAMPEÃO
+   ======================================================== */
+
+.modal-overlay {
+    display: none; /* Escondido por padrão */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 3000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #2c2c2c;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    border: 1px solid #ffffff33;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+}
+
+.close-modal {
+    font-size: 28px;
+    cursor: pointer;
+    color: #aaa;
+}
+.close-modal:hover { color: #fff; }
+
+/* GRID DE CAMPEÕES COM SCROLL */
+.grid-campeoes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 15px;
+    max-height: 400px; /* Limita a altura */
+    overflow-y: auto;  /* Habilita o scroll vertical */
+    padding-right: 5px;
+}
+
+/* Custom Scrollbar */
+.grid-campeoes::-webkit-scrollbar {
+    width: 8px;
+}
+.grid-campeoes::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 4px;
+}
+.grid-campeoes::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+/* Itens da lista */
+.item-campeao {
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.item-campeao:hover {
+    transform: scale(1.1);
+}
+
+.item-campeao img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    margin-bottom: 5px;
+}
+
+.item-campeao:hover img {
+    border-color: #00bcd4; /* Cor de destaque ao passar o mouse */
+}
+
+.item-campeao span {
+    font-size: 12px;
+    color: #ccc;
 }
