@@ -6,6 +6,16 @@ CREATE TABLE IF NOT EXISTS conta (
     email VARCHAR(255) UNIQUE NOT NULL,
     senha_hash VARCHAR(255) NOT NULL,
     tipo_conta ENUM('JOGADOR', 'ORGANIZACAO', 'ADMIN') NOT NULL,
+    data_cadastro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    imagem_perfil VARCHAR(255)
+);
+
+
+CREATE TABLE IF NOT EXISTS admin(
+	id_admin INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR (255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    senha VARCHAR(255) NOT NULL,
     data_cadastro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -44,7 +54,7 @@ CREATE TABLE IF NOT EXISTS jogador (
     divisao ENUM('I', 'II', 'III', 'IV') NULL,
     pontos_liga INT DEFAULT 0,
     premiacao DOUBLE DEFAULT 0.00,
-    idade INT,
+    dt_nascimento DATE,
     
     CONSTRAINT fk_jogador_conta FOREIGN KEY (id_conta)
         REFERENCES conta(id_conta)
@@ -136,6 +146,9 @@ CREATE TABLE ranking_historico (
     posicao INT NOT NULL,
     data_registro DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+INSERT INTO admin(nome, email, senha)
+VALUES("Nexus", "nexus@gmail.com", "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92");
 
 INSERT INTO regiao (codigo_regiao, nome_regiao) VALUES 
 ('BR1', 'Brasil'), 

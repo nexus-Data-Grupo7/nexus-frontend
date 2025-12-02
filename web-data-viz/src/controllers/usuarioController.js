@@ -9,28 +9,28 @@ async function cadastrar(req, res) {
     gameName,
     tagline,
     nome,
-    dtNascimento, // ALTERAÇÃO: Recebendo a data
+    dtNascimento,
     nomeOrg,
     sigla,
     cnpj,
   } = req.body;
 
-  // Validações básicas
+  
   if (!emailServer || !senhaServer || !tipoContaServer) {
     return res.status(400).json({ erro: "Email, senha e tipo de conta são obrigatórios!" });
   }
 
   try {
-    // Cadastra a conta (o model já vai por a foto padrão)
+    
     const idConta = await usuarioModel.cadastrarConta(
       emailServer,
       senhaServer,
       tipoContaServer
     );
 
-    // Cadastra jogador ou organização
+   
     if (tipoContaServer === "JOGADOR") {
-      // ALTERAÇÃO: Valida dtNascimento
+  
       if (!idRegiao || !gameName || !tagline || !nome || !dtNascimento) {
         return res.status(400).json({ erro: "Todos os campos do jogador são obrigatórios!" });
       }
@@ -40,7 +40,7 @@ async function cadastrar(req, res) {
       console.log("=== DEBUG CADASTRO JOGADOR ===");
       console.log("dtNascimento:", dtNascimento);
 
-      // ALTERAÇÃO: Passando a data para o model
+     
       await usuarioModel.cadastrarJogador(idConta, idRegiaoNum, gameName, tagline, nome, dtNascimento);
 
     } else if (tipoContaServer === "ORGANIZACAO") {
@@ -75,6 +75,17 @@ async function autenticar(req, res) {
   }
 
   try {
+    const admin = await usuarioModel.autenticarAdmin(email, senhaHash);
+    
+    if (admin) {
+      return res.json({
+        id: admin.id_admin,
+        nome: admin.nome,
+        email: admin.email,
+        tipoConta: "ADMINISTRADOR"
+      });
+    }
+
     const usuario = await usuarioModel.autenticar(email, senhaHash);
 
     if (!usuario) {
@@ -137,7 +148,7 @@ async function atualizarPerfilJogador(req, res) {
     return res.status(400).json({ erro: "ID do usuário é obrigatório!" });
   }
 
-  // Verifica se pelo menos um campo foi enviado
+ 
   if ((!novoEmail || novoEmail.trim() === "") && (!novaSenha || novaSenha.trim() === "") && (!novoNome || novoNome.trim() === "")) {
     return res.status(400).json({ erro: "Preencha pelo menos um campo para atualizar." });
   }
@@ -169,6 +180,105 @@ async function excluirContaJogador(req, res) {
   }
 }
 
+async function listarAdministradores(req, res) {
+  try {
+    const administradores = await usuarioModel.listarAdministradores();
+    res.status(200).json(administradores);
+  } catch (erro) {
+    console.error("Erro ao listar administradores:", erro);
+    res.status(500).json({ erro: "Erro ao listar administradores." });
+  }
+}
+
+async function cadastrarAdministrador(req, res) {
+  const { nomeServer, emailServer, senhaServer } = req.body;
+
+  if (!nomeServer || !emailServer || !senhaServer) {
+    return res.status(400).json({ erro: "Nome, email e senha são obrigatórios!" });
+  }
+
+  try {
+    const idAdmin = await usuarioModel.cadastrarAdministrador(
+      nomeServer,
+      emailServer,
+      senhaServer
+    );
+    res.status(201).json({ 
+      mensagem: "Administrador cadastrado com sucesso!", 
+      id: idAdmin 
+    });
+  } catch (erro) {
+    console.error("Erro ao cadastrar administrador:", erro);
+    
+    if (erro.code === 'ER_DUP_ENTRY') {
+      return res.status(400).json({ erro: "Este email já está cadastrado!" });
+    }
+    
+    res.status(500).json({ erro: "Erro ao cadastrar administrador." });
+  }
+}
+
+async function editarAdministrador(req, res) {
+  const { idAdmin, nomeServer, emailServer, senhaServer } = req.body;
+
+  if (!idAdmin) {
+    return res.status(400).json({ erro: "ID do administrador é obrigatório!" });
+  }
+
+  if (!nomeServer && !emailServer && !senhaServer) {
+    return res.status(400).json({ erro: "Preencha pelo menos um campo para atualizar." });
+  }
+
+  try {
+    const sucesso = await usuarioModel.editarAdministrador(
+      idAdmin,
+      nomeServer,
+      emailServer,
+      senhaServer
+    );
+
+    if (sucesso) {
+      res.status(200).json({ mensagem: "Administrador atualizado com sucesso!" });
+    } else {
+      res.status(404).json({ erro: "Administrador não encontrado." });
+    }
+  } catch (erro) {
+    console.error("Erro ao editar administrador:", erro);
+    
+    if (erro.code === 'ER_DUP_ENTRY') {
+      return res.status(400).json({ erro: "Este email já está em uso!" });
+    }
+    
+    res.status(500).json({ erro: "Erro ao editar administrador." });
+  }
+}
+
+async function excluirAdministrador(req, res) {
+  const { idAdmin } = req.body;
+
+  if (!idAdmin) {
+    return res.status(400).json({ erro: "ID do administrador é obrigatório!" });
+  }
+
+  try {
+    const sucesso = await usuarioModel.excluirAdministrador(idAdmin);
+
+    if (sucesso) {
+      res.status(200).json({ mensagem: "Administrador excluído com sucesso!" });
+    } else {
+      res.status(404).json({ erro: "Administrador não encontrado." });
+    }
+  } catch (erro) {
+    console.error("Erro ao excluir administrador:", erro);
+    
+    if (erro.message === "Não é possível excluir o administrador padrão") {
+      return res.status(403).json({ erro: erro.message });
+    }
+    
+    res.status(500).json({ erro: "Erro ao excluir administrador." });
+  }
+}
+
 module.exports = {
   cadastrar,
   autenticar,
@@ -176,5 +286,9 @@ module.exports = {
   obterPerfilJogador,
   obterPerfilOrganizacao,
   atualizarPerfilJogador,
-  excluirContaJogador
+  excluirContaJogador,
+  listarAdministradores,
+  cadastrarAdministrador,
+  editarAdministrador,
+  excluirAdministrador
 };

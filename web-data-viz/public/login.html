@@ -123,71 +123,67 @@
     }
 
     async function entrar() {
-        const email_input = document.getElementById("input_email");
-        const senha_input = document.getElementById("input_senha");
+    const email_input = document.getElementById("input_email");
+    const senha_input = document.getElementById("input_senha");
 
-        const email = email_input.value.trim();
-        const senha = senha_input.value.trim();
+    const email = email_input.value.trim();
+    const senha = senha_input.value.trim();
 
-
-        if (!email || !senha) {
-            alert("Preencha todos os campos.");
-            return;
-        }
-
-        if (!validarEmail(email)) {
-            alert("Digite um e-mail válido!");
-            return;
-        }
-
-        if (senha.length < 6) {
-            alert("A senha deve ter no mínimo 6 caracteres!");
-            return;
-        }
-
-        const senhaHash = sha256(senha);
-
-        try {
-            const resposta = await fetch("/usuarios/autenticar", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    emailServer: email,
-                    senhaServer: senhaHash
-                })
-            });
-
-            const json = await resposta.json();
-
-            if (resposta.ok) {
-                sessionStorage.setItem("ID_USUARIO", json.id);
-                sessionStorage.setItem("EMAIL_USUARIO", json.email);
-                sessionStorage.setItem("TIPO_CONTA", json.tipoConta);
-
-                alert("Login realizado com sucesso!");
-
-                if (json.tipoConta === "JOGADOR") {
-                    window.location.href = "dashboard.html";
-                } else if (json.tipoConta === "ORGANIZACAO") {
-                    window.location.href = "dashboard.html";
-                } else {
-                    window.location.href = "index.html";
-                }
-            } else {
-                alert(json.erro || "Email e/ou senha inválido(s)");
-            }
-        } catch (erro) {
-            console.error("Erro completo:", erro);
-            alert("Erro de conexão com o servidor.");
-        }
+    if (!email || !senha) {
+        alert("Preencha todos os campos.");
+        return;
     }
 
-    document.addEventListener("DOMContentLoaded", function () {
-        const senhaInput = document.getElementById("input_senha");
-        senhaInput.addEventListener("keypress", function (event) {
-            if (event.key === "Enter") {
-                entrar();
-            }
+    if (!validarEmail(email)) {
+        alert("Digite um e-mail válido!");
+        return;
+    }
+
+    if (senha.length < 6) {
+        alert("A senha deve ter no mínimo 6 caracteres!");
+        return;
+    }
+
+    const senhaHash = sha256(senha);
+
+    try {
+        const resposta = await fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                emailServer: email,
+                senhaServer: senhaHash
+            })
         });
-    });
+
+        const json = await resposta.json();
+
+        if (resposta.ok) {
+            sessionStorage.setItem("ID_USUARIO", json.id);
+            sessionStorage.setItem("EMAIL_USUARIO", json.email);
+            sessionStorage.setItem("TIPO_CONTA", json.tipoConta);
+            
+            if (json.nome) {
+                sessionStorage.setItem("NOME_USUARIO", json.nome);
+            }
+
+            alert("Login realizado com sucesso!");
+
+            if (json.tipoConta === "ADMINISTRADOR") {
+                window.location.href = "dashboard.html";
+            } else if (json.tipoConta === "JOGADOR") {
+                window.location.href = "dashboard.html";
+            } else if (json.tipoConta === "ORGANIZACAO") {
+                window.location.href = "dashboard.html";
+            } else {
+                window.location.href = "index.html";
+            }
+        } else {
+            alert(json.erro || "Email e/ou senha inválido(s)");
+        }
+    } catch (erro) {
+        console.error("Erro completo:", erro);
+        alert("Erro de conexão com o servidor.");
+    }
+}
 </script>

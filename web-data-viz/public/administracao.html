@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin</title>
+    <link rel="stylesheet" href="./css/dash_adm.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+</head>
+
+<body>
+
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Abrir menu">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <div class="overlay" onclick="toggleMenu()"></div>
+
+    <nav id="nav">
+        <div class="navHora">
+            22:10
+            <div class="navData">
+                Segunda-feira, 23 de nov 2020
+            </div>
+        </div>
+
+        <div class="navLinks">
+            <a href="dashboard.html" class="navLinksLogo">
+                <img src="images/icon_link_home.svg" alt="">
+                Home
+            </a>
+            <a href="" class="navLinksLogo">
+                <img src="images/icon_link_usuarios.svg" alt="">
+                Usuarios
+            </a>
+            <a href="ranking.html" class="navLinksLogo">
+                <img src="images/icon_link_ranking.svg" alt="">
+                Ranking
+            </a>
+            <a href="perfil.html" class="navLinksLogo">
+                <img src="images/icon_link_usuarios.svg" alt="">
+                Perfil
+            </a>
+        </div>
+
+        <div class="navUserInfo">
+            <div>
+                <img src="images/icon_camera.svg" alt="">
+            </div>
+            <div>
+                <div>nomesobrenome</div>
+                <div>email@gmail.com</div>
+            </div>
+        </div>
+
+        <button class="navExit">
+            Sair
+            <div>
+                <img src="images/icon_sair.svg" alt="">
+            </div>
+        </button>
+    </nav>
+
+    <div class="container">
+        <div class="sindico-criar">
+            <span id="title-sindico">Administradores</span>
+            <button id="button-criar"><img src="./images/plus.png" alt="">CRIAR</button>
+        </div>
+
+
+        <div class="fundo-modal" id="fundoModal">
+            <div class="modal">
+                <div class="cabecalho-modal">
+                    <h2 class="titulo-modal">Cadastro de Administrador</h2>
+                    <button class="botao-fechar" id="botaoFechar">&times;</button>
+                </div>
+
+                <form id="formularioAdministrador">
+                    <div class="grupo-form">
+                        <label for="nomeAdmin">Nome Completo:</label>
+                        <input type="text" id="nomeAdmin" name="nomeAdmin" placeholder="Digite o nome completo"
+                            required>
+                    </div>
+
+                    <div class="grupo-form">
+                        <label for="emailAdmin">Email:</label>
+                        <input type="email" id="emailAdmin" name="emailAdmin" placeholder="email@exemplo.com" required>
+                    </div>
+
+                    <div class="grupo-form">
+                        <label for="senhaAdmin">Senha:</label>
+                        <input type="password" id="senhaAdmin" name="senhaAdmin" placeholder="Digite a senha" required>
+                    </div>
+
+                    <div class="grupo-form">
+                        <label for="confirmarSenhaAdmin">Confirmar Senha:</label>
+                        <input type="password" id="confirmarSenhaAdmin" name="confirmarSenhaAdmin"
+                            placeholder="Confirme a senha" required>
+                    </div>
+
+                    <div class="botoes">
+                        <button type="button" class="botao-cancelar" id="botaoCancelar">Cancelar</button>
+                        <button type="button" class="botao-salvar" onclick="cadastrar()">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <div class="fundo-modal" id="fundoModalEditar">
+            <div class="modal">
+                <div class="cabecalho-modalEditar">
+                    <h2 class="titulo-modalEditar">Editar Administrador</h2>
+                    <button class="botao-fechar" onclick="fecharModalEditar()">&times;</button>
+                </div>
+
+                <form id="formularioEditarAdministrador">
+                    <div class="grupo-form">
+                        <label for="editarNome">Nome Completo:</label>
+                        <input type="text" id="editarNome" name="editarNome" required>
+                    </div>
+
+                    <div class="grupo-form">
+                        <label for="editarEmail">Email:</label>
+                        <input type="email" id="editarEmail" name="editarEmail" required>
+                    </div>
+
+                    <div class="grupo-form">
+                        <label for="editarSenha">Nova Senha (opcional):</label>
+                        <input type="password" id="editarSenha" name="editarSenha"
+                            placeholder="Deixe em branco para manter a atual">
+                    </div>
+
+                    <div class="botoes">
+                        <button type="button" class="botao-cancelar" onclick="fecharModalEditar()">Cancelar</button>
+                        <button type="button" class="botao-salvar" onclick="salvarEdicao()">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <div class="fundo-modal" id="fundoModalExcluir">
+            <div class="modal">
+                <h2>Confirmar exclusão</h2>
+                <p>Tem certeza que deseja excluir este administrador?</p>
+                <div class="botoes">
+                    <button class="botaoExcluir" type="button" onclick="cancelarExclusao()">Cancelar</button>
+                    <button class="botaoExcluir" type="button" onclick="confirmarExclusao()">Excluir</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabela">
+            <table border="1" class="tabela-fisica">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Data de Cadastro</th>
+                        <th>Editar</th>
+                        <th>Excluir</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-administradores">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+
+<script>
+    let idAdminAtual = null;
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const tipoConta = sessionStorage.getItem("TIPO_CONTA");
+
+        if (tipoConta !== "ADMINISTRADOR") {
+            alert("Acesso negado! Apenas administradores podem acessar esta página.");
+            window.location.href = "login.html";
+            return;
+        }
+
+        carregarAdministradores();
+    });
+
+    async function carregarAdministradores() {
+        try {
+            const resposta = await fetch("/usuarios/administradores/listar");
+            const administradores = await resposta.json();
+
+            const tbody = document.getElementById("tabela-administradores");
+            tbody.innerHTML = "";
+
+            if (administradores.length === 0) {
+                tbody.innerHTML = `
+                <tr>
+                    <td colspan="6" style="text-align: center; padding: 20px;">
+                        Nenhum administrador cadastrado
+                    </td>
+                </tr>
+            `;
+                return;
+            }
+
+            administradores.forEach(admin => {
+                const tr = document.createElement("tr");
+
+                const isNexus = admin.email === 'nexus@gmail.com';
+
+                tr.innerHTML = `
+                <td>${admin.nome}</td>
+                <td>${admin.email}</td>
+                <td>${admin.data_cadastro || 'N/A'}</td>
+                <td>
+                    <button onclick="abrirModalEditar(${admin.id_admin}, '${admin.nome}', '${admin.email}')">
+                        <img src="../assets/icons_cadastro/edit.png" alt="Editar">
+                    </button>
+                </td>
+                <td>
+                    ${isNexus ?
+                        '<span style="color: #999; font-size: 0.85rem;">Protegido</span>' :
+                        `<button onclick="abrirModalExcluir(${admin.id_admin})">
+                            <img src="../assets/icons_cadastro/delete.png" alt="Excluir">
+                        </button>`
+                    }
+                </td>
+            `;
+
+                tbody.appendChild(tr);
+            });
+        } catch (erro) {
+            console.error("Erro ao carregar administradores:", erro);
+            alert("Erro ao carregar a lista de administradores.");
+        }
+    }
+
+    async function cadastrar() {
+        const nome = document.getElementById('nomeAdmin').value.trim();
+        const email = document.getElementById('emailAdmin').value.trim();
+        const senha = document.getElementById('senhaAdmin').value.trim();
+        const confirmarSenha = document.getElementById('confirmarSenhaAdmin').value.trim();
+
+        if (!nome || !email || !senha || !confirmarSenha) {
+            alert('Preencha todos os campos!');
+            return;
+        }
+
+        if (!validarEmail(email)) {
+            alert('Digite um e-mail válido!');
+            return;
+        }
+
+        if (senha.length < 6) {
+            alert('A senha deve ter no mínimo 6 caracteres!');
+            return;
+        }
+
+        if (senha !== confirmarSenha) {
+            alert('As senhas não coincidem!');
+            return;
+        }
+
+        const senhaHash = CryptoJS.SHA256(senha).toString();
+
+        try {
+            const resposta = await fetch("/usuarios/administradores/cadastrar", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    nomeServer: nome,
+                    emailServer: email,
+                    senhaServer: senhaHash
+                })
+            });
+
+            const json = await resposta.json();
+
+            if (resposta.ok) {
+                alert("Administrador cadastrado com sucesso!");
+                document.getElementById('fundoModal').classList.remove('ativo');
+                document.getElementById('formularioAdministrador').reset();
+                carregarAdministradores();
+            } else {
+                alert(json.erro || "Erro ao cadastrar administrador");
+            }
+        } catch (erro) {
+            console.error("Erro ao cadastrar:", erro);
+            alert("Erro de conexão com o servidor.");
+        }
+    }
+
+    function abrirModalEditar(idAdmin, nome, email) {
+        idAdminAtual = idAdmin;
+
+        document.getElementById('editarNome').value = nome;
+        document.getElementById('editarEmail').value = email;
+        document.getElementById('editarSenha').value = '';
+
+        document.getElementById('fundoModalEditar').classList.add('ativo');
+    }
+
+    async function salvarEdicao() {
+        const nome = document.getElementById('editarNome').value.trim();
+        const email = document.getElementById('editarEmail').value.trim();
+        const senha = document.getElementById('editarSenha').value.trim();
+
+        if (!nome || !email) {
+            alert('Nome e e-mail são obrigatórios!');
+            return;
+        }
+
+        if (!validarEmail(email)) {
+            alert('Digite um e-mail válido!');
+            return;
+        }
+
+        let senhaHash = null;
+        if (senha && senha.trim() !== '') {
+            if (senha.length < 6) {
+                alert('A nova senha deve ter no mínimo 6 caracteres!');
+                return;
+            }
+            senhaHash = CryptoJS.SHA256(senha).toString();
+        }
+
+        try {
+            const resposta = await fetch("/usuarios/administradores/editar", {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    idAdmin: idAdminAtual,
+                    nomeServer: nome,
+                    emailServer: email,
+                    senhaServer: senhaHash
+                })
+            });
+
+            const json = await resposta.json();
+
+            if (resposta.ok) {
+                alert("Administrador atualizado com sucesso!");
+                fecharModalEditar();
+                carregarAdministradores();
+            } else {
+                alert(json.erro || "Erro ao editar administrador");
+            }
+        } catch (erro) {
+            console.error("Erro ao editar:", erro);
+            alert("Erro de conexão com o servidor.");
+        }
+    }
+
+    function abrirModalExcluir(idAdmin) {
+        idAdminAtual = idAdmin;
+        document.getElementById('fundoModalExcluir').classList.add('ativo');
+    }
+
+    async function confirmarExclusao() {
+        try {
+            const resposta = await fetch("/usuarios/administradores/excluir", {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    idAdmin: idAdminAtual
+                })
+            });
+
+            const json = await resposta.json();
+
+            if (resposta.ok) {
+                alert("Administrador excluído com sucesso!");
+                cancelarExclusao();
+                carregarAdministradores();
+            } else {
+                alert(json.erro || "Erro ao excluir administrador");
+            }
+        } catch (erro) {
+            console.error("Erro ao excluir:", erro);
+            alert("Erro de conexão com o servidor.");
+        }
+    }
+
+    function fecharModalEditar() {
+        document.getElementById('fundoModalEditar').classList.remove('ativo');
+        idAdminAtual = null;
+    }
+
+    function cancelarExclusao() {
+        document.getElementById('fundoModalExcluir').classList.remove('ativo');
+        idAdminAtual = null;
+    }
+
+    function validarEmail(email) {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+    }
+
+    document.getElementById('button-criar')?.addEventListener('click', () => {
+        document.getElementById('fundoModal').classList.add('ativo');
+    });
+
+    document.getElementById('botaoFechar')?.addEventListener('click', () => {
+        document.getElementById('fundoModal').classList.remove('ativo');
+    });
+
+    document.getElementById('botaoCancelar')?.addEventListener('click', () => {
+        document.getElementById('fundoModal').classList.remove('ativo');
+    });
+
+    function toggleMenu() {
+        const nav = document.getElementById('nav');
+        const overlay = document.querySelector('.overlay');
+        const menuToggle = document.querySelector('.menu-toggle');
+
+        nav.classList.toggle('active');
+        overlay.classList.toggle('active');
+
+        const icon = menuToggle.querySelector('i');
+        if (nav.classList.contains('active')) {
+            icon.classList.replace('fa-bars', 'fa-times');
+            menuToggle.setAttribute('aria-label', 'Fechar menu');
+            document.body.style.overflow = 'hidden';
+        } else {
+            icon.classList.replace('fa-times', 'fa-bars');
+            menuToggle.setAttribute('aria-label', 'Abrir menu');
+            document.body.style.overflow = '';
+        }
+    }
+
+    document.querySelectorAll('.navLinksLogo').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                toggleMenu();
+            }
+        });
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const nav = document.getElementById('nav');
+            if (nav.classList.contains('active')) {
+                toggleMenu();
+            }
+        }
+    });
+
+</script>

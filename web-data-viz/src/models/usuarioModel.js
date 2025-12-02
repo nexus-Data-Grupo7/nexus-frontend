@@ -13,7 +13,6 @@ async function cadastrarConta(email, senhaHash, tipoConta) {
   try {
     await connection.beginTransaction();
 
-    // ALTERAÇÃO AQUI: Adicionado 'imagem_perfil' com valor fixo 'foto_perfil'
     const [resConta] = await connection.execute(
       "INSERT INTO conta (email, senha_hash, tipo_conta, imagem_perfil) VALUES (?, ?, ?, 'foto_perfil')",
       [email, senhaHash, tipoConta]
@@ -232,7 +231,120 @@ async function excluirContaJogador(idUsuario) {
     }
 }
 
-// Não esqueça de manter o module.exports atualizado no final do arquivo:
+async function autenticarAdmin(email, senhaHash) {
+  const connection = await pool.getConnection();
+  try {
+    const [rows] = await connection.execute(
+      "SELECT id_admin, nome, email FROM admin WHERE email = ? AND senha = ?",
+      [email, senhaHash]
+    );
+
+    if (rows.length === 0) return null;
+    return rows[0];
+  } finally {
+    connection.release();
+  }
+}
+
+async function listarAdministradores() {
+  const connection = await pool.getConnection();
+  try {
+    const [rows] = await connection.execute(
+      "SELECT id_admin, nome, email, DATE_FORMAT(data_cadastro, '%d/%m/%Y') as data_cadastro FROM admin ORDER BY nome"
+    );
+    return rows;
+  } finally {
+    connection.release();
+  }
+}
+
+async function cadastrarAdministrador(nome, email, senhaHash) {
+  const connection = await pool.getConnection();
+  try {
+    const [result] = await connection.execute(
+      "INSERT INTO admin (nome, email, senha) VALUES (?, ?, ?)",
+      [nome, email, senhaHash]
+    );
+    return result.insertId;
+  } catch (error) {
+    throw error;
+  } finally {
+    connection.release();
+  }
+}
+
+async function editarAdministrador(idAdmin, nome, email, senhaHash) {
+  const connection = await pool.getConnection();
+  try {
+    const campos = [];
+    const valores = [];
+
+    if (nome && nome.trim() !== "") {
+      campos.push("nome = ?");
+      valores.push(nome);
+    }
+    if (email && email.trim() !== "") {
+      campos.push("email = ?");
+      valores.push(email);
+    }
+    if (senhaHash && senhaHash.trim() !== "") {
+      campos.push("senha = ?");
+      valores.push(senhaHash);
+    }
+
+    if (campos.length === 0) {
+      throw new Error("Nenhum campo para atualizar");
+    }
+
+    valores.push(idAdmin);
+    const query = `UPDATE admin SET ${campos.join(", ")} WHERE id_admin = ?`;
+    
+    const [result] = await connection.execute(query, valores);
+    return result.affectedRows > 0;
+  } catch (error) {
+    throw error;
+  } finally {
+    connection.release();
+  }
+}
+
+async function excluirAdministrador(idAdmin) {
+  const connection = await pool.getConnection();
+  try {
+    const [admin] = await connection.execute(
+      "SELECT email FROM admin WHERE id_admin = ?",
+      [idAdmin]
+    );
+
+    if (admin.length > 0 && admin[0].email === 'nexus@gmail.com') {
+      throw new Error("Não é possível excluir o administrador padrão");
+    }
+
+    const [result] = await connection.execute(
+      "DELETE FROM admin WHERE id_admin = ?",
+      [idAdmin]
+    );
+    return result.affectedRows > 0;
+  } catch (error) {
+    throw error;
+  } finally {
+    connection.release();
+  }
+}
+
+async function buscarAdministradorPorId(idAdmin) {
+  const connection = await pool.getConnection();
+  try {
+    const [rows] = await connection.execute(
+      "SELECT id_admin, nome, email FROM admin WHERE id_admin = ?",
+      [idAdmin]
+    );
+    return rows[0] || null;
+  } finally {
+    connection.release();
+  }
+}
+
 module.exports = {
     cadastrarConta,
     cadastrarJogador,
@@ -242,5 +354,11 @@ module.exports = {
     obterPerfilJogador,
     obterPerfilOrganizacao,
     atualizarPerfilJogador,
-    excluirContaJogador // <--- Garanta que está aqui
+    excluirContaJogador,
+    autenticarAdmin,
+    listarAdministradores,
+    cadastrarAdministrador,
+    editarAdministrador,
+    excluirAdministrador,
+    buscarAdministradorPorId
 };
