@@ -180,6 +180,47 @@ async function excluirContaJogador(req, res) {
   }
 }
 
+async function atualizarPerfilOrganizacao(req, res) {
+  const { idUsuario, novoNome, novoEmail, novaSenha, novaSigla } = req.body; 
+  
+  if (!idUsuario) {
+    return res.status(400).json({ erro: "ID do usuário é obrigatório!" });
+  }
+
+  try {
+    await usuarioModel.atualizarPerfilOrganizacao(
+        idUsuario, 
+        novoNome, 
+        novoEmail, 
+        novaSenha, 
+        novaSigla
+    );
+    
+    res.status(200).json({ mensagem: "Perfil atualizado com sucesso!" });
+  } catch (erro) {
+    console.error("Erro ao atualizar perfil:", erro);
+    if (erro.code === 'ER_DUP_ENTRY') {
+      return res.status(400).json({ erro: "E-mail ou Sigla já em uso." });
+    }
+    res.status(500).json({ erro: "Erro ao atualizar o perfil." });
+  }
+}
+
+async function excluirContaOrganizacao(req, res) {
+  const { idUsuario } = req.body;
+  if (!idUsuario) {
+    return res.status(400).json({ erro: "ID do usuário é obrigatório!" });
+  }
+
+  try {
+    await usuarioModel.excluirContaOrganizacao(idUsuario);
+    res.status(200).json({ mensagem: "Conta excluída com sucesso!" });
+  } catch (erro) {
+    console.error("Erro ao excluir conta:", erro);
+    res.status(500).json({ erro: "Erro ao excluir a conta." });
+  }
+}
+
 async function listarAdministradores(req, res) {
   try {
     const administradores = await usuarioModel.listarAdministradores();
@@ -279,6 +320,19 @@ async function excluirAdministrador(req, res) {
   }
 }
 
+async function carregarBarraLateral(req, res) {
+  const { idUsuario } = req.params;
+  try {
+    const perfil = await usuarioModel.carregarBarraLateral(idUsuario);
+    res.json(perfil);
+  } catch (erro) {
+    console.error("Erro ao obter dados de perfil:", erro);
+    res.status(500).json({ erro: "Erro ao obter dados de perfil." });
+  }
+}
+
+
+
 module.exports = {
   cadastrar,
   autenticar,
@@ -287,8 +341,11 @@ module.exports = {
   obterPerfilOrganizacao,
   atualizarPerfilJogador,
   excluirContaJogador,
+  atualizarPerfilOrganizacao,
+  excluirContaOrganizacao,
   listarAdministradores,
   cadastrarAdministrador,
   editarAdministrador,
-  excluirAdministrador
+  excluirAdministrador,
+  carregarBarraLateral
 };

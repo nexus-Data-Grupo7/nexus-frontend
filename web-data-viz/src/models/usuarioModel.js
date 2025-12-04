@@ -231,6 +231,78 @@ async function excluirContaJogador(idUsuario) {
     }
 }
 
+async function atualizarPerfilOrganizacao(idUsuario, nome, email, senha, sigla) {
+    const connection = await pool.getConnection();
+    try {
+        await connection.beginTransaction();
+
+        const camposConta = [];
+        const valoresConta = [];
+
+        if (email && email.trim() !== "") {
+            camposConta.push("email = ?");
+            valoresConta.push(email);
+        }
+        if (senha && senha.trim() !== "") {
+            camposConta.push("senha_hash = ?");
+            valoresConta.push(senha);
+        }
+
+        // Se houver algo para atualizar na conta, executa o UPDATE
+        if (camposConta.length > 0) {
+            valoresConta.push(idUsuario);
+            const queryConta = `UPDATE conta SET ${camposConta.join(", ")} WHERE id_conta = ?`;
+            await connection.execute(queryConta, valoresConta);
+        }
+
+        // 2. Atualiza Tabela ORGANIZACAO (Nome Org e Sigla)
+        const camposOrg = [];
+        const valoresOrg = [];
+
+        if (nome && nome.trim() !== "") {
+            camposOrg.push("nome_org = ?");
+            valoresOrg.push(nome);
+        }
+        if (sigla && sigla.trim() !== "") {
+            camposOrg.push("sigla = ?");
+            valoresOrg.push(sigla);
+        }
+
+        // Se houver algo para atualizar na organização, executa o UPDATE
+        if (camposOrg.length > 0) {
+            valoresOrg.push(idUsuario);
+            const queryOrg = `UPDATE organizacao SET ${camposOrg.join(", ")} WHERE id_conta = ?`;
+            await connection.execute(queryOrg, valoresOrg);
+        }
+
+        await connection.commit();
+    } catch (error) {
+        await connection.rollback();
+        throw error;
+    } finally {
+        connection.release();
+    }
+}
+
+async function excluirContaOrganizacao(idUsuario) {
+    const connection = await pool.getConnection();
+    try {
+        await connection.beginTransaction();
+
+        // Como usamos DELETE CASCADE no banco de dados (fk_organizacao_conta),
+        // ao deletar a conta, a organização some automaticamente.
+        await connection.execute("DELETE FROM conta WHERE id_conta = ?", [idUsuario]);
+
+        await connection.commit();
+        return true;
+    } catch (error) {
+        await connection.rollback();
+        throw error;
+    } finally {
+        connection.release();
+    }
+}
+
 async function autenticarAdmin(email, senhaHash) {
   const connection = await pool.getConnection();
   try {
@@ -345,6 +417,20 @@ async function buscarAdministradorPorId(idAdmin) {
   }
 }
 
+async function carregarBarraLateral(idUsuario) {
+  const connection = await pool.getConnection();
+  try {
+    // Implement the query to fetch the sidebar data based on the user ID
+    const [rows] = await connection.execute(
+      "SELECT email, imagem_perfil FROM conta WHERE id_conta = ?",
+      [idUsuario]
+    );
+    return rows[0] || null;
+  } finally {
+    connection.release();
+  }
+}
+
 module.exports = {
     cadastrarConta,
     cadastrarJogador,
@@ -355,10 +441,13 @@ module.exports = {
     obterPerfilOrganizacao,
     atualizarPerfilJogador,
     excluirContaJogador,
+    atualizarPerfilOrganizacao,
+    excluirContaOrganizacao,
     autenticarAdmin,
     listarAdministradores,
     cadastrarAdministrador,
     editarAdministrador,
     excluirAdministrador,
-    buscarAdministradorPorId
+    buscarAdministradorPorId,
+    carregarBarraLateral
 };

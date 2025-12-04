@@ -1,3 +1,7 @@
+const ID_USUARIO = sessionStorage.getItem("ID_USUARIO");
+const EMAIL_USUARIO = sessionStorage.getItem("EMAIL_USUARIO");
+const TIPO_CONTA = sessionStorage.getItem("TIPO_CONTA");
+const FOTO_ATUAL = sessionStorage.getItem("FOTO_PERFIL") || "foto_perfil";
 const idJogadorSelecionado = sessionStorage.getItem('idJogadorSelecionado');
 
 function carregarDadosJogador() {
@@ -268,4 +272,42 @@ document.addEventListener("DOMContentLoaded", () => {
     carregarGraficoPizza();
     carregarPremiacao()
     carregaInfoJogador();
+    carregarBarraLateral();
 });
+
+function carregarBarraLateral() {
+    if (TIPO_CONTA == "JOGADOR" || TIPO_CONTA == "ORGANIZACAO") {
+        divNavLinks = document.getElementById("divNavLinks");
+
+        divNavLinks.innerHTML = `
+        <a href="dashboard.html" class="navLinksLogo">
+                <img src="images/icon_link_home.svg" alt="">
+                Home
+            </a>
+            <a href="ranking.html" class="navLinksLogo">
+                <img src="images/icon_link_ranking.svg" alt="">
+                Ranking
+            </a>
+            <a href="perfil.html" class="navLinksLogo">
+                <img src="images/icon_link_usuarios.svg" alt="">
+                Perfil
+            </a>`
+    }
+
+    fetch(`/usuarios/carregarBarraLateral/${ID_USUARIO}`, { method: "GET" })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Dados da barra lateral:", data);
+
+        divNavUserInfo.innerHTML = `
+            <div>
+                <img src="images/campeões/${data.imagem_perfil}.png" alt="">
+            </div>
+            <div>
+                <div>${data.email}</div>
+            </div>`
+    })
+    .catch(error => {
+        console.error("Erro ao carregar barra lateral:", error);
+    });
+}

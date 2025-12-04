@@ -257,7 +257,8 @@ input {
     align-items: center;
     justify-content: center;
     width: 150vh;
-    height: 55vh;
+    min-height: 55vh; /* Garante o tamanho base */
+    height: auto;     /* Permite crescer se adicionar mais campos */
     background: linear-gradient(to right, #111111, #1d1d1d);
     border-radius: 1vh;
     padding: 5vh;

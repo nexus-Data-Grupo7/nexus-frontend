@@ -200,12 +200,12 @@ function carregarPerfil() {
                 console.log("Dados do jogador:", data);
 
                 const divNome = document.querySelector(".nome span");
-                if (divNome) divNome.innerText = data.nome;
+                if (divNome) divNome.innerText = `NOME: ${data.nome}`;
 
                 const divIdade = document.querySelector(".idade span");
                 if (divIdade) {
                     const idadeCalculada = calcularIdade(data.dt_nascimento);
-                    divIdade.innerText = `${idadeCalculada} anos`;
+                    divIdade.innerText = `IDADE: ${idadeCalculada} anos`;
                 }
 
                 const imgPerfil = document.getElementById("img_perfil_atual");
@@ -235,7 +235,48 @@ function carregarPerfil() {
             });
 
     } else if (TIPO_CONTA === "ORGANIZACAO") {
-        // Lógica da organização (se necessário)
+        fetch(`/usuarios/perfilOrganizacao/${ID_USUARIO}`, { method: "GET" })
+            .then(response => {
+                if (!response.ok) throw new Error("Erro na requisição");
+                return response.json();
+            })
+            .then(data => {
+                console.log("Dados da organização:", data);
+                const divNome = document.querySelector(".nome span");
+                if (divNome) divNome.innerText = `NOME: ${data.nome_org}`;
+
+                const divIdade = document.querySelector(".idade span");
+                if (divIdade) {
+                    divIdade.innerText = `SIGLA: ${data.sigla}`;
+                }
+
+                const divBoxRanking = document.getElementById("divBoxRanking");
+                divBoxRanking.style.display = 'none';
+
+                const divFormBox = document.getElementById("divFormBox");
+                divFormBox.innerHTML = `
+                <div>
+                ALTERAR INFORMAÇÕES <br><br>
+
+                <label>Nome</label>
+                <input type="text" id="inputNome">
+
+                <label>Sigla</label>
+                <input type="text" id="inputSigla">
+
+                <label>E-mail</label>
+                <input type="email" id="inputEmail">
+
+                <label>Senha</label>
+                <input type="password" id="inputSenha">
+
+                <button class="save-btn" onclick="alterarInformacoes()">Salvar alteração</button>
+                <button class="save-btn" onclick="excluirConta()">Excluir conta</button>
+            </div>`;
+            })
+            .catch(error => {
+                console.error("Erro ao carregar perfil da organização:", error);
+            });
     }
 }
 
@@ -272,6 +313,30 @@ function alterarInformacoes() {
         });
 
         console.log("Alterar informações para:", { novoNome, novoEmail, novaSenha });
+    } else if (TIPO_CONTA == "ORGANIZACAO") {
+        const novaSigla = document.getElementById("inputSigla").value; // <--- PEGA A SIGLA
+
+        fetch("/usuarios/atualizarPerfilOrganizacao", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idUsuario: ID_USUARIO,
+                novoNome: novoNome,
+                novoEmail: novoEmail,
+                novaSenha: novaSenha,
+                novaSigla: novaSigla // <--- ENVIA A SIGLA
+            })
+        }).then(response => {
+            if (!response.ok) throw new Error("Erro ao atualizar perfil");
+            alert("Informações da Organização atualizadas com sucesso!");
+            carregarPerfil();
+        }).catch(error => {
+            console.error("Erro:", error);
+            alert("Erro ao atualizar. Verifique Sigla já não existe.");
+        });
+        console.log("Alterar informações para:", { novoNome, novoEmail, novaSenha, novaSigla });
     }
 
 }
@@ -288,17 +353,32 @@ function excluirConta() {
             body: JSON.stringify({
                 idUsuario: ID_USUARIO
             })
-        }).then(response => {   
+        }).then(response => {
             if (!response.ok) throw new Error("Erro ao excluir conta");
             alert("Conta excluída com sucesso!");
             window.location.href = "./index.html";
-            // Redirecionar para página inicial ou de cadastro/login
         }).catch(error => {
             console.error("Erro ao excluir conta:", error);
             alert("Erro ao excluir conta. Tente novamente.");
         });
     } else if (TIPO_CONTA == "ORGANIZACAO") {
         // Lógica de exclusão para organização
+        fetch("/usuarios/excluirContaOrganizacao", {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idUsuario: ID_USUARIO
+            })
+        }).then(response => {
+            if (!response.ok) throw new Error("Erro ao excluir conta");
+            alert("Conta excluída com sucesso!");
+            window.location.href = "./index.html";
+        }).catch(error => {
+            console.error("Erro ao excluir conta:", error);
+            alert("Erro ao excluir conta. Tente novamente.");
+        });
     }
 }
 
@@ -311,4 +391,42 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     carregarPerfil();
+    carregarBarraLateral();
 });
+
+function carregarBarraLateral() {
+    if (TIPO_CONTA == "JOGADOR" || TIPO_CONTA == "ORGANIZACAO") {
+        divNavLinks = document.getElementById("divNavLinks");
+
+        divNavLinks.innerHTML = `
+        <a href="dashboard.html" class="navLinksLogo">
+                <img src="images/icon_link_home.svg" alt="">
+                Home
+            </a>
+            <a href="ranking.html" class="navLinksLogo">
+                <img src="images/icon_link_ranking.svg" alt="">
+                Ranking
+            </a>
+            <a href="perfil.html" class="navLinksLogo">
+                <img src="images/icon_link_usuarios.svg" alt="">
+                Perfil
+            </a>`
+    }
+
+    fetch(`/usuarios/carregarBarraLateral/${ID_USUARIO}`, { method: "GET" })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Dados da barra lateral:", data);
+
+        divNavUserInfo.innerHTML = `
+            <div>
+                <img src="images/campeões/${data.imagem_perfil}.png" alt="">
+            </div>
+            <div>
+                <div>${data.email}</div>
+            </div>`
+    })
+    .catch(error => {
+        console.error("Erro ao carregar barra lateral:", error);
+    });
+}
