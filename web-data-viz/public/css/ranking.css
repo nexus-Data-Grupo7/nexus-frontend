@@ -289,6 +289,7 @@ nav button {
     flex-direction: column;
     align-items: center;
     gap: 3vh;
+    padding-top: 10%;
 }
 
 .filtrosRanking {
