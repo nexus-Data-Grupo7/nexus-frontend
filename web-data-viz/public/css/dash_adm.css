@@ -773,6 +773,12 @@ input:focus {
         text-align: center;
         gap: 1vh;
     }
+    .navUserInfo div img {
+    width: 8vh;
+    height: 8vh;
+    border-radius: 90%;
+    object-fit: cover;
+}
 
     .navExit {
         justify-content: center;

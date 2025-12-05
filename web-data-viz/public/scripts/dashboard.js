@@ -1,7 +1,7 @@
 const ID_USUARIO = sessionStorage.getItem("ID_USUARIO");
 const EMAIL_USUARIO = sessionStorage.getItem("EMAIL_USUARIO");
 const TIPO_CONTA = sessionStorage.getItem("TIPO_CONTA");
-const FOTO_ATUAL = sessionStorage.getItem("FOTO_PERFIL") || "foto_perfil";
+
 
 function tempoDesde(dataIso) {
     const data = new Date(dataIso);
@@ -227,6 +227,7 @@ function carregarBarraLateral() {
     .then(response => response.json())
     .then(data => {
         console.log("Dados da barra lateral:", data);
+        const FOTO_ATUAL = sessionStorage.setItem("FOTO_PERFIL", data.imagem_perfil);
 
         divNavUserInfo.innerHTML = `
             <div>

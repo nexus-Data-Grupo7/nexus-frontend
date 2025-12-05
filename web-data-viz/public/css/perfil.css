@@ -105,6 +105,13 @@ nav {
     justify-content: center;
 }
 
+.navUserInfo div img {
+    width: 8vh;
+    height: 8vh;
+    border-radius: 90%;
+    object-fit: cover;
+}
+
 nav button {
     background: none;
     border: none;
