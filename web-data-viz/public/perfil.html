@@ -53,7 +53,7 @@
             </div>
         </div>
 
-        <button class="navExit">
+        <button class="navExit" onclick="redirectLogin()">
             Sair
             <div>
                 <img src="images/icon_sair.svg" alt="">
@@ -134,3 +134,9 @@
 
 </html>
 <script src="scripts/perfil.js"></script>
+
+<script>
+    function redirectLogin(){
+        window.location = "login.html";
+    }
+</script>

@@ -55,7 +55,7 @@
             </div>
         </div>
 
-        <button class="navExit">
+        <button class="navExit" onclick="redirectLogin()">
             Sair
             <div>
                 <img src="images/icon_sair.svg" alt="">
@@ -143,6 +143,11 @@
 </html>
 
 <script>
+    function redirectLogin(){
+        window.location = "login.html";
+    }
+
+
     function toggleMenu() {
         const nav = document.getElementById('nav');
         const overlay = document.querySelector('.overlay');

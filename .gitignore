@@ -2,5 +2,7 @@
 node_modules
 web-data-viz/package-lock.json
 web-data-viz/package.json
+.env
+.env.dev
 
 .github

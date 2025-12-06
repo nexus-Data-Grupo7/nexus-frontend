@@ -24,6 +24,8 @@ var usuarioRouter = require("./src/routes/usuario");
 var rankingRouter = require("./src/routes/ranking");
 var jogadorRouter = require("./src/routes/jogador");
 var dashboardRouter = require("./src/routes/dashboard");
+var jogadoresRouter = require("./src/routes/jogadores");
+var organizacoesRouter = require("./src/routes/organizacoes");
 
 
 app.use(express.json());
@@ -43,6 +45,8 @@ app.use("/usuarios", usuarioRouter)
 app.use("/ranking", rankingRouter)
 app.use("/jogador", jogadorRouter)
 app.use("/dashboard", dashboardRouter)
+app.use("/jogadores", jogadoresRouter);
+app.use("/organizacoes", organizacoesRouter);
 
 
 // Corrigido para usar HOST_APP e PORTA_APP

@@ -331,8 +331,6 @@ async function carregarBarraLateral(req, res) {
   }
 }
 
-
-
 module.exports = {
   cadastrar,
   autenticar,

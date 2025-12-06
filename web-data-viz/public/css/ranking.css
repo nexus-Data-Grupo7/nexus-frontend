@@ -43,8 +43,6 @@ nav {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    margin-right: 2vh;
-    flex-shrink: 0;
 }
 
 .navHora {
@@ -61,11 +59,10 @@ nav {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 0.5rem;
 }
 
 .navLinks {
-    width: 100%;
+    width: auto;
     margin-top: 10vh;
     font-size: 1.1rem;
     display: flex;
@@ -79,13 +76,17 @@ nav {
     color: white;
     text-decoration: none;
     border-bottom: 0.3vh solid transparent;
-    transition: border-bottom-color 0.3s ease, transform 0.3s ease;
+    transition: width 1s ease,
+                border-bottom-color 0.6s ease,
+                transform 0.6s ease;
 }
 
 .navLinks a:hover {
+    width: 50%;
     border-bottom-color: white;
     transform: scale(1.03);
 }
+
 
 .navLinksLogo {
     width: 100%;
@@ -97,11 +98,6 @@ nav {
     font-family: "Inter";
 }
 
-.navLinksLogo img {
-    width: 24px;
-    height: 24px;
-}
-
 .navUserInfo {
     width: 100%;
     margin-top: auto;
@@ -109,13 +105,11 @@ nav {
     flex-direction: row;
     gap: 2vh;
     justify-content: center;
-    align-items: center;
 }
-
 .navUserInfo div img {
     width: 8vh;
     height: 8vh;
-    border-radius: 50%;
+    border-radius: 90%;
     object-fit: cover;
 }
 
@@ -134,12 +128,6 @@ nav button {
     justify-content: flex-end;
     font-size: 0.8rem;
     gap: 1vh;
-    align-items: center;
-}
-
-.navExit img {
-    width: 20px;
-    height: 20px;
 }
 
 .graficosContainer {
@@ -289,7 +277,6 @@ nav button {
     flex-direction: column;
     align-items: center;
     gap: 3vh;
-    padding-top: 10%;
 }
 
 .filtrosRanking {

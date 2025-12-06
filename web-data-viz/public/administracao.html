@@ -29,7 +29,7 @@
             </div>
         </div>
 
-                <div class="navLinks" id="divNavLinks">
+        <div class="navLinks" id="divNavLinks">
             <a href="dashboard.html" class="navLinksLogo">
                 <img src="images/icon_link_home.svg" alt="">
                 Home
@@ -58,7 +58,7 @@
             </div>
         </div>
 
-        <button class="navExit">
+        <button class="navExit" onclick="redirectLogin()">
             Sair
             <div>
                 <img src="images/icon_sair.svg" alt="">
@@ -67,12 +67,25 @@
     </nav>
 
     <div class="container">
+        <!-- Botões de Seleção -->
+        <div class="botoes-selecao">
+            <button class="btn-selecao active" onclick="selecionarTipo('administrador')">
+                <i class="fa-solid fa-user-shield"></i> Administradores
+            </button>
+            <button class="btn-selecao" onclick="selecionarTipo('jogador')">
+                <i class="fa-solid fa-gamepad"></i> Jogadores
+            </button>
+            <button class="btn-selecao" onclick="selecionarTipo('organizacao')">
+                <i class="fa-solid fa-building"></i> Organizações
+            </button>
+        </div>
+
         <div class="sindico-criar">
             <span id="title-sindico">Administradores</span>
             <button id="button-criar"><img src="./images/plus.png" alt="">CRIAR</button>
         </div>
 
-
+        <!-- Modal Criar Admin -->
         <div class="fundo-modal" id="fundoModal">
             <div class="modal">
                 <div class="cabecalho-modal">
@@ -83,8 +96,7 @@
                 <form id="formularioAdministrador">
                     <div class="grupo-form">
                         <label for="nomeAdmin">Nome Completo:</label>
-                        <input type="text" id="nomeAdmin" name="nomeAdmin" placeholder="Digite o nome completo"
-                            required>
+                        <input type="text" id="nomeAdmin" name="nomeAdmin" placeholder="Digite o nome completo" required>
                     </div>
 
                     <div class="grupo-form">
@@ -99,8 +111,7 @@
 
                     <div class="grupo-form">
                         <label for="confirmarSenhaAdmin">Confirmar Senha:</label>
-                        <input type="password" id="confirmarSenhaAdmin" name="confirmarSenhaAdmin"
-                            placeholder="Confirme a senha" required>
+                        <input type="password" id="confirmarSenhaAdmin" name="confirmarSenhaAdmin" placeholder="Confirme a senha" required>
                     </div>
 
                     <div class="botoes">
@@ -111,7 +122,7 @@
             </div>
         </div>
 
-
+        <!-- Modal Editar Admin -->
         <div class="fundo-modal" id="fundoModalEditar">
             <div class="modal">
                 <div class="cabecalho-modalEditar">
@@ -132,8 +143,7 @@
 
                     <div class="grupo-form">
                         <label for="editarSenha">Nova Senha (opcional):</label>
-                        <input type="password" id="editarSenha" name="editarSenha"
-                            placeholder="Deixe em branco para manter a atual">
+                        <input type="password" id="editarSenha" name="editarSenha" placeholder="Deixe em branco para manter a atual">
                     </div>
 
                     <div class="botoes">
@@ -144,11 +154,10 @@
             </div>
         </div>
 
-
         <div class="fundo-modal" id="fundoModalExcluir">
             <div class="modal">
                 <h2>Confirmar exclusão</h2>
-                <p>Tem certeza que deseja excluir este administrador?</p>
+                <p id="mensagemExclusao">Tem certeza que deseja excluir este registro?</p>
                 <div class="botoes">
                     <button class="botaoExcluir" type="button" onclick="cancelarExclusao()">Cancelar</button>
                     <button class="botaoExcluir" type="button" onclick="confirmarExclusao()">Excluir</button>
@@ -158,7 +167,7 @@
 
         <div class="tabela">
             <table border="1" class="tabela-fisica">
-                <thead>
+                <thead id="tabela-head">
                     <tr>
                         <th>Nome</th>
                         <th>Email</th>
@@ -178,9 +187,13 @@
 
 </html>
 
-
 <script>
-    let idAdminAtual = null;
+    let tipoAtual = 'administrador';
+    let idAtual = null;
+
+    function redirectLogin(){
+        window.location = "login.html";
+    }
 
     document.addEventListener('DOMContentLoaded', function () {
         const tipoConta = sessionStorage.getItem("TIPO_CONTA");
@@ -191,57 +204,256 @@
             return;
         }
 
-        carregarAdministradores();
+        carregarDados();
     });
+
+    function selecionarTipo(tipo) {
+        tipoAtual = tipo;
+        
+        document.querySelectorAll('.btn-selecao').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        event.target.closest('.btn-selecao').classList.add('active');
+
+        const titulos = {
+            'administrador': 'Administradores',
+            'jogador': 'Jogadores',
+            'organizacao': 'Organizações'
+        };
+        document.getElementById('title-sindico').textContent = titulos[tipo];
+
+        document.getElementById('button-criar').style.display = tipo === 'administrador' ? 'flex' : 'none';
+
+        carregarDados();
+    }
+
+    async function carregarDados() {
+        if (tipoAtual === 'administrador') {
+            carregarAdministradores();
+        } else if (tipoAtual === 'jogador') {
+            carregarJogadores();
+        } else if (tipoAtual === 'organizacao') {
+            carregarOrganizacoes();
+        }
+    }
 
     async function carregarAdministradores() {
         try {
             const resposta = await fetch("/usuarios/administradores/listar");
             const administradores = await resposta.json();
 
+            const thead = document.getElementById("tabela-head");
             const tbody = document.getElementById("tabela-administradores");
+            
+            thead.innerHTML = `
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Data de Cadastro</th>
+                    <th>Editar</th>
+                    <th>Excluir</th>
+                </tr>
+            `;
+            
             tbody.innerHTML = "";
 
             if (administradores.length === 0) {
                 tbody.innerHTML = `
-                <tr>
-                    <td colspan="6" style="text-align: center; padding: 20px;">
-                        Nenhum administrador cadastrado
-                    </td>
-                </tr>
-            `;
+                    <tr>
+                        <td colspan="5" style="text-align: center; padding: 20px;">
+                            Nenhum administrador cadastrado
+                        </td>
+                    </tr>
+                `;
                 return;
             }
 
             administradores.forEach(admin => {
                 const tr = document.createElement("tr");
-
                 const isNexus = admin.email === 'nexus@gmail.com';
 
                 tr.innerHTML = `
-                <td>${admin.nome}</td>
-                <td>${admin.email}</td>
-                <td>${admin.data_cadastro || 'N/A'}</td>
-                <td>
-                    <button onclick="abrirModalEditar(${admin.id_admin}, '${admin.nome}', '${admin.email}')">
-                        <img src="../assets/icons_cadastro/edit.png" alt="Editar">
-                    </button>
-                </td>
-                <td>
-                    ${isNexus ?
-                        '<span style="color: #999; font-size: 0.85rem;">Protegido</span>' :
-                        `<button onclick="abrirModalExcluir(${admin.id_admin})">
-                            <img src="../assets/icons_cadastro/delete.png" alt="Excluir">
-                        </button>`
-                    }
-                </td>
-            `;
-
+                    <td>${admin.nome}</td>
+                    <td>${admin.email}</td>
+                    <td>${admin.data_cadastro || 'N/A'}</td>
+                    <td>
+                        <button onclick="abrirModalEditar(${admin.id_admin}, '${admin.nome}', '${admin.email}')">
+                            <img src="../assets/icons_cadastro/edit.png" alt="Editar">
+                        </button>
+                    </td>
+                    <td>
+                        ${isNexus ?
+                            '<span style="color: #999; font-size: 0.85rem;">Protegido</span>' :
+                            `<button onclick="abrirModalExcluir(${admin.id_admin})">
+                                <img src="../assets/icons_cadastro/delete.png" alt="Excluir">
+                            </button>`
+                        }
+                    </td>
+                `;
                 tbody.appendChild(tr);
             });
         } catch (erro) {
             console.error("Erro ao carregar administradores:", erro);
             alert("Erro ao carregar a lista de administradores.");
+        }
+    }
+
+    async function carregarJogadores() {
+        try {
+            const resposta = await fetch("/jogadores/listar");
+            const jogadores = await resposta.json();
+
+            const thead = document.getElementById("tabela-head");
+            const tbody = document.getElementById("tabela-administradores");
+            
+            thead.innerHTML = `
+                <tr>
+                    <th>Game Name</th>
+                    <th>Tag</th>
+                    <th>Nome</th>
+                    <th>Região</th>
+                    <th>Elo</th>
+                    <th>Organização</th>
+                    <th>Excluir</th>
+                </tr>
+            `;
+            
+            tbody.innerHTML = "";
+
+            if (jogadores.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" style="text-align: center; padding: 20px;">
+                            Nenhum jogador cadastrado
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            jogadores.forEach(jogador => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>${jogador.game_name}</td>
+                    <td>${jogador.tagline || '-'}</td>
+                    <td>${jogador.nome}</td>
+                    <td>${jogador.nome_regiao || 'N/A'}</td>
+                    <td>${jogador.nome_elo || 'N/A'}</td>
+                    <td>${jogador.nome_org || 'Sem Org'}</td>
+                    <td>
+                        <button onclick="abrirModalExcluirJogador(${jogador.id_jogador})">
+                            <img src="../assets/icons_cadastro/delete.png" alt="Excluir">
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        } catch (erro) {
+            console.error("Erro ao carregar jogadores:", erro);
+            alert("Erro ao carregar a lista de jogadores.");
+        }
+    }
+
+    async function carregarOrganizacoes() {
+        try {
+            const resposta = await fetch("/organizacoes/listar");
+            const organizacoes = await resposta.json();
+
+            const thead = document.getElementById("tabela-head");
+            const tbody = document.getElementById("tabela-administradores");
+            
+            thead.innerHTML = `
+                <tr>
+                    <th>Nome</th>
+                    <th>Sigla</th>
+                    <th>CNPJ</th>
+                    <th>Email</th>
+                    <th>Data Cadastro</th>
+                    <th>Excluir</th>
+                </tr>
+            `;
+            
+            tbody.innerHTML = "";
+
+            if (organizacoes.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="6" style="text-align: center; padding: 20px;">
+                            Nenhuma organização cadastrada
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            organizacoes.forEach(org => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>${org.nome_org}</td>
+                    <td>${org.sigla || '-'}</td>
+                    <td>${org.cnpj}</td>
+                    <td>${org.email}</td>
+                    <td>${org.data_cadastro || 'N/A'}</td>
+                    <td>
+                        <button onclick="abrirModalExcluirOrganizacao(${org.id_organizacao})">
+                            <img src="../assets/icons_cadastro/delete.png" alt="Excluir">
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        } catch (erro) {
+            console.error("Erro ao carregar organizações:", erro);
+            alert("Erro ao carregar a lista de organizações.");
+        }
+    }
+
+    function abrirModalExcluirJogador(idJogador) {
+        idAtual = idJogador;
+        document.getElementById('mensagemExclusao').textContent = 'Tem certeza que deseja excluir este jogador?';
+        document.getElementById('fundoModalExcluir').classList.add('ativo');
+    }
+
+    function abrirModalExcluirOrganizacao(idOrganizacao) {
+        idAtual = idOrganizacao;
+        document.getElementById('mensagemExclusao').textContent = 'Tem certeza que deseja excluir esta organização?';
+        document.getElementById('fundoModalExcluir').classList.add('ativo');
+    }
+
+    async function confirmarExclusao() {
+        try {
+            let endpoint = '';
+            let body = {};
+
+            if (tipoAtual === 'administrador') {
+                endpoint = '/usuarios/administradores/excluir';
+                body = { idAdmin: idAtual };
+            } else if (tipoAtual === 'jogador') {
+                endpoint = '/jogadores/excluir';
+                body = { idJogador: idAtual };
+            } else if (tipoAtual === 'organizacao') {
+                endpoint = '/organizacoes/excluir';
+                body = { idOrganizacao: idAtual };
+            }
+
+            const resposta = await fetch(endpoint, {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body)
+            });
+
+            const json = await resposta.json();
+
+            if (resposta.ok) {
+                alert(`${tipoAtual.charAt(0).toUpperCase() + tipoAtual.slice(1)} excluído(a) com sucesso!`);
+                cancelarExclusao();
+                carregarDados();
+            } else {
+                alert(json.erro || `Erro ao excluir ${tipoAtual}`);
+            }
+        } catch (erro) {
+            console.error("Erro ao excluir:", erro);
+            alert("Erro de conexão com o servidor.");
         }
     }
 
@@ -301,12 +513,10 @@
     }
 
     function abrirModalEditar(idAdmin, nome, email) {
-        idAdminAtual = idAdmin;
-
+        idAtual = idAdmin;
         document.getElementById('editarNome').value = nome;
         document.getElementById('editarEmail').value = email;
         document.getElementById('editarSenha').value = '';
-
         document.getElementById('fundoModalEditar').classList.add('ativo');
     }
 
@@ -339,7 +549,7 @@
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    idAdmin: idAdminAtual,
+                    idAdmin: idAtual,
                     nomeServer: nome,
                     emailServer: email,
                     senhaServer: senhaHash
@@ -362,43 +572,19 @@
     }
 
     function abrirModalExcluir(idAdmin) {
-        idAdminAtual = idAdmin;
+        idAtual = idAdmin;
+        document.getElementById('mensagemExclusao').textContent = 'Tem certeza que deseja excluir este administrador?';
         document.getElementById('fundoModalExcluir').classList.add('ativo');
-    }
-
-    async function confirmarExclusao() {
-        try {
-            const resposta = await fetch("/usuarios/administradores/excluir", {
-                method: "DELETE",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    idAdmin: idAdminAtual
-                })
-            });
-
-            const json = await resposta.json();
-
-            if (resposta.ok) {
-                alert("Administrador excluído com sucesso!");
-                cancelarExclusao();
-                carregarAdministradores();
-            } else {
-                alert(json.erro || "Erro ao excluir administrador");
-            }
-        } catch (erro) {
-            console.error("Erro ao excluir:", erro);
-            alert("Erro de conexão com o servidor.");
-        }
     }
 
     function fecharModalEditar() {
         document.getElementById('fundoModalEditar').classList.remove('ativo');
-        idAdminAtual = null;
+        idAtual = null;
     }
 
     function cancelarExclusao() {
         document.getElementById('fundoModalExcluir').classList.remove('ativo');
-        idAdminAtual = null;
+        idAtual = null;
     }
 
     function validarEmail(email) {
