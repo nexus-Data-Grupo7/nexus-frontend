@@ -9,6 +9,7 @@
     list-style: none;
     scroll-behavior: smooth;
     font-family: var(--font-family-texts);
+    transition: all .6s ease-in-out;
 }
 
 body {
@@ -17,10 +18,12 @@ body {
     color: white;
     display: flex;
     flex-direction: row;
-    padding: 5vh;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    padding-left: 5vh;
+    padding-right: 5vh;
     justify-content: center;
-    align-items: flex-start;
-    min-height: 100vh;
+    align-items: center;
 }
 
 .menu-toggle {
@@ -30,7 +33,6 @@ body {
 .overlay {
     display: none;
 }
-
 nav {
     width: 40vh;
     height: 80vh;
@@ -313,7 +315,7 @@ nav button {
     flex-direction: column;
     align-items: center;
     gap: 2vh;
-    max-height: 60vh;
+    max-height: 50vh;
     overflow-y: auto;
     overflow-x: hidden;
     scrollbar-width: thin;
