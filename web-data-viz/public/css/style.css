@@ -24,6 +24,7 @@ header #topo {
     display: flex;
     justify-content: space-between;
     gap: 80px;
+    object-fit: cover;
 }
 
 header #topo #logo {
@@ -43,8 +44,8 @@ header #topo #logoNexus {
     line-height: 100%;
     letter-spacing: 0.5px;
     color: var(--white);
-    right: 38px;
-    top: 38px;
+    right: 75px;
+    top: 43px;
 }
 
 header #topo #logoNexus2 {
